@@ -1336,25 +1336,33 @@
 
 % DEPRECATED command \jkulogoblack: see \jkulogo[black]
 \newcommand{\jkulogoblack}{
-    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use \string\jkulogo[dark] instead!}%
+    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use `\string\jkulogo[dark]' instead!}%
     \jkulogo[black]%
 }
 
 % DEPRECATED command \jkulogogrey: see \jkulogo[dark]
 \newcommand{\jkulogogrey}{
-    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use \string\jkulogo[dark] instead!}%
+    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use `\string\jkulogo[dark]' instead!}%
     \jkulogo[dark]%
 }
 
 % DEPRECATED command \jkulogowhite: see \jkulogo[light]
 \newcommand{\jkulogowhite}{
-    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use \string\jkulogo[light] instead!}%
+    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use `\string\jkulogo[light]' instead!}%
     \jkulogo[light]%
+}
+
+% DEPRECATED environment jkufinalgrey: a final frame just like any other frame
+\newenvironment<>{jkufinalgrey}{%
+    \PackageWarning{beamerthemejku}{Environment `jkufinalgrey' deprecated, use `\string\jkulogo' as your end frame instead!}%
+    \begin{frame}#1
+}{%
+    \end{frame}
 }
 
 % DEPRECATED environment jkufinalwhite: a final frame just like any other frame
 \newenvironment<>{jkufinalwhite}{%
-    \PackageWarning{beamerthemejku}{Environment `jkufinalwhite' deprecated, use \string\jkulogo as your end frame instead!}%
+    \PackageWarning{beamerthemejku}{Environment `jkufinalwhite' deprecated, use `\string\jkulogo' as your end frame instead!}%
     \begin{frame}#1
 }{%
     \end{frame}
