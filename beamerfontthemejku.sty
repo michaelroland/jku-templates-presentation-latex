@@ -64,6 +64,9 @@
 \usefonttheme{serif}
 
 \ifxetex\else%
+    \ifbool{jkubeamer@xetexfonts}{%
+        \PackageWarning{beamerfontthemejku}{True-type fonts are only supported on XeLaTeX. Please consider switching to XeLaTeX to get the full look and feel of this beamer template. Note that you can silence this warning with the `nofancyfonts' option.}%
+    }{}%
     \boolfalse{jkubeamer@xetexfonts}%
 \fi
 
@@ -142,6 +145,13 @@
     \RequirePackage[T1]{fontenc}
     \RequirePackage{inconsolata}
     \RequirePackage{helvet}
+    \newcommand{\rmlightfamily}{\rmfamily}
+    \newcommand{\rmblackfamily}{\rmfamily\bfseries}
+    \newcommand{\sflightfamily}{\sffamily}
+    \newcommand{\sfblackfamily}{\sffamily\bfseries}
+    \newcommand{\ttlightfamily}{\ttfamily}
+    \newcommand{\ttcondensedfamily}{\ttfamily}
+    \newcommand{\ttcondensedlightfamily}{\ttfamily}
 }
 
 \renewcommand\familydefault{\sfdefault}
