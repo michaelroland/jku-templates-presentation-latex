@@ -1,0 +1,19 @@
+stages:
+  - build
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  SOURCE_NAME: main
+
+build:
+  stage: build
+  image: texlive/texlive:latest
+  script:
+  - latexmk -pdf -bibtex -gg  -jobname=%A-pdflatex $SOURCE_NAME.tex
+  - latexmk -pdfxe -bibtex -gg -jobname=%A-xelatex $SOURCE_NAME.tex
+  artifacts:
+    paths:
+    - ./$SOURCE_NAME-pdflatex.pdf
+    - ./$SOURCE_NAME-pdflatex.log
+    - ./$SOURCE_NAME-xelatex.pdf
+    - ./$SOURCE_NAME-xelatex.log
