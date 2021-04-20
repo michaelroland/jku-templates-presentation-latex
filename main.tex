@@ -1,0 +1,766 @@
+%%% Template created by Susanne Hametner and Doris Pargfrieder
+%%% Template altered by Pieter-Jan Hoedt (2020)
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%        LOADING DOCUMENT
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+% Consider options 'german' and 'handout'
+% For 4:3 aspect ratio, set the option 'aspectratio=43'
+\documentclass[aspectratio=169]{beamer}
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+% Choose among the following options for the JKU-beamer-theme:
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+% german
+% protectframetitle
+% nopagenumber
+% nosectionpage
+% nojkuFooter
+% greyText
+% RE
+% SOWI
+% TNF
+% MED
+% mac
+\usetheme[nojkuFooter]{jku}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        LOADING PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\usepackage[utf8]{inputenc}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	PRESENTATION INFORMATION
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\title{JKU \LaTeX\ Beamer Theme}
+\subtitle{A First Layout Proposal}
+\author{Space for speaker names}
+\institute{Space for institute information}
+%\date{}
+%\partnerlogo{fwf.png}
+
+\bibliographystyle{abbrv}
+
+\begin{document}
+
+\jkulogoblack
+
+\jkulogogrey
+
+\jkulogowhite
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	TITLE PAGE
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\maketitle
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	SECTION: PREREQUISITES
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\section{Prerequisites}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Installation
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[fragile]
+\frametitle{Installation}
+
+\begin{itemize}
+	\item Download \texttt{jkubeamer.zip} (or \texttt{jkulatex.zip}) from \texttt{teaming.jku.at}.
+	\item Extract its content (unzip) and move the files to a location on your computer where {\LaTeX} will find them (depends on your installation).
+	\item Use documentclass \texttt{beamer} with your preferred options.
+	\item Use JKU beamer theme: \verb+\usetheme[...]{jku}+.
+	\item use ``pdflatex'' (because it includes graphics in non-PostScript-format).
+\end{itemize}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Theme Package Requirements
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]
+\frametitle{Theme Package Requirements}
+
+This theme requires that the following packages are installed:
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item \lstinline!{beamer}!
+\item \lstinline!{calc}!
+\item \lstinline![utf8]{inputenc}!
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item \lstinline!{listings}!
+\item \lstinline!{pgf}!
+\item \lstinline!{xcolor}!
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{JKU Theme Options}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Theme Options
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}
+\frametitle{General Options}
+
+\begin{table}[]
+	\begin{tabularx}{\linewidth}{l>{\raggedright}X}
+		\toprule
+		\textbf{Option}			& \textbf{Description} \tabularnewline
+		\midrule
+		\texttt{german} & German logo, german text templates \tabularnewline
+		\texttt{nosectionpage} & Section pages will be suppressed\tabularnewline
+		\texttt{nopagenumber} & Page Numbers will be suppresed \tabularnewline
+		\texttt{nojkuFooter} & No JKU-logo in the page footer \tabularnewline
+		\texttt{greyText} & Most text-like fonts are printed darkgrey \tabularnewline
+		\bottomrule
+	\end{tabularx}
+	\label{tab:options}
+\end{table}
+\end{frame}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[fragile]
+\frametitle{Faculty-Specific Options}
+
+\begin{description}
+ \item[RE] colors for RE-faculty
+ \item[SOWI] colors for SOWI-faculty
+ \item[TNF] colors for TNF-faculty
+ \item[MED] colors for MED-faculty
+ \item[\ldots] maybe more in the future?
+\end{description}
+
+If no faculty-specific options are given,
+the package uses general JKU color styling, which is essentially b/w.
+\end{frame}
+
+%\subsubsection{JKU Theme Information}
+
+\begin{frame}[fragile]
+\frametitle{Titlepage}
+
+A titlepage is generated with the \verb+\maketitle+-command. It uses the information given in the preamble:
+ \begin{description}
+  \item[Title:] title of the presentation (\verb+\title+-command)
+  \item[Subtitle:] subtitle of the presentation (\verb+\subtitle+-command)
+  \item[Author:] author of the presentation (\verb+\author+-command)
+  \item[Institute:] institute of the autho (\verb+\institute+-command)
+  \item[Date:] date of the presentation (\verb+\date+-command)
+  \begin{itemize}
+   \item \verb+\date{}+ suppresses the date
+   \item omitting the \verb+\date+-command uses today's date
+  \end{itemize}
+  \item[Partnerlogo:] a logo for a partner-institution (e.g. co-sponsor) (\verb+\partnerlogo+-command). Must be a filename containing an image.
+
+ \end{description}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}
+\frametitle{Teaser Pages}
+
+ You might consider to put some sort of empty slide with the JKU-logo before the titlepage (like in the current presentation). This slide could be shown before the presentation begins.
+
+ The commands for producing these slides are:
+ \begin{itemize}
+  \item \texttt{\textbackslash{}jkulogoblack}
+  \item \texttt{\textbackslash{}jkulogogrey}
+  \item \texttt{\textbackslash{}jkulogowhite}
+ \end{itemize}
+\end{frame}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Table of Contents
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]
+\frametitle{Table of Contents}
+
+Include a listing of the presentation's sections
+For those longer presentations - keep the table of contents compact, but consider omitting an overview slide entirely, see~\cite{karol}. 
+\begin{verbatim}
+\begin{frame}{Table of Contents}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+\end{verbatim}
+\tableofcontents[hideallsubsections]
+
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Table of Contents}
+
+This is a table of contents including the subsections
+
+\begin{verbatim}
+\begin{frame}{Table of Contents}
+    \tableofcontents
+\end{frame}
+\end{verbatim}
+\tableofcontents
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Section Pages}
+
+ \begin{itemize}
+  \item At the beginning of each section (subsection, subsubsection) a slide will be inserted automatically telling the section title.
+  \item Choose compact titles such that they fit on one line, it will look better!
+  \item Section pages can be suppressed with the option \texttt{nosectionpage}.
+  \item No section pages will be generated in handout-mode, see slide~\ref{handout}.
+  \item Frame numbering does not count the section pages. Btw., if you want to reference a slide number, use the option \verb+[label=s]+ in the target frame. Then \verb+\ref{s}+ will give a reference to the slide number!
+ \end{itemize}
+ 
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Items \& Enums}
+
+\LaTeX\ does not support more than three levels, and this is good!
+
+\begin{columns}
+\begin{column}{.45\textwidth}
+\begin{itemize}
+	\item point 1
+	\begin{itemize}
+	  \item sub 1
+	\begin{itemize}
+	  \item subsub 1
+	\end{itemize}
+	\end{itemize}
+\end{itemize} 
+\begin{verbatim}
+\begin{itemize}
+	\item point 1
+	\begin{itemize}
+	  \item sub 1
+	\begin{itemize}
+	  \item subsub 1
+	\end{itemize}
+	\end{itemize}
+\end{itemize} 
+\end{verbatim}
+\end{column}
+
+\begin{column}{.45\textwidth}
+\begin{enumerate}
+	\item point 1
+	\begin{enumerate}
+	  \item sub 1
+	  \begin{enumerate}
+	  \item subsub 1
+	\end{enumerate}
+	\end{enumerate}
+\end{enumerate} 
+\begin{verbatim}
+\begin{enumerate}
+	\item point 1
+	\begin{enumerate}
+	  \item sub 1
+	  \begin{enumerate}
+	  \item subsub 1
+	\end{enumerate}
+	\end{enumerate}
+\end{enumerate}  
+\end{verbatim}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Blocks
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[fragile]
+\frametitle{Blocks}
+
+\begin{block}{Block Title Here}
+In \LaTeX-beamer it is very common to highlight content in so-called blocks. This is a standard \texttt{block}.
+\end{block}
+
+\begin{verbatim}
+\begin{block}{Block Title Here}
+  In \LaTeX-beamer it is very common to highlight content in 
+  so-called blocks. This is a standard \texttt{block}.
+\end{block} 
+\end{verbatim}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Additional Blocks
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[fragile]
+\frametitle{Additional Blocks}
+\begin{alertblock}{Alert Block}
+	This is an alert-block, if you have to use it.
+\end{alertblock}
+
+\begin{verbatim}
+\begin{alertblock}{Alert Block}
+  This is an alert-block, if you have to use it.
+\end{alertblock}
+\end{verbatim}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Environments
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}
+\frametitle{Environments}
+
+\begin{definition}[Monoid]
+ We call $(M,\circ)$ a \emph{monoid} if and only if
+ \begin{gather*}
+  \forall a,b,c\in M:\quad(a\circ b)\circ c = a\circ(b\circ c) \tag{associativity}\\
+  \exists e\in M \;\forall a\in M:\quad a\circ e= e\circ a= a \tag{neutral element}
+ \end{gather*}
+\end{definition}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Environments}
+
+\begin{theorem}[Fundamental Theorem of \ldots]
+ Let $(M,+)$ be a monoid. Then \ldots
+\end{theorem}
+
+\begin{proof}
+ Let $M$ be an arbitrary set. We then show \ldots
+\end{proof}
+
+\begin{example}
+ Put an example here.
+\end{example}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pre-defined Environments}
+
+ Standard \LaTeX-beamer defines several environments like
+ \begin{quote}
+  theorem, corollary, fact, lemma, problem, solution, definition, definitions,
+  example, and examples.
+ \end{quote}
+
+ \begin{alertblock}{German Environment Names}
+  Note that if you want german environment names you have to pass the option `german' to \textbf{beamer}, it is not enough to have `german' in the JKU-beamer-theme.
+ \end{alertblock}
+
+\end{frame}
+
+\section{Colors}
+
+\begin{frame}
+ \frametitle{Color in Presentation}
+
+If you need colors in your presentation, use one of the pre-defined JKU-colors. 
+
+Mac-users should use theme-option `mac'.
+
+Consider one of the faculty-specific options, they also give decent coloring.
+ 
+\end{frame}
+
+\begin{frame}
+\frametitle{Pre-defined JKU-Colors}
+
+\tiny
+\begin{columns}[t]
+
+\begin{column}{0.18\textwidth}
+%	Color Box: Blue
+\setbeamercolor{boxjkuBlue}{bg=jkuBlue,fg=white}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuBlue}
+\centering
+	\texttt{jkuBlue}\\
+\end{beamercolorbox}
+
+\vspace{2em}
+
+%	Color Box: Cyan
+\setbeamercolor{boxjkuCyan}{bg=jkuCyan,fg=black}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuCyan}
+\centering
+	\texttt{jkuCyan}\\
+\end{beamercolorbox}
+
+\vspace{2em}
+
+%	Color Box: Black
+\setbeamercolor{boxjkuBlack}{bg=black,fg=white}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuBlack}
+\centering
+	\texttt{black}\\
+\end{beamercolorbox}
+
+\end{column}
+
+\begin{column}{0.18\textwidth}
+%	Color Box: Yellow
+\setbeamercolor{boxjkuYellow}{bg=jkuYellow,fg=black}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuYellow}
+\centering
+	\texttt{jkuYellow}\\
+\end{beamercolorbox}
+
+\vspace{2em}
+
+%	Color Box: Grey
+\setbeamercolor{boxjkuGrey}{bg=jkuGrey,fg=white}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuGrey}
+\centering
+	\texttt{jkuGrey}\\
+\end{beamercolorbox}
+
+\vspace{2em}
+
+%	Color Box: White
+\setbeamercolor{boxjkuWhite}{bg=white,fg=black}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuWhite}
+\centering
+	\texttt{white}\\
+\end{beamercolorbox}
+
+\end{column}
+
+\begin{column}{0.18\textwidth}
+%	Color Box: LightGreen
+\setbeamercolor{boxjkuLightGreen}{bg=jkuLightGreen,fg=black}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuLightGreen}
+\centering
+	\texttt{jkuLightGreen}\\
+\end{beamercolorbox}
+
+\vspace{2em}
+
+%	Color Box: Green
+\setbeamercolor{boxjkuGreen}{bg=jkuGreen,fg=black}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuGreen}
+\centering
+	\texttt{jkuGreen}\\
+\end{beamercolorbox}
+
+\end{column}
+
+
+\begin{column}{0.18\textwidth}
+%	Color Box: Purple
+\setbeamercolor{boxjkuPurple}{bg=jkuPurple,fg=white}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuPurple}
+\centering
+	\texttt{jkuPurple}\\
+\end{beamercolorbox}
+
+\vspace{2em}
+
+%	Color Box: Red
+\setbeamercolor{boxjkuRed}{bg=jkuRed,fg=black}
+\begin{beamercolorbox}[wd=0.85\linewidth,ht=5ex,dp=3ex]{boxjkuRed}
+\centering
+	\texttt{jkuRed}\\
+\end{beamercolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\section{General Beamer Features (non JKU-Theme-specific)}
+
+\begin{frame}
+ \frametitle{General Beamer Features}
+
+ The following tips and tricks may be known to you as a frequent beamer user.
+ \begin{itemize}
+  \item background coloring
+  \item empty slides
+  \item including pictures
+  \item using columns
+  \item coustomized blocks
+  \item self-defined environments
+  \item producing handouts
+  \item 16:9 presentations, etc.
+  \item \ldots
+ \end{itemize}
+
+\end{frame}
+
+\begingroup
+\setbeamercolor{background canvas}{bg=jkuLightGreen}
+\begin{frame}[containsverbatim]
+\frametitle{Frame Colored Backgrounds}
+
+You can change the color of a frame background by placing the frame within a group:
+
+\begin{verbatim}
+
+\begingroup
+\setbeamercolor{background canvas}{bg=jkuLightGreen}
+\begin{frame}
+	% Your frame content goes here
+\end{frame}
+\endgroup
+\end{verbatim}
+
+\end{frame}
+\endgroup
+
+\begingroup
+\setbeamercolor{background canvas}{bg=jkuBlue}
+\setbeamercolor{normal text}{fg=jkuYellow}
+\usebeamercolor[fg]{normal text}
+\begin{frame}[plain,containsverbatim]
+
+Or maybe you want a blank blue frame to work with
+
+\begin{verbatim}
+
+\begingroup
+\setbeamercolor{background canvas}{bg=jkuBlue}
+\begin[plain]{frame}
+	% Your frame content goes here
+\end{frame}
+\endgroup
+\end{verbatim}
+
+\end{frame}
+\endgroup
+
+\begingroup
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{logos/jku_en_black}}
+\setbeamercolor{normal text}{fg=jkuCyan}
+\usebeamercolor[fg]{normal text}
+\begin{frame}[plain,containsverbatim]
+Or maybe you want a background picture.
+
+The aspect-ratio of the picture should fit the presentation page. To fill the whole screen you might use \texttt{height=\ldots}, but the result might be distorted!
+\begin{verbatim}
+
+\begingroup
+\usebackgroundtemplate{
+  \includegraphics[width=\paperwidth]{logos/jku_en_black}}
+\begin[plain]{frame}
+	% Your frame content goes here
+\end{frame}
+\endgroup
+\end{verbatim}
+
+\end{frame}
+\endgroup
+
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Blocks
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[fragile]
+\frametitle{Custom Blocks}
+\begingroup
+\setbeamercolor{block title}{fg=white, bg=jkuPurple}
+\setbeamercolor{block body}{bg=jkuPurple!20}
+\begin{block}{Purple customization}
+	Using the theme colors to generate colored blocks.
+\end{block}
+\endgroup
+\begin{verbatim}
+\begingroup
+\setbeamercolor{block title}{fg=white, bg=jkuPurple}
+\setbeamercolor{block body}{bg=jkuPurple!20}
+\begin{block}{Custom Blocks}
+    Using the theme colors to generate colored blocks.
+\end{block}
+\endgroup
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Self-defined Environments}
+
+\newtheorem{idea}[theorem]{Idea}
+\theoremstyle{definition}
+\newtheorem{defi}[theorem]{My Definition}
+\theoremstyle{example}
+\newtheorem{ex}[theorem]{My Example}
+
+ You can define your own environments, too.
+\begin{verbatim}
+ \newtheorem{idea}[theorem]{Idea}
+ \theoremstyle{definition}
+ \newtheorem{def}[theorem]{My Definition}
+ \theoremstyle{example}
+ \newtheorem{ex}[theorem]{My Example}
+\end{verbatim}
+ 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Self-defined Environments}
+
+\begin{idea}[My own idea]
+ Here is a self-defined environment
+\end{idea}
+
+\begin{defi}
+ Test
+\end{defi}
+
+\begin{ex}
+ Test
+\end{ex}
+\end{frame}
+
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Multiple Columns
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}
+\frametitle{Multiple Columns}
+
+\begin{columns}
+\begin{column}{.45\textwidth}
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur.
+\end{column}
+\begin{column}{.45\textwidth}
+		\begin{itemize}
+        	\item Point 1
+        	\item Point 2
+		\end{itemize}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[label=handout]
+\frametitle{Producing Handouts}
+  
+ \begin{enumerate}
+  \item You can generate a `handout'-version with the option \texttt{handout} in \alert{beamer}.
+  \item Overlays will be flattened.
+  \item No section pages will be generated.
+  \item Note that frame-numbering will still coincide with frame-numbers in the non-handout version.
+ \end{enumerate}
+\end{frame}
+
+ \begin{frame}[containsverbatim]
+\frametitle{Presentations using Different Aspect Ratio}
+  
+ \begin{enumerate}
+  \item Standard beamer supports the option \verb+aspectratio=num+, where \verb+num+ is a decimal number and
+\begin{description}
+ \item[43] means 4:3,
+ \item[169] means 16:9, and
+ \item[1610] means 16:10.
+\end{description}
+  \item All JKU-specific pages appear ``nice'' in all of these three formats due to adjustments in certain spacing.
+  \item Standard beamer supports more than those three, but the JKU-layout is not tested against them.
+ \end{enumerate}
+\end{frame}
+
+\section{Ending the Presentation}
+
+\begin{frame}
+\frametitle{Thank You Thank You Thank You Thank You Thank You Thank You Thank You Thank You Thank You Thank You}
+
+(you see, btw., the slide title can run over several lines \ldots)
+
+\begin{block}{Please \ldots}
+  \ldots\ refrain from putting an extra slide at the end saying \alert{``Thank you for your attention''}. This is really annoying. You can say ``Thank you'' anyway, it need not be written, instead you can put a nice ``JKU page'' as the final slide! \cite{schultz,karol}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+ Further activities:
+ \begin{itemize}
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+ \end{itemize}
+ Next meeting(s):
+ \begin{enumerate}
+  \item \ldots
+  \item \ldots
+  \item \ldots
+  \item \ldots
+ \end{enumerate}
+ 
+\end{frame}
+
+\begin{jkufinalwhite}
+ Further activities:
+ \begin{itemize}
+  \item \ldots
+  \item \ldots
+ \end{itemize}
+%  Next meeting(s):
+%  \begin{enumerate}
+%   \item \ldots
+%   \item \ldots
+%  \end{enumerate}
+ 
+\end{jkufinalwhite}
+
+\jkulogogrey
+\jkulogowhite
+
+\begin{frame}
+\frametitle{References}
+
+\bibliography{references}
+\end{frame}
+
+\begin{frame}
+\frametitle{JKU Theme Information}
+
+This is an \alert{official} beamer theme for JKU University, Linz, Austria.
+
+\vspace{1em}
+
+\begin{alertblock}{Please help improving the style}
+You are always welcome to suggest improvements, or, even better, create alternative JKU styles based on this one.
+\end{alertblock}
+\end{frame}
+
+\end{document}
