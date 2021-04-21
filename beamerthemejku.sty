@@ -32,6 +32,7 @@
 \RequirePackage{babel}
 \RequirePackage{translations}
 \RequirePackage{datetime2}
+\RequirePackage{amsmath}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -215,6 +216,10 @@
 \DeclareOptionBeamer{fontpath}{\PassOptionsToPackage{fontpath=#1}{beamerfontthemejku}}
 \DeclareOptionBeamer{fancyfonts}[true]{\PassOptionsToPackage{fancyfonts=#1}{beamerfontthemejku}}
 \DeclareOptionBeamer{nofancyfonts}{\PassOptionsToPackage{nofancyfonts}{beamerfontthemejku}}
+\DeclareOptionBeamer{compactverb}[true]{\PassOptionsToPackage{compactverb=#1}{beamerfontthemejku}}
+\DeclareOptionBeamer{nocompactverb}{\PassOptionsToPackage{nocompactverb}{beamerfontthemejku}}
+\DeclareOptionBeamer{compactmono}[true]{\PassOptionsToPackage{compactmono=#1}{beamerfontthemejku}}
+\DeclareOptionBeamer{nocompactmono}{\PassOptionsToPackage{nocompactmono}{beamerfontthemejku}}
 
 \ProcessOptionsBeamer
 

@@ -49,6 +49,18 @@
 \DeclareOptionBeamer{fancyfonts}[true]{\setbool{jkubeamer@xetexfonts}{#1}}
 \DeclareOptionBeamer{nofancyfonts}{\boolfalse{jkubeamer@xetexfonts}}
 
+% Option [no]compactverb: use condensed fixed-width font for verbatim and listings (requires XeTeX and the fancyfonts option)
+\newbool{jkubeamer@compactverb}
+\booltrue{jkubeamer@compactverb}%
+\DeclareOptionBeamer{compactverb}[true]{\setbool{jkubeamer@compactverb}{#1}}
+\DeclareOptionBeamer{nocompactverb}{\boolfalse{jkubeamer@compactverb}}
+
+% Option [no]compactmono: use condensed fixed-width font (requires XeTeX and the fancyfonts option)
+\newbool{jkubeamer@compactmono}
+%\booltrue{jkubeamer@compactmono}%
+\DeclareOptionBeamer{compactmono}[true]{\setbool{jkubeamer@compactmono}{#1}}
+\DeclareOptionBeamer{nocompactmono}{\boolfalse{jkubeamer@compactmono}}
+
 \ProcessOptionsBeamer
 
 %% 
@@ -60,8 +72,11 @@
 %% Fancy fonts with XeTeX
 %% 
 
+\RequirePackage{lmodern}
+\RequirePackage{inconsolata}
+\RequirePackage{helvet}
+%\usefonttheme{serif}
 \usefonttheme{professionalfonts}
-\usefonttheme{serif}
 
 \ifxetex\else%
     \ifbool{jkubeamer@xetexfonts}{%
@@ -93,12 +108,17 @@
         ItalicFont={},
         BoldItalicFont={},
         AutoFakeSlant,
-        BoldItalicFeatures={FakeSlant}
+        AutoFakeBold,
+        %BoldItalicFeatures={FakeSlant}
     }
     \setmainfont{Merriweather}
     %\setsansfont{OpenSans}
     \setsansfont{PublicSans}
-    \setmonofont{Inconsolata}
+    \ifbool{jkubeamer@compactmono}{%
+        \setmonofont{InconsolataCondensed}
+    }{%
+        \setmonofont{Inconsolata}
+    }
     \newfontfamily\rmlightfamily{Merriweather}[
         NFSSFamily=rmlight,
         UprightFont=*-Light,
@@ -136,10 +156,17 @@
         BoldFont=*-Black,
         ItalicFont=*-ExtraBoldItalic,
         BoldItalicFont=*-BlackItalic]
-    \newfontfamily\ttlightfamily{Inconsolata}[
-        NFSSFamily=ttlight,
-        UprightFont=*-Light,
-        BoldFont=*-Medium]
+    \ifbool{jkubeamer@compactmono}{%
+        \newfontfamily\ttlightfamily{InconsolataCondensed}[
+            NFSSFamily=ttlight,
+            UprightFont=*-Light,
+            BoldFont=*-Medium]
+    }{%
+        \newfontfamily\ttlightfamily{Inconsolata}[
+            NFSSFamily=ttlight,
+            UprightFont=*-Light,
+            BoldFont=*-Medium]
+    }
     \newfontfamily\ttcondensedfamily{InconsolataCondensed}[
         NFSSFamily=ttcondensed]
     \newfontfamily\ttcondensedlightfamily{InconsolataCondensed}[
@@ -154,11 +181,13 @@
         ItalicFont=*-BlackItalic,
         BoldItalicFont=*-BlackItalic]
     \setmathsf{OpenSans}
-    \setmathtt{Inconsolata}
+    \ifbool{jkubeamer@compactmono}{%
+        \setmathtt{InconsolataCondensed}
+    }{%
+        \setmathtt{Inconsolata}
+    }
 }{%
     \RequirePackage[T1]{fontenc}
-    \RequirePackage{inconsolata}
-    \RequirePackage{helvet}
     \newcommand{\rmlightfamily}{\rmfamily}
     \newcommand{\rmblackfamily}{\rmfamily\bfseries}
     \newcommand{\sflightfamily}{\sffamily}
@@ -166,7 +195,20 @@
     \newcommand{\ttlightfamily}{\ttfamily}
     \newcommand{\ttcondensedfamily}{\ttfamily}
     \newcommand{\ttcondensedlightfamily}{\ttfamily}
+    
+    \ifbool{jkubeamer@compactmono}{%
+        \PackageWarning{beamerfontthemejku}{Option `compactmono' requires the `fancyfonts' option.}%
+    }{}%
+    \ifbool{jkubeamer@compactverb}{%
+        \PackageWarning{beamerfontthemejku}{Option `compactverb' requires the `fancyfonts' option.}%
+    }{}%
 }
+
+\ifbool{jkubeamer@compactverb}{%
+    \newcommand{\jkubeamer@verbfamily}{\ttcondensedfamily}
+}{%
+    \newcommand{\jkubeamer@verbfamily}{\ttfamily}
+}%
 
 \renewcommand\familydefault{\sfdefault}
 
@@ -186,17 +228,8 @@
 \ifbool{jkubeamer@optpackages}{%
     \RequirePackage{textcomp}
     \PassOptionsToPackage{full}{textcomp}
-    
-    % TODO: remove/move up
-    \RequirePackage{pifont}
-    \RequirePackage{wasysym}
-    %\RequirePackage{trsym}
-    %\RequirePackage{eurosym}
-    %\RequirePackage{amsmath}
-    %\RequirePackage{amsfonts}
-    %\RequirePackage{amsbsy}
-    %\RequirePackage{cancel}
-    %\RequirePackage{soul}
+    %\RequirePackage{wasysym}
+    %\RequirePackage{pifont}
 }{}
 
 %% 
@@ -331,38 +364,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Verbatim and listings
+%% 
 
+\def\verbatim@font{\fontsize{10pt}{11pt}\jkubeamer@verbfamily}
 
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-%	LISTINGS PACKAGE
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-%TODO: Create switch to allow selection between condensed and normal width (do this also for all ttfamily!)
-
-\def\verbatim@font{\fontsize{10pt}{11pt}\ttfamily}
-
-\lstset{ %
-language=[LaTeX]TeX,
-basicstyle=\normalsize\ttfamily,
-keywordstyle=,
-numbers=left,
-numberstyle=\tiny\ttfamily,
-stepnumber=1,
-showspaces=false,
-showstringspaces=false,
-showtabs=false,
-breaklines=true,
-frame=tb,
-framerule=0.5pt,
-tabsize=4,
-framexleftmargin=0.5em,
-framexrightmargin=0.5em,
-xleftmargin=0.5em,
-xrightmargin=0.5em
+\lstset{%
+    language=C,%[LaTeX]TeX,
+    extendedchars=true,
+    columns=fullflexible, % since we are using a fixed-width font anyways
+    keepspaces=true,      % needs to be set to maintain fixed-width property of spaces with fullflexible
+    %fontadjust=true,
+    numbers=left,
+    numberstyle=\fontsize{6pt}{6.6pt}\jkubeamer@verbfamily,
+    %stepnumber=1,
+    basicstyle=\fontsize{10pt}{11pt}\jkubeamer@verbfamily,
+    commentstyle=\crGreen\itshape,
+    keywordstyle=\crBlue\bfseries,
+    stringstyle=\crPurple,
+    tabsize=4,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=true,
+    breaklines=true,
+    %frame=tb,
+    %framerule=0.5pt,
+    %framexleftmargin=0.5em,
+    %framexrightmargin=0.5em,
+    %xleftmargin=0.5em,
+    %xrightmargin=0.5em,
 }
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Setup default document font
+%% 
 
 \linespread{1.15}
 \AtBeginDocument{\usebeamerfont{normal text}}
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
