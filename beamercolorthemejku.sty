@@ -359,32 +359,27 @@
 % frame color mode switches
 \newcommand{\jkubeamer@currentcolormode}{default}
 \define@key{jkubeamer@kv@framecolormode}{light}[]{%
-    \PackageWarning{testing}{setting light mode}
     \setbeamercolor*{background canvas}{parent=palette secondary}%
     \setbeamercolor*{normal text}{parent=palette primary}%
     \renewcommand{\jkubeamer@currentcolormode}{light}%
 }
 \define@key{jkubeamer@kv@framecolormode}{dark}[]{%
-    \PackageWarning{testing}{setting dark mode}
     \setbeamercolor*{background canvas}{use=palette secondary,bg=palette secondary.fg,fg=palette secondary.bg}%
     \setbeamercolor*{normal text}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
     \renewcommand{\jkubeamer@currentcolormode}{dark}%
 }
 \define@key{jkubeamer@kv@framecolormode}{black}[]{%
-    \PackageWarning{testing}{setting black mode}
     \setbeamercolor*{background canvas}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
     \setbeamercolor*{normal text}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
     \renewcommand{\jkubeamer@currentcolormode}{black}%
 }
 \define@key{jkubeamer@kv@framecolormode}{grey}[]{%
-    \PackageWarning{testing}{setting grey mode}
     \setbeamercolor*{background canvas}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
     \setbeamercolor*{normal text}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
     \renewcommand{\jkubeamer@currentcolormode}{grey}%
 }
 \define@key{jkubeamer@kv@framecolormode}{gray}[]{\KV@jkubeamer@kv@framecolormode@grey{#1}}
 \define@key{jkubeamer@kv@framecolormode}{default}[]{%
-    \PackageWarning{testing}{setting default mode}
     \ifbool{jkubeamer@darkmode}{%
         \KV@jkubeamer@kv@framecolormode@dark{#1}%
     }{%
