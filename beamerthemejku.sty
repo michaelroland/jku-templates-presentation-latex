@@ -1396,6 +1396,97 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
+%% Image frames
+%% 
+
+\newcommand{\jkubeamer@frameimage}{}
+
+\setbeamertemplate{image title page}{%
+    \thispagestyle{empty}%
+    \begin{tikzpicture}[remember picture, overlay]
+    \fill[fill=fg] (current page.south west) rectangle (current page.north east);
+    %\fill[fill=red,opacity=0.5] ($(current page.south west) + (0.3\paperwidth, 0)$) rectangle (current page.north east);
+    \node[anchor=north east,line width=0mm, inner sep=0mm] at ($(current page.north east)$) {
+        \color{bg}%
+        \expandafter\notblank\expandafter{\jkubeamer@frameimage}{%
+            \resizebox{!}{\paperheight}{\mbox{\jkubeamer@frameimage}}%
+        }{}%
+    };
+    \fill[fill=bg] (current page.south west) rectangle ($(current page.north west) + (0.3\paperwidth, 0)$);
+    \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south west) + (.75\beamer@leftmargin, .75\jkubeamer@margin)$) {
+        \color{fg}%
+        \resizebox{.4\jkubeamer@Klogo@width}{!}{\jkubeamer@Klogo}%
+    };
+    \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north west) + (.75\beamer@leftmargin, -.75\jkubeamer@margin)$) {%
+        \begin{minipage}[t]{\dimexpr.3\paperwidth-1.5\jkubeamer@margin\relax}%
+            \raggedright%
+            \linespread{0.9}%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \usebeamerfont{frametitle}%
+            \usebeamercolor[fg]{frametitle}%
+            \begingroup%
+            \expandafter\notblank\expandafter{\insertframetitle}{%
+                \vphantom{Gg}%
+                \ifbool{jkubeamer@frametitlecaps}{%
+                    \MakeUppercase{\insertframetitle}%
+                }{%
+                    \protect\insertframetitle%
+                }
+                \vphantom{Gg}%
+                \par%
+                \vspace*{.75\jkubeamer@margin}%
+            }{}%
+            \expandafter\notblank\expandafter{\insertframesubtitle}{%
+                \begingroup%
+                \usebeamerfont{framesubtitle}%
+                \usebeamercolor[fg]{framesubtitle}%
+                \vphantom{Gg}%
+                \protect\insertframesubtitle%
+                \vphantom{Gg}%
+                \endgroup%
+                \par% with baselineskip of outer font (frametitle)
+            }{}%
+            \endgroup%
+        \end{minipage}%
+    };
+    \end{tikzpicture}%
+}
+
+% Command \imageframe[light | dark | gray | black, FACULTY]{title}{subtitle}{graphic}: add full screen image slide with title sidebar using the given color mode (mode defaults to global default color mode)
+\newcommand{\imageframe}[4][]{
+    \ifbool{beamer@inframe}{%
+        \PackageError{beamerthemejku}{Command `\string\imageframe' is not allowed within a frame!}{}%
+    }{%
+        \begingroup%
+        \setbeamertemplate{frametitle}{}%
+        \framecolormode{#1}%
+        \usebeamercolor[fg]{background canvas}%
+        \begin{frame}[plain]%
+        \frametitle{#2}%
+        \framesubtitle{#3}%
+        \renewcommand{\jkubeamer@frameimage}{#4}
+        \usebeamertemplate{image title page}%
+        \end{frame}
+        %\addtocounter{framenumber}{-1}
+        \endgroup%
+    }%
+}
+
+\mode
+<article>
+
+\renewcommand{\imageframe}[4][]{}
+
+\mode
+<all>
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
 %% Frame title/footer
 %% 
 
