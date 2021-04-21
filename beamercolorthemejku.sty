@@ -24,6 +24,7 @@
 %% 
 
 \RequirePackage{etoolbox}
+\RequirePackage{xkeyval}
 \RequirePackage{graphicx}
 \RequirePackage{xcolor}
 
@@ -189,39 +190,6 @@
 \setbeamercolor*{palette bus highlight}{bg=jkuDarkGrey,fg=jkuPurple}
 \setbeamercolor*{palette quaternary}{parent=palette jku highlight}
 
-\ifbool{jkubeamer@faculty@JKU}{%
-    \setbeamercolor*{palette secondary}{parent=palette jku}
-    \setbeamercolor*{palette quaternary}{parent=palette jku highlight}
-}{}%
-\ifbool{jkubeamer@faculty@BUS}{
-    \setbeamercolor*{palette secondary}{parent=palette bus}
-    \setbeamercolor*{palette quaternary}{parent=palette bus highlight}
-}{}%
-\ifbool{jkubeamer@faculty@LIT}{
-    \setbeamercolor*{palette secondary}{parent=palette lit}
-    \setbeamercolor*{palette quaternary}{parent=palette lit highlight}
-}{}%
-\ifbool{jkubeamer@faculty@MED}{%
-    \setbeamercolor*{palette secondary}{parent=palette med}
-    \setbeamercolor*{palette quaternary}{parent=palette med highlight}
-}{}%
-\ifbool{jkubeamer@faculty@RE}{%
-    \setbeamercolor*{palette secondary}{parent=palette re}
-    \setbeamercolor*{palette quaternary}{parent=palette re highlight}
-}{}%
-\ifbool{jkubeamer@faculty@SOE}{
-    \setbeamercolor*{palette secondary}{parent=palette soe}
-    \setbeamercolor*{palette quaternary}{parent=palette soe highlight}
-}{}%
-\ifbool{jkubeamer@faculty@SOWI}{%
-    \setbeamercolor*{palette secondary}{parent=palette sowi}
-    \setbeamercolor*{palette quaternary}{parent=palette sowi highlight}
-}{}%
-\ifbool{jkubeamer@faculty@TNF}{
-    \setbeamercolor*{palette secondary}{parent=palette tnf}
-    \setbeamercolor*{palette quaternary}{parent=palette tnf highlight}
-}{}%
-
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -243,10 +211,10 @@
 %% 
 %% Title frames
 %% 
-\setbeamercolor*{title}{parent=palette primary}
+\setbeamercolor*{title}{parent=normal text}
 \setbeamercolor*{series title}{parent=title}
-\setbeamercolor*{subtitle}{parent=palette primary}
-\setbeamercolor*{subsubtitle}{parent=palette primary}
+\setbeamercolor*{subtitle}{parent=normal text}
+\setbeamercolor*{subsubtitle}{parent=subtitle}
 
 \setbeamercolor*{author}{parent=subtitle}
 \setbeamercolor*{institute}{parent=subsubtitle}
@@ -254,7 +222,7 @@
 \setbeamercolor*{agenda}{parent=subtitle}
 \setbeamercolor*{agenda title}{parent=agenda}
 
-\setbeamercolor*{imprint}{parent=palette primary}
+\setbeamercolor*{imprint}{parent=normal text}
 \setbeamercolor*{imprint name}{parent=imprint}
 \setbeamercolor*{imprint address}{parent=imprint}
 \setbeamercolor*{imprint url}{parent=imprint}
@@ -270,7 +238,7 @@
 %% 
 %% Frame title/footer
 %% 
-\setbeamercolor*{frametitle}{parent=palette primary}
+\setbeamercolor*{frametitle}{parent=normal text}
 \setbeamercolor*{footline}{bg=white,fg=black}
 \setbeamercolor*{section in head/foot}{parent=footline}
 \setbeamercolor*{page number in head/foot}{parent=section in head/foot}
@@ -342,65 +310,116 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
-%% Title frame color mode switching
+%% Color mode switching commands
 %% 
 
-\newcommand{\jkubeamer@framecolormode@default}{%
+% color palette switches
+\xdef\jkubeamer@currentfaculty{\jkubeamer@faculty}
+\define@key{jkubeamer@kv@colorpalette}{jku}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette jku}%
+    \setbeamercolor*{palette quaternary}{parent=palette jku highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{jku}%
+}
+\define@key{jkubeamer@kv@colorpalette}{bus}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette bus}%
+    \setbeamercolor*{palette quaternary}{parent=palette bus highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{bus}%
+}
+\define@key{jkubeamer@kv@colorpalette}{lit}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette lit}%
+    \setbeamercolor*{palette quaternary}{parent=palette lit highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{lit}%
+}
+\define@key{jkubeamer@kv@colorpalette}{med}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette med}%
+    \setbeamercolor*{palette quaternary}{parent=palette med highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{med}%
+}
+\define@key{jkubeamer@kv@colorpalette}{re}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette re}%
+    \setbeamercolor*{palette quaternary}{parent=palette re highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{re}%
+}
+\define@key{jkubeamer@kv@colorpalette}{soe}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette soe}%
+    \setbeamercolor*{palette quaternary}{parent=palette soe highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{soe}%
+}
+\define@key{jkubeamer@kv@colorpalette}{sowi}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette sowi}%
+    \setbeamercolor*{palette quaternary}{parent=palette sowi highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{sowi}%
+}
+\define@key{jkubeamer@kv@colorpalette}{tnf}[]{%
+    \setbeamercolor*{palette secondary}{parent=palette tnf}%
+    \setbeamercolor*{palette quaternary}{parent=palette tnf highlight}%
+    \renewcommand{\jkubeamer@currentfaculty}{tnf}%
+}
+
+% frame color mode switches
+\newcommand{\jkubeamer@currentcolormode}{default}
+\define@key{jkubeamer@kv@framecolormode}{light}[]{%
+    \PackageWarning{testing}{setting light mode}
+    \setbeamercolor*{background canvas}{parent=palette secondary}%
+    \setbeamercolor*{normal text}{parent=palette primary}%
+    \renewcommand{\jkubeamer@currentcolormode}{light}%
+}
+\define@key{jkubeamer@kv@framecolormode}{dark}[]{%
+    \PackageWarning{testing}{setting dark mode}
+    \setbeamercolor*{background canvas}{use=palette secondary,bg=palette secondary.fg,fg=palette secondary.bg}%
+    \setbeamercolor*{normal text}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
+    \renewcommand{\jkubeamer@currentcolormode}{dark}%
+}
+\define@key{jkubeamer@kv@framecolormode}{black}[]{%
+    \PackageWarning{testing}{setting black mode}
+    \setbeamercolor*{background canvas}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
+    \setbeamercolor*{normal text}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
+    \renewcommand{\jkubeamer@currentcolormode}{black}%
+}
+\define@key{jkubeamer@kv@framecolormode}{grey}[]{%
+    \PackageWarning{testing}{setting grey mode}
+    \setbeamercolor*{background canvas}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
+    \setbeamercolor*{normal text}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
+    \renewcommand{\jkubeamer@currentcolormode}{grey}%
+}
+\define@key{jkubeamer@kv@framecolormode}{gray}[]{\KV@jkubeamer@kv@framecolormode@grey{#1}}
+\define@key{jkubeamer@kv@framecolormode}{default}[]{%
+    \PackageWarning{testing}{setting default mode}
     \ifbool{jkubeamer@darkmode}{%
-        \jkubeamer@framecolormode@dark%
+        \KV@jkubeamer@kv@framecolormode@dark{#1}%
     }{%
-        \jkubeamer@framecolormode@light%
+        \KV@jkubeamer@kv@framecolormode@light{#1}%
     }%
+    \renewcommand{\jkubeamer@currentcolormode}{default}%
 }
-\newcommand{\jkubeamer@framecolormode@light}{%
-    \setbeamercolor{background canvas}{use=palette secondary}%
-    \setbeamercolor{palette primary}{fg=black}%
+
+% Command \framecolormode{light | dark | gray | black, FACULTY}: changes the current frame color mode (if color mode is absent, use the current theme color mode)
+\newcommand{\framecolormode}[1]{%
+    % convert param to lowercase
+    \begingroup\edef\@temp{\lowercase{\endgroup\def\noexpand\@temp@lcparam{#1}}}\@temp%
+    % preset default color palette
+    \setkeys{jkubeamer@kv@colorpalette}{\jkubeamer@currentfaculty}%
+    % update color palette according to params
+    \begingroup\edef\@temp{\endgroup\noexpand\setkeys*{jkubeamer@kv@colorpalette}{\@temp@lcparam}}\@temp%
+    % update frame color mode according to params (presetting default frame color mode)
+    \begingroup\edef\@temp{\endgroup\noexpand\setkeys{jkubeamer@kv@framecolormode}{\jkubeamer@currentcolormode,\XKV@rm}}\@temp%
 }
-\newcommand{\jkubeamer@framecolormode@dark}{%
-    \setbeamercolor{background canvas}{use=palette secondary, bg=palette secondary.fg, fg=palette secondary.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
+
+% Command \setcolormode[light | dark | gray | black, FACULTY]: changes the theme color mode (if color mode is absent, reset to the global default color mode)
+\newcommand{\setcolormode}[1][]{%
+    % convert param to lowercase
+    \begingroup\edef\@temp{\lowercase{\endgroup\def\noexpand\@temp@lcparam{#1}}}\@temp%
+    % preset default color palette
+    \setkeys{jkubeamer@kv@colorpalette}{\jkubeamer@faculty}%
+    % update color palette according to params
+    \begingroup\edef\@temp{\endgroup\noexpand\setkeys*{jkubeamer@kv@colorpalette}{\@temp@lcparam}}\@temp%
+    % update frame color mode according to params (presetting default frame color mode)
+    \begingroup\edef\@temp{\endgroup\noexpand\setkeys{jkubeamer@kv@framecolormode}{default,\XKV@rm}}\@temp%
+    \setbeamercolor*{background canvas}{parent=palette secondary}%
+    \setbeamercolor*{normal text}{parent=palette primary}%
 }
-\newcommand{\jkubeamer@framecolormode@dark@JKU}{%
-    \setbeamercolor{background canvas}{use=palette jku, bg=palette jku.fg, fg=palette jku.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@dark@BUS}{%
-    \setbeamercolor{background canvas}{use=palette bus, bg=palette bus.fg, fg=palette bus.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@dark@LIT}{%
-    \setbeamercolor{background canvas}{use=palette lit, bg=palette lit.fg, fg=palette lit.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@dark@MED}{%
-    \setbeamercolor{background canvas}{use=palette med, bg=palette med.fg, fg=palette med.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@dark@RE}{%
-    \setbeamercolor{background canvas}{use=palette re, bg=palette re.fg, fg=palette re.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@dark@SOE}{%
-    \setbeamercolor{background canvas}{use=palette soe, bg=palette soe.fg, fg=palette soe.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@dark@SOWI}{%
-    \setbeamercolor{background canvas}{use=palette sowi, bg=palette sowi.fg, fg=palette sowi.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@dark@TNF}{%
-    \setbeamercolor{background canvas}{use=palette tnf, bg=palette tnf.fg, fg=palette tnf.bg}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@black}{%
-    \setbeamercolor{background canvas}{bg=black, fg=white}%
-    \setbeamercolor{palette primary}{fg=white}%
-}
-\newcommand{\jkubeamer@framecolormode@grey}{%
-    \setbeamercolor{background canvas}{use=palette tertiary, bg=palette tertiary.fg, fg=palette tertiary.bg}%
-    \setbeamercolor{palette primary}{use=palette tertiary, bg=palette tertiary.fg, fg=palette tertiary.bg}%
-}
-\newcommand{\jkubeamer@framecolormode@gray}{\jkubeamer@framecolormode@grey}
+
+\setcolormode%
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -143,44 +143,38 @@
 \DeclareOptionBeamer{c}{\booltrue{beamer@centered}}
 
 % Option JKU: use color palette for all JKU
-\newbool{jkubeamer@faculty@JKU}
-\DeclareOptionBeamer{JKU}[true]{\setbool{jkubeamer@faculty@JKU}{#1}}
-\DeclareOptionBeamer{jku}[true]{\setbool{jkubeamer@faculty@JKU}{#1}}
+\newcommand{\jkubeamer@faculty}{jku}
+\DeclareOptionBeamer{JKU}{\renewcommand{\jkubeamer@faculty}{jku}}
+\DeclareOptionBeamer{jku}{\renewcommand{\jkubeamer@faculty}{jku}}
 
 % Option BUS: use color palette for the business school
-\newbool{jkubeamer@faculty@BUS}
-\DeclareOptionBeamer{BUS}[true]{\setbool{jkubeamer@faculty@BUS}{#1}}
-\DeclareOptionBeamer{bus}[true]{\setbool{jkubeamer@faculty@BUS}{#1}}
+\DeclareOptionBeamer{BUS}{\renewcommand{\jkubeamer@faculty}{bus}}
+\DeclareOptionBeamer{bus}{\renewcommand{\jkubeamer@faculty}{bus}}
 
 % Option LIT: use color palette for the Linz Institute of Technology
-\newbool{jkubeamer@faculty@LIT}
-\DeclareOptionBeamer{LIT}[true]{\setbool{jkubeamer@faculty@LIT}{#1}}
-\DeclareOptionBeamer{lit}[true]{\setbool{jkubeamer@faculty@lit}{#1}}
+\DeclareOptionBeamer{LIT}{\renewcommand{\jkubeamer@faculty}{lit}}
+\DeclareOptionBeamer{lit}{\renewcommand{\jkubeamer@faculty}{lit}}
 
 % Option MED: use color palette for the MED faculty
-\newbool{jkubeamer@faculty@MED}
-\DeclareOptionBeamer{MED}[true]{\setbool{jkubeamer@faculty@MED}{#1}}
-\DeclareOptionBeamer{med}[true]{\setbool{jkubeamer@faculty@MED}{#1}}
+\DeclareOptionBeamer{MED}{\renewcommand{\jkubeamer@faculty}{med}}
+\DeclareOptionBeamer{med}{\renewcommand{\jkubeamer@faculty}{med}}
 
 % Option RE: use color palette for the RE faculty
-\newbool{jkubeamer@faculty@RE}
-\DeclareOptionBeamer{RE}[true]{\setbool{jkubeamer@faculty@RE}{#1}}
-\DeclareOptionBeamer{re}[true]{\setbool{jkubeamer@faculty@RE}{#1}}
+\DeclareOptionBeamer{RE}{\renewcommand{\jkubeamer@faculty}{re}}
+\DeclareOptionBeamer{re}{\renewcommand{\jkubeamer@faculty}{re}}
 
 % Option SOE: use color palette for the School of Education
-\newbool{jkubeamer@faculty@SOE}
-\DeclareOptionBeamer{SOE}[true]{\setbool{jkubeamer@faculty@SOE}{#1}}
-\DeclareOptionBeamer{soe}[true]{\setbool{jkubeamer@faculty@SOE}{#1}}
+\DeclareOptionBeamer{SOE}{\renewcommand{\jkubeamer@faculty}{soe}}
+\DeclareOptionBeamer{SoE}{\renewcommand{\jkubeamer@faculty}{soe}}
+\DeclareOptionBeamer{soe}{\renewcommand{\jkubeamer@faculty}{soe}}
 
 % Option SOWI: use color palette for the SOWI faculty
-\newbool{jkubeamer@faculty@SOWI}
-\DeclareOptionBeamer{SOWI}[true]{\setbool{jkubeamer@faculty@SOWI}{#1}}
-\DeclareOptionBeamer{sowi}[true]{\setbool{jkubeamer@faculty@SOWI}{#1}}
+\DeclareOptionBeamer{SOWI}{\renewcommand{\jkubeamer@faculty}{sowi}}
+\DeclareOptionBeamer{sowi}{\renewcommand{\jkubeamer@faculty}{sowi}}
 
 % Option TNF: use color palette for the TNF faculty
-\newbool{jkubeamer@faculty@TNF}
-\DeclareOptionBeamer{TNF}[true]{\setbool{jkubeamer@faculty@TNF}{#1}}
-\DeclareOptionBeamer{tnf}[true]{\setbool{jkubeamer@faculty@TNF}{#1}}
+\DeclareOptionBeamer{TNF}{\renewcommand{\jkubeamer@faculty}{tnf}}
+\DeclareOptionBeamer{tnf}{\renewcommand{\jkubeamer@faculty}{tnf}}
 
 
 % DEPRECATED options: these options no longer have any effect
@@ -694,15 +688,6 @@
     \renewcommand{\jkubeamer@insertagenda}{#2}%
 }
 
-% Command \setcolormode[light | dark | dark@FACULTY | gray | black]: changes the current frame color mode (if color mode is absent, reset to the global default color mode)
-\newcommand{\setcolormode}[1][default]{%
-    \ifcsdef{jkubeamer@framecolormode@#1}{%
-        \csuse{jkubeamer@framecolormode@#1}%
-    }{%
-        \PackageError{beamerthemejku}{Unknown color mode `#1'}%
-    }
-}
-
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -720,8 +705,10 @@
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
         \usebeamerfont{imprint}%
+        \usebeamercolor[fg]{imprint}%
         \begingroup
         \usebeamerfont{imprint name}%
+        \usebeamercolor[fg]{imprint name}%
         \MakeUppercase{Johannes Kepler}\\
         \ifcurrentbaselanguage{german}{%
             \MakeUppercase{Universit\"{a}t Linz}
@@ -731,11 +718,13 @@
         \endgroup
         \begingroup
         \usebeamerfont{imprint address}%
+        \usebeamercolor[fg]{imprint address}%
         Altenbergerstra{\ss}e 69\\
         4040 Linz, Austria\\
         \endgroup
         \begingroup
         \usebeamerfont{imprint url}%
+        \usebeamercolor[fg]{imprint url}%
         \href{https://jku.at}{jku.at}\\
         \hfill
         \endgroup
@@ -916,16 +905,16 @@
 \mode
 <presentation>
 
-% Command \maketitle[light | dark | dark@FACULTY | gray | black]: insert a title page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
-\renewcommand{\maketitle}[1][default]{\titlepage[#1]}
+% Command \maketitle[light | dark | gray | black, FACULTY]: insert a title page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+\renewcommand{\maketitle}[1][]{\titlepage[#1]}
 
-% Command \titlepage[light | dark | dark@FACULTY | gray | black]: insert a title page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
-\renewcommand{\titlepage}[1][default]{
+% Command \titlepage[light | dark | gray | black, FACULTY]: insert a title page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+\renewcommand{\titlepage}[1][]{
     \ifbool{beamer@inframe}{%
         \usebeamertemplate{title page}%
     }{%
         \begingroup%
-        \setcolormode[#1]%
+        \framecolormode{#1}%
         \usebeamercolor[fg]{background canvas}%
         \begin{frame}[plain]%
         \usebeamertemplate{title page}%
@@ -940,8 +929,8 @@
 <article>
 
 \let\jkubeamer@original@maketitle=\maketitle%
-\renewcommand{\maketitle}[1][default]{\jkubeamer@original@maketitle}
-\renewcommand{\titlepage}[1][default]{}
+\renewcommand{\maketitle}[1][]{\jkubeamer@original@maketitle}
+\renewcommand{\titlepage}[1][]{}
 
 \mode
 <all>
@@ -1121,13 +1110,13 @@
 \mode
 <presentation>
 
-% Command \partpage[light | dark | dark@FACULTY | gray | black]: insert a section page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
-\renewcommand{\partpage}[1][default]{
+% Command \partpage[light | dark | gray | black, FACULTY]: insert a section page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+\renewcommand{\partpage}[1][]{
     \ifbool{beamer@inframe}{%
         \usebeamertemplate{part page}%
     }{%
         \begingroup%
-        \setcolormode[#1]%
+        \framecolormode{#1}%
         \usebeamercolor[fg]{background canvas}%
         \begin{frame}%
         \usebeamertemplate{part page}%
@@ -1142,8 +1131,8 @@
 <article>
 
 \let\jkubeamer@original@maketitle=\maketitle%
-\renewcommand{\maketitle}[1][default]{\jkubeamer@original@maketitle}
-\renewcommand{\partpage}[1][default]{}
+\renewcommand{\maketitle}[1][]{\jkubeamer@original@maketitle}
+\renewcommand{\partpage}[1][]{}
 
 \mode
 <all>
@@ -1262,8 +1251,8 @@
 \mode
 <presentation>
 
-% Command \sectionpage[light | dark | dark@FACULTY | gray | black]: insert a section page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
-\renewcommand{\sectionpage}[1][default]{
+% Command \sectionpage[light | dark | gray | black, FACULTY]: insert a section page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+\renewcommand{\sectionpage}[1][]{
     \begingroup%
     \renewcommand{\insertsectionhead}{}%
     \renewcommand{\insertsubsectionhead}{}%
@@ -1272,7 +1261,7 @@
         \usebeamertemplate{section page}%
     }{%
         \begingroup%
-        \setcolormode[#1]%
+        \framecolormode{#1}%
         \usebeamercolor[fg]{background canvas}%
         \begin{frame}%
         \usebeamertemplate{section page}%
@@ -1284,7 +1273,7 @@
     \agenda[]{}%
 }
 
-\renewcommand{\subsectionpage}[1][default]{\sectionpage[#1]}
+\renewcommand{\subsectionpage}[1][]{\sectionpage[#1]}
 
 \ifbool{jkubeamer@sectionpage}{%
     \AtBeginSection[]{\sectionpage}
@@ -1312,8 +1301,8 @@
 \mode
 <article>
 
-\renewcommand{\sectionpage}[1][default]{}
-\renewcommand{\subsectionpage}[1][default]{}
+\renewcommand{\sectionpage}[1][]{}
+\renewcommand{\subsectionpage}[1][]{}
 
 \mode
 <all>
@@ -1338,13 +1327,13 @@
     \end{tikzpicture}%
 }
 
-% Command \jkulogo[light | dark | dark@FACULTY | gray | black]: add JKU logo slide using the given color mode (mode defaults to global default color mode)
-\newcommand{\jkulogo}[1][default]{
+% Command \jkulogo[light | dark | gray | black, FACULTY]: add JKU logo slide using the given color mode (mode defaults to global default color mode)
+\newcommand{\jkulogo}[1][]{
     \ifbool{beamer@inframe}{%
         \usebeamertemplate{logo page}%
     }{%
         \begingroup%
-        \setcolormode[#1]%
+        \framecolormode{#1}%
         \usebeamercolor[fg]{background canvas}%
         \begin{frame}[plain]%
         \usebeamertemplate{logo page}%
@@ -1391,12 +1380,12 @@
 \mode
 <handout>
 
-\renewcommand{\jkulogo}[1][default]{}
+\renewcommand{\jkulogo}[1][]{}
 
 \mode
 <article>
 
-\renewcommand{\jkulogo}[1][default]{}
+\renewcommand{\jkulogo}[1][]{}
 
 \mode
 <all>
