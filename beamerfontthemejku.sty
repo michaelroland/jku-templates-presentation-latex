@@ -96,7 +96,8 @@
         BoldItalicFeatures={FakeSlant}
     }
     \setmainfont{Merriweather}
-    \setsansfont{OpenSans}
+    %\setsansfont{OpenSans}
+    \setsansfont{PublicSans}
     \setmonofont{Inconsolata}
     \newfontfamily\rmlightfamily{Merriweather}[
         NFSSFamily=rmlight,
@@ -110,18 +111,31 @@
         BoldFont=*-Black,
         ItalicFont=*-BlackItalic,
         BoldItalicFont=*-BlackItalic]
-    \newfontfamily\sflightfamily{OpenSans}[
+    %\newfontfamily\sflightfamily{OpenSans}[
+    %    NFSSFamily=sflight,
+    %    UprightFont=*-Light,
+    %    BoldFont=*-SemiBold,
+    %    ItalicFont=*-LightItalic,
+    %    BoldItalicFont=*-SemiBoldItalic]
+    %\newfontfamily\sfblackfamily{OpenSans}[
+    %    NFSSFamily=sfblack,
+    %    UprightFont=*-ExtraBold,
+    %    BoldFont=*-ExtraBold,
+    %    ItalicFont=*-ExtraBoldItalic,
+    %    BoldItalicFont=*-ExtraBoldItalic]
+    \newfontfamily\sflightfamily{PublicSans}[
         NFSSFamily=sflight,
-        UprightFont=*-Light,
-        BoldFont=*-SemiBold,
-        ItalicFont=*-LightItalic,
-        BoldItalicFont=*-SemiBoldItalic]
-    \newfontfamily\sfblackfamily{OpenSans}[
+        UprightFont=*-Thin,
+        BoldFont=*-Medium,
+        ItalicFont=*-ThinItalic,
+        BoldItalicFont=*-MediumItalic]
+    \newfontfamily\sfblackfamily{PublicSans}[
         NFSSFamily=sfblack,
+        %LetterSpace=1.0,
         UprightFont=*-ExtraBold,
-        BoldFont=*-ExtraBold,
+        BoldFont=*-Black,
         ItalicFont=*-ExtraBoldItalic,
-        BoldItalicFont=*-ExtraBoldItalic]
+        BoldItalicFont=*-BlackItalic]
     \newfontfamily\ttlightfamily{Inconsolata}[
         NFSSFamily=ttlight,
         UprightFont=*-Light,
