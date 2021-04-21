@@ -60,10 +60,13 @@
 %% JKU base colors
 %% 
 \ifbool{jkubeamer@maccolors}{%
+    %TODO: Where do those color values come from? Are they still correct?
+    
     %BLUE
     \definecolor{jkuBlue}{RGB}{0,120,170}
     %CYAN
     \definecolor{jkuCyan}{RGB}{100,180,190}
+    \colorlet{jkuLightBlue}{jkuCyan}
     %YELLOW
     \definecolor{jkuYellow}{RGB}{230,195,35}
     %GREY
@@ -85,6 +88,7 @@
     \definecolor{jkuBlue}{RGB}{4,110,152}
     %CYAN
     \definecolor{jkuCyan}{RGB}{92,207,203}
+    \colorlet{jkuLightBlue}{jkuCyan}
     %YELLOW
     \definecolor{jkuYellow}{RGB}{251,186,0}
     %GREY
@@ -118,6 +122,9 @@
 \newcommand{\crCyan}{\color{jkuCyan}}
 \newcommand{\cCyan}[1]{{\crCyan{#1}}}
 \newcommand{\cjkuCyan}[1]{{\crCyan{#1}}}
+\newcommand{\crLightBlue}{\crCyan}
+\newcommand{\cLightBlue}[1]{{\crCyan{#1}}}
+\newcommand{\cjkuLightBlue}[1]{{\crCyan{#1}}}
 
 \newcommand{\crYellow}{\color{jkuYellow}}
 \newcommand{\cYellow}[1]{{\crYellow{#1}}}
@@ -162,18 +169,38 @@
 %% Color palettes
 %% 
 \setbeamercolor*{palette primary}{bg=white,fg=black}
-\setbeamercolor*{palette secondary}{bg=white,fg=jkuGrey}
+\setbeamercolor*{palette jku}{bg=white,fg=jkuGrey}
 \setbeamercolor*{palette med}{bg=white,fg=jkuYellow}
 \setbeamercolor*{palette re}{bg=white,fg=jkuRed}
 \setbeamercolor*{palette sowi}{bg=white,fg=jkuGreen}
 \setbeamercolor*{palette tnf}{bg=white,fg=jkuBlue}
+\setbeamercolor*{palette lit}{parent=palette tnf}
+\setbeamercolor*{palette soe}{bg=white,fg=jkuPurple}
+\setbeamercolor*{palette bus}{bg=white,fg=jkuLightGreen}
+\setbeamercolor*{palette secondary}{parent=palette jku}
 \setbeamercolor*{palette tertiary}{bg=white,fg=jkuGrey}
-\setbeamercolor*{palette quaternary}{bg=jkuDarkGrey,fg=jkuPurple}
+\setbeamercolor*{palette jku highlight}{bg=jkuDarkGrey,fg=jkuPurple}
 \setbeamercolor*{palette med highlight}{bg=jkuDarkGrey,fg=jkuGreen}
 \setbeamercolor*{palette re highlight}{bg=jkuDarkGrey,fg=jkuCyan}
 \setbeamercolor*{palette sowi highlight}{bg=jkuDarkGrey,fg=jkuPurple}
 \setbeamercolor*{palette tnf highlight}{bg=jkuDarkGrey,fg=jkuPurple}
+\setbeamercolor*{palette lit highlight}{parent=palette tnf highlight}
+\setbeamercolor*{palette soe highlight}{bg=jkuDarkGrey,fg=jkuYellow}
+\setbeamercolor*{palette bus highlight}{bg=jkuDarkGrey,fg=jkuPurple}
+\setbeamercolor*{palette quaternary}{parent=palette jku highlight}
 
+\ifbool{jkubeamer@faculty@JKU}{%
+    \setbeamercolor*{palette secondary}{parent=palette jku}
+    \setbeamercolor*{palette quaternary}{parent=palette jku highlight}
+}{}%
+\ifbool{jkubeamer@faculty@BUS}{
+    \setbeamercolor*{palette secondary}{parent=palette bus}
+    \setbeamercolor*{palette quaternary}{parent=palette bus highlight}
+}{}%
+\ifbool{jkubeamer@faculty@LIT}{
+    \setbeamercolor*{palette secondary}{parent=palette lit}
+    \setbeamercolor*{palette quaternary}{parent=palette lit highlight}
+}{}%
 \ifbool{jkubeamer@faculty@MED}{%
     \setbeamercolor*{palette secondary}{parent=palette med}
     \setbeamercolor*{palette quaternary}{parent=palette med highlight}
@@ -181,6 +208,10 @@
 \ifbool{jkubeamer@faculty@RE}{%
     \setbeamercolor*{palette secondary}{parent=palette re}
     \setbeamercolor*{palette quaternary}{parent=palette re highlight}
+}{}%
+\ifbool{jkubeamer@faculty@SOE}{
+    \setbeamercolor*{palette secondary}{parent=palette soe}
+    \setbeamercolor*{palette quaternary}{parent=palette soe highlight}
 }{}%
 \ifbool{jkubeamer@faculty@SOWI}{%
     \setbeamercolor*{palette secondary}{parent=palette sowi}
@@ -329,12 +360,28 @@
     \setbeamercolor{background canvas}{use=palette secondary, bg=palette secondary.fg, fg=palette secondary.bg}%
     \setbeamercolor{palette primary}{fg=white}%
 }
+\newcommand{\jkubeamer@framecolormode@dark@JKU}{%
+    \setbeamercolor{background canvas}{use=palette jku, bg=palette jku.fg, fg=palette jku.bg}%
+    \setbeamercolor{palette primary}{fg=white}%
+}
+\newcommand{\jkubeamer@framecolormode@dark@BUS}{%
+    \setbeamercolor{background canvas}{use=palette bus, bg=palette bus.fg, fg=palette bus.bg}%
+    \setbeamercolor{palette primary}{fg=white}%
+}
+\newcommand{\jkubeamer@framecolormode@dark@LIT}{%
+    \setbeamercolor{background canvas}{use=palette lit, bg=palette lit.fg, fg=palette lit.bg}%
+    \setbeamercolor{palette primary}{fg=white}%
+}
 \newcommand{\jkubeamer@framecolormode@dark@MED}{%
     \setbeamercolor{background canvas}{use=palette med, bg=palette med.fg, fg=palette med.bg}%
     \setbeamercolor{palette primary}{fg=white}%
 }
 \newcommand{\jkubeamer@framecolormode@dark@RE}{%
     \setbeamercolor{background canvas}{use=palette re, bg=palette re.fg, fg=palette re.bg}%
+    \setbeamercolor{palette primary}{fg=white}%
+}
+\newcommand{\jkubeamer@framecolormode@dark@SOE}{%
+    \setbeamercolor{background canvas}{use=palette soe, bg=palette soe.fg, fg=palette soe.bg}%
     \setbeamercolor{palette primary}{fg=white}%
 }
 \newcommand{\jkubeamer@framecolormode@dark@SOWI}{%

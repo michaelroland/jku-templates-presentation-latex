@@ -142,6 +142,21 @@
 \DeclareOptionBeamer{t}{\boolfalse{beamer@centered}}
 \DeclareOptionBeamer{c}{\booltrue{beamer@centered}}
 
+% Option JKU: use color palette for all JKU
+\newbool{jkubeamer@faculty@JKU}
+\DeclareOptionBeamer{JKU}[true]{\setbool{jkubeamer@faculty@JKU}{#1}}
+\DeclareOptionBeamer{jku}[true]{\setbool{jkubeamer@faculty@JKU}{#1}}
+
+% Option BUS: use color palette for the business school
+\newbool{jkubeamer@faculty@BUS}
+\DeclareOptionBeamer{BUS}[true]{\setbool{jkubeamer@faculty@BUS}{#1}}
+\DeclareOptionBeamer{bus}[true]{\setbool{jkubeamer@faculty@BUS}{#1}}
+
+% Option LIT: use color palette for the Linz Institute of Technology
+\newbool{jkubeamer@faculty@LIT}
+\DeclareOptionBeamer{LIT}[true]{\setbool{jkubeamer@faculty@LIT}{#1}}
+\DeclareOptionBeamer{lit}[true]{\setbool{jkubeamer@faculty@lit}{#1}}
+
 % Option MED: use color palette for the MED faculty
 \newbool{jkubeamer@faculty@MED}
 \DeclareOptionBeamer{MED}[true]{\setbool{jkubeamer@faculty@MED}{#1}}
@@ -151,6 +166,11 @@
 \newbool{jkubeamer@faculty@RE}
 \DeclareOptionBeamer{RE}[true]{\setbool{jkubeamer@faculty@RE}{#1}}
 \DeclareOptionBeamer{re}[true]{\setbool{jkubeamer@faculty@RE}{#1}}
+
+% Option SOE: use color palette for the School of Education
+\newbool{jkubeamer@faculty@SOE}
+\DeclareOptionBeamer{SOE}[true]{\setbool{jkubeamer@faculty@SOE}{#1}}
+\DeclareOptionBeamer{soe}[true]{\setbool{jkubeamer@faculty@SOE}{#1}}
 
 % Option SOWI: use color palette for the SOWI faculty
 \newbool{jkubeamer@faculty@SOWI}
