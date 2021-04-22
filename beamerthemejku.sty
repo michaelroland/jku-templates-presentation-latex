@@ -152,7 +152,10 @@
 % Option c/t: override default vertical centering of beamer class, but allow manually switching to centering mode
 \boolfalse{beamer@centered}
 \DeclareOptionBeamer{t}{\boolfalse{beamer@centered}}
-\DeclareOptionBeamer{c}{\booltrue{beamer@centered}}
+\DeclareOptionBeamer{c}{%
+    \booltrue{beamer@centered}%
+    \PackageWarning{beamerthemejku}{Use option `c' with care; I hope you really know what you are doing!}%
+}
 
 % Option JKU: use color palette for all JKU
 \newcommand{\jkubeamer@faculty}{jku}
