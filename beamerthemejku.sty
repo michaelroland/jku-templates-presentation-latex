@@ -321,10 +321,11 @@
     \boolfalse{beamer@autopdfinfo}%
 }
 
+% Add a boolean flag to detect if authors are set
 \def\author{\@dblarg\jkubeamer@author}
 \newbool{jkubeamer@author@isset}
 \long\def\jkubeamer@author[#1]#2{%
-    \expandafter\notblank\expandafter{#1}{%
+    \expandafter\notblank\expandafter{#2}{%
         \booltrue{jkubeamer@author@isset}%
     }{%
         \boolfalse{jkubeamer@author@isset}%
@@ -848,8 +849,6 @@
             \begingroup%
             \def\beamer@insttitle##1{\textsuperscript{##1}}%
             \def\beamer@andtitle{\unskip, }%
-            \def\beamer@insttitle##1{}%
-            \def\beamer@andtitle{}%
             \def\beamer@instother##1{}%
             \def\beamer@andother{\unskip, }%
             \def\beamer@instinst##1{\textsuperscript{##1}\ignorespaces}%
