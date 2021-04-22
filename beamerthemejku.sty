@@ -47,7 +47,7 @@
 \newcommand{\jkubeamer@logopath}{./logos}
 \DeclareOptionBeamer{logopath}{\renewcommand{\jkubeamer@logopath}{#1}}
 
-% Option frametitlecaps: set frame titles in all-caps (defaults to false)
+% Option [no]frametitlecaps: set frame titles in all-caps (defaults to false)
 \newbool{jkubeamer@frametitlecaps}
 \DeclareOptionBeamer{capsframetitle}[true]{\setbool{jkubeamer@frametitlecaps}{#1}}
 \DeclareOptionBeamer{nocapsframetitle}{\boolfalse{jkubeamer@frametitlecaps}}
@@ -448,77 +448,77 @@
 
 \newsavebox{\jkubeamer@logoblack@en}
 \sbox{\jkubeamer@logoblack@en}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}%
-    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}%
-    }{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{black}}%
-    }}%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}%
+        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}%
+        }{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{black}}%
+        }}%
 }
 \newsavebox{\jkubeamer@logocolor@en}
 \sbox{\jkubeamer@logocolor@en}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}%
-    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}%
-    }{%
-        \usebox{\jkubeamer@logoblack@en}%
-    }}%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}%
+        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}%
+        }{%
+            \usebox{\jkubeamer@logoblack@en}%
+        }}%
 }
 \newsavebox{\jkubeamer@logowhite@en}
 \sbox{\jkubeamer@logowhite@en}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}%
-    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}%
-    }{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{white}}%
-    }}%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}%
+        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}%
+        }{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{white}}%
+        }}%
 }
 \newsavebox{\jkubeamer@footerlogo@en}
 \sbox{\jkubeamer@footerlogo@en}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}{%
-        \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}%
-    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
-        \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
-    }{%
-        \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{black_wide}}%
-    }}%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}%
+        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
+        }{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{black_wide}}%
+        }}%
 }
 \newsavebox{\jkubeamer@logoblack@de}
 \sbox{\jkubeamer@logoblack@de}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}%
-    }{%
-        \usebox{\jkubeamer@logoblack@en}%
-    }%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}%
+        }{%
+            \usebox{\jkubeamer@logoblack@en}%
+        }%
 }
 \newsavebox{\jkubeamer@logocolor@de}
 \sbox{\jkubeamer@logocolor@de}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}%
-    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
-        \usebox{\jkubeamer@logoblack@de}%
-    }{%
-        \usebox{\jkubeamer@logocolor@en}%
-    }}%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}%
+        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
+            \usebox{\jkubeamer@logoblack@de}%
+        }{%
+            \usebox{\jkubeamer@logocolor@en}%
+        }}%
 }
 \newsavebox{\jkubeamer@logowhite@de}
 \sbox{\jkubeamer@logowhite@de}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}{%
-        \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}%
-    }{%
-        \usebox{\jkubeamer@logowhite@en}%
-    }%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}%
+        }{%
+            \usebox{\jkubeamer@logowhite@en}%
+        }%
 }
 \newsavebox{\jkubeamer@footerlogo@de}
 \sbox{\jkubeamer@footerlogo@de}{%
-    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}{%
-        \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}%
-    }{%
-        \usebox{\jkubeamer@footerlogo@en}%
-    }%
+        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@en}%
+        }%
 }
 \newcommand{\jkubeamer@logoblack}{%
     \ifcurrentbaselanguage{german}{%
