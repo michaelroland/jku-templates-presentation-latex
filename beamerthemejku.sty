@@ -159,6 +159,7 @@
 
 % Option JKU: use color palette for all JKU
 \newcommand{\jkubeamer@faculty}{jku}
+\newcommand{\jkubeamer@institute@code}{}
 \DeclareOptionBeamer{JKU}{\renewcommand{\jkubeamer@faculty}{jku}}
 \DeclareOptionBeamer{jku}{\renewcommand{\jkubeamer@faculty}{jku}}
 
@@ -167,8 +168,8 @@
 \DeclareOptionBeamer{bus}{\renewcommand{\jkubeamer@faculty}{bus}}
 
 % Option LIT: use color palette for the Linz Institute of Technology
-\DeclareOptionBeamer{LIT}{\renewcommand{\jkubeamer@faculty}{lit}}
-\DeclareOptionBeamer{lit}{\renewcommand{\jkubeamer@faculty}{lit}}
+\DeclareOptionBeamer{LIT}{\renewcommand{\jkubeamer@faculty}{lit}\renewcommand{\jkubeamer@institute@code}{LIT}}
+\DeclareOptionBeamer{lit}{\renewcommand{\jkubeamer@faculty}{lit}\renewcommand{\jkubeamer@institute@code}{LIT}}
 
 % Option MED: use color palette for the MED faculty
 \DeclareOptionBeamer{MED}{\renewcommand{\jkubeamer@faculty}{med}}
@@ -274,9 +275,6 @@
 %% 
 
 \newcommand{\jkubeamer@logoprefix}{jku}
-
-% Institute
-\newcommand{\jkubeamer@institute@code}{}
 
 % Margin
 \newlength{\jkubeamer@margin}
@@ -456,7 +454,15 @@
 }
 
 \newsavebox{\jkubeamer@logoblack@en}
-\sbox{\jkubeamer@logoblack@en}{%
+\newsavebox{\jkubeamer@logocolor@en}
+\newsavebox{\jkubeamer@logowhite@en}
+\newsavebox{\jkubeamer@footerlogo@en}
+\newsavebox{\jkubeamer@logoblack@de}
+\newsavebox{\jkubeamer@logocolor@de}
+\newsavebox{\jkubeamer@logowhite@de}
+\newsavebox{\jkubeamer@footerlogo@de}
+\newcommand{\jkubeamer@updatelogos}{%
+    \sbox{\jkubeamer@logoblack@en}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}%
         }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}{%
@@ -464,9 +470,8 @@
         }{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{black}}%
         }}%
-}
-\newsavebox{\jkubeamer@logocolor@en}
-\sbox{\jkubeamer@logocolor@en}{%
+    }
+    \sbox{\jkubeamer@logocolor@en}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}%
         }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}{%
@@ -474,9 +479,8 @@
         }{%
             \usebox{\jkubeamer@logoblack@en}%
         }}%
-}
-\newsavebox{\jkubeamer@logowhite@en}
-\sbox{\jkubeamer@logowhite@en}{%
+    }
+    \sbox{\jkubeamer@logowhite@en}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}%
         }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}{%
@@ -484,9 +488,8 @@
         }{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{white}}%
         }}%
-}
-\newsavebox{\jkubeamer@footerlogo@en}
-\sbox{\jkubeamer@footerlogo@en}{%
+    }
+    \sbox{\jkubeamer@footerlogo@en}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}%
         }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
@@ -494,17 +497,15 @@
         }{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{black_wide}}%
         }}%
-}
-\newsavebox{\jkubeamer@logoblack@de}
-\sbox{\jkubeamer@logoblack@de}{%
+    }
+    \sbox{\jkubeamer@logoblack@de}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}%
         }{%
             \usebox{\jkubeamer@logoblack@en}%
         }%
-}
-\newsavebox{\jkubeamer@logocolor@de}
-\sbox{\jkubeamer@logocolor@de}{%
+    }
+    \sbox{\jkubeamer@logocolor@de}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}%
         }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
@@ -512,23 +513,23 @@
         }{%
             \usebox{\jkubeamer@logocolor@en}%
         }}%
-}
-\newsavebox{\jkubeamer@logowhite@de}
-\sbox{\jkubeamer@logowhite@de}{%
+    }
+    \sbox{\jkubeamer@logowhite@de}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}%
         }{%
             \usebox{\jkubeamer@logowhite@en}%
         }%
-}
-\newsavebox{\jkubeamer@footerlogo@de}
-\sbox{\jkubeamer@footerlogo@de}{%
+    }
+    \sbox{\jkubeamer@footerlogo@de}{%
         \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}%
         }{%
             \usebox{\jkubeamer@footerlogo@en}%
         }%
+    }%
 }
+\jkubeamer@updatelogos% execute logo fetching now
 \newcommand{\jkubeamer@logoblack}{%
     \ifcurrentbaselanguage{german}{%
         \usebox{\jkubeamer@logoblack@de}%
@@ -711,6 +712,12 @@
 \newcommand{\agenda}[2][]{%
     \renewcommand{\jkubeamer@insertagendaname}{#1}%
     \renewcommand{\jkubeamer@insertagenda}{#2}%
+}
+
+% Command \institutecode{code}: set the institute code (used to load institute-specific logo instead of JKU logo)
+\newcommand{\institutecode}[1]{%
+    \renewcommand{\jkubeamer@institute@code}{#1}%
+    \jkubeamer@updatelogos%
 }
 
 %% 
