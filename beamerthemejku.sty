@@ -47,9 +47,10 @@
 \newcommand{\jkubeamer@logopath}{./logos}
 \DeclareOptionBeamer{logopath}{\renewcommand{\jkubeamer@logopath}{#1}}
 
-% Option frametitlecaps: set frame titles in all-caps
+% Option frametitlecaps: set frame titles in all-caps (defaults to false)
 \newbool{jkubeamer@frametitlecaps}
 \DeclareOptionBeamer{capsframetitle}[true]{\setbool{jkubeamer@frametitlecaps}{#1}}
+\DeclareOptionBeamer{nocapsframetitle}{\boolfalse{jkubeamer@frametitlecaps}}
 
 % Option [no]footer: display a frame footer (defaults to true)
 \newbool{jkubeamer@framefooter}
@@ -70,23 +71,33 @@
     \boolfalse{jkubeamer@framefooterjku}%
 }
 
-% Option framenumber: insert frame number into the frame footer
+% Option [no]framenumber: insert frame number into the frame footer (defaults to false)
 \newbool{jkubeamer@framenumber}
 \DeclareOptionBeamer{framenumber}[true]{\setbool{jkubeamer@framenumber}{#1}}
+\DeclareOptionBeamer{noframenumber}{\boolfalse{jkubeamer@framenumber}}
 
-% Option totalframenumber: insert total frame number (in addition to frame number) into the frame footer
+% Option [no]totalframenumber: insert total frame number (in addition to frame number) into the frame footer (defaults to false)
 \newbool{jkubeamer@totalframenumber}
 \DeclareOptionBeamer{totalframenumber}[true]{%
     \setbool{jkubeamer@framenumber}{#1}%
     \setbool{jkubeamer@totalframenumber}{#1}%
 }
+\DeclareOptionBeamer{nototalframenumber}{%
+    \boolfalse{jkubeamer@framenumber}%
+    \boolfalse{jkubeamer@totalframenumber}%
+}
 
-% Option appendixframenumber: insert total frame number (in addition to frame number) into the frame footer; before \appendix: display current frame number and total number of frames in main part; in appendix: display current frame number and overall total number of frames.
+% Option [no]appendixframenumber: insert total frame number (in addition to frame number) into the frame footer; before \appendix: display current frame number and total number of frames in main part; in appendix: display current frame number and overall total number of frames; (defaults to false)
 \newbool{jkubeamer@appendixframenumber}
 \DeclareOptionBeamer{appendixframenumber}[true]{%
     \setbool{jkubeamer@framenumber}{#1}%
     \setbool{jkubeamer@totalframenumber}{#1}%
     \setbool{jkubeamer@appendixframenumber}{#1}%
+}
+\DeclareOptionBeamer{noappendixframenumber}{%
+    \boolfalse{jkubeamer@framenumber}%
+    \boolfalse{jkubeamer@totalframenumber}%
+    \boolfalse{jkubeamer@appendixframenumber}%
 }
 
 % Option [no]sectionpage: insert section frames (defaults to true)
@@ -730,7 +741,7 @@
         \begingroup
         \usebeamerfont{imprint url}%
         \usebeamercolor[fg]{imprint url}%
-        \href{https://jku.at}{jku.at}\\
+        \href{https://jku.at/}{jku.at}\\
         \hfill
         \endgroup
     }%
