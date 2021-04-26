@@ -1648,9 +1648,20 @@
 \mode
 <presentation>
 
-\setbeamertemplate{itemize item}{\rule[.20ex]{.95ex}{.95ex}\hspace*{0.25em}}
-\setbeamertemplate{itemize subitem}{\raisebox{.675ex}{\mbox{\circle*{1ex}}\hspace*{-.575ex}\hspace*{0.25em}}}
-\setbeamertemplate{itemize subsubitem}{\rule[.575ex]{.95ex}{.20ex}\hspace*{0.25em}}
+\setbeamertemplate{itemize item}{\rule[0.20ex]{0.95ex}{0.95ex}\hspace*{0.25em}}
+\setbeamertemplate{itemize subitem}{%
+    \raisebox{0.675ex}{%
+        \mbox{%
+            \setlength\unitlength{1ex}%
+            \begin{picture}(1,1)(0,0)%
+            \put (0,0){\circle*{1}}%
+            \end{picture}%
+        }%
+        \hspace*{-0.5ex}%
+        \hspace*{0.25em}%
+    }%
+}
+\setbeamertemplate{itemize subsubitem}{\rule[0.575ex]{0.95ex}{0.20ex}\hspace*{0.25em}}
 \setlength{\leftmargini}{1.25em}
 \setlength{\leftmarginii}{1.25em}
 \setlength{\leftmarginiii}{1.25em}
