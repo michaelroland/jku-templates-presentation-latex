@@ -1329,9 +1329,21 @@
 \mode
 <handout>
 
-\AtBeginSection[]{}
-\AtBeginSubsection[]{}
-\AtBeginSubsubsection[]{}
+\ifbool{jkubeamer@sectionpage}{%
+    \AtBeginSection[]{\addtocounter{framenumber}{1}}
+}{
+    \AtBeginSection[]{}
+}%
+\ifbool{jkubeamer@subsectionpage}{%
+    \AtBeginSubsection[]{\addtocounter{framenumber}{1}}
+}{
+    \AtBeginSubsection[]{}
+}%
+\ifbool{jkubeamer@subsubsectionpage}{%
+    \AtBeginSubsubsection[]{\addtocounter{framenumber}{1}}
+}{
+    \AtBeginSubsubsection[]{}
+}%
 
 \mode
 <article>
@@ -1370,10 +1382,9 @@
         \begingroup%
         \framecolormode{#1}%
         \usebeamercolor[fg]{background canvas}%
-        \begin{frame}[plain]%
+        \begin{frame}[plain,noframenumbering]%
         \usebeamertemplate{logo page}%
         \end{frame}
-        %\addtocounter{framenumber}{-1}
         \endgroup%
     }%
 }
