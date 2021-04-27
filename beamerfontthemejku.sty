@@ -61,6 +61,12 @@
 \DeclareOptionBeamer{compactmono}[true]{\setbool{jkubeamer@compactmono}{#1}}
 \DeclareOptionBeamer{nocompactmono}{\boolfalse{jkubeamer@compactmono}}
 
+% Option [no]mathastext: use standard document fonts (and default to sans-serif font) in math mode
+\newbool{jkubeamer@mathastext}
+%\booltrue{jkubeamer@mathastext}%
+\DeclareOptionBeamer{mathastext}[true]{\setbool{jkubeamer@mathastext}{#1}}
+\DeclareOptionBeamer{nomathastext}{\boolfalse{jkubeamer@mathastext}}
+
 \ProcessOptionsBeamer
 
 %% 
@@ -75,6 +81,7 @@
 \RequirePackage{lmodern}
 \RequirePackage{inconsolata}
 \RequirePackage{helvet}
+\RequirePackage{euler}
 %\usefonttheme{serif}
 \usefonttheme{professionalfonts}
 
@@ -94,7 +101,7 @@
         \stop
     }}
     
-    \RequirePackage{fontspec}
+    \RequirePackage[no-math]{fontspec}
     \defaultfontfeatures{
         Path={\jkubeamer@fontpath},
         Extension=.ttf,
@@ -173,19 +180,21 @@
         NFSSFamily=ttcondensedlight,
         UprightFont=*-Light,
         BoldFont=*-Medium]
-    \setmathrm{Merriweather}
-    \setboldmathrm{Merriweather}[
-        NFSSFamily=rmblack,
-        UprightFont=*-Black,
-        BoldFont=*-Black,
-        ItalicFont=*-BlackItalic,
-        BoldItalicFont=*-BlackItalic]
-    \setmathsf{OpenSans}
-    \ifbool{jkubeamer@compactmono}{%
-        \setmathtt{InconsolataCondensed}
-    }{%
-        \setmathtt{Inconsolata}
-    }
+    %\setmathsfont(Digits,Latin){Merriweather}
+    %\setmathrm{Merriweather}
+    %\setboldmathrm{Merriweather}[
+    %    NFSSFamily=rmblack,
+    %    UprightFont=*-Black,
+    %    BoldFont=*-Black,
+    %    ItalicFont=*-BlackItalic,
+    %    BoldItalicFont=*-BlackItalic]
+    %%\setmathsf{OpenSans}
+    %\setmathsf{PublicSans}
+    %\ifbool{jkubeamer@compactmono}{%
+    %    \setmathtt{InconsolataCondensed}
+    %}{%
+    %    \setmathtt{Inconsolata}
+    %}
 }{%
     \RequirePackage[T1]{fontenc}
     \newcommand{\rmlightfamily}{\rmfamily}
@@ -230,6 +239,19 @@
     \PassOptionsToPackage{full}{textcomp}
     %\RequirePackage{wasysym}
     %\RequirePackage{pifont}
+}{}
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Experimental: Use standard document fonts in math mode
+%% 
+
+\ifbool{jkubeamer@mathastext}{%
+    \usepackage[italic,defaultmathsizes,eulergreek]{mathastext}
 }{}
 
 %% 
