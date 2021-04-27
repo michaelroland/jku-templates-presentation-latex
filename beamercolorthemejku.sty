@@ -200,7 +200,7 @@
 %% 
 \setbeamercolor*{normal text}{parent=palette primary}
 \setbeamercolor*{structure}{parent=normal text}
-\setbeamercolor*{alerted text}{parent=normal text,fg=jkuPurple}
+\setbeamercolor*{alerted text}{parent=normal text,fg=jkuRed}
 \setbeamercolor*{example text}{parent=normal text,fg=jkuGreen}
 \setbeamercolor*{emphasized text}{parent=normal text}
 %% 
@@ -299,12 +299,12 @@
 %% 
 %% Blocks
 %% 
-\setbeamercolor*{block body}{bg=jkuGrey!20,fg=black}
 \setbeamercolor*{block title}{bg=jkuDarkGrey,fg=white}
-\setbeamercolor*{block body example}{bg=jkuGreen!20,fg=black}
+\setbeamercolor*{block body}{use=block title,bg=block title.bg!20,fg=black}
 \setbeamercolor*{block title example}{bg=jkuGreen,fg=white}
-\setbeamercolor*{block body alerted}{bg=jkuPurple!20,fg=black}
+\setbeamercolor*{block body example}{use=block title example,bg=block title example.bg!20,fg=black}
 \setbeamercolor*{block title alerted}{bg=jkuPurple,fg=white}
+\setbeamercolor*{block body alerted}{use=block title alerted,bg=block title alerted.bg!20,fg=black}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
