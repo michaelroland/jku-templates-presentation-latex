@@ -93,8 +93,8 @@
 \fi
 
 \ifbool{jkubeamer@xetexfonts}{%
-    \expandafter\IfFileExists\expandafter{\jkubeamer@fontpath OpenSans-Regular.ttf}{%
-    }{\expandafter\IfFileExists\expandafter{\jkubeamer@fontpath/OpenSans-Regular.ttf}{%
+    \expandafter\IfFileExists\expandafter{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
+    }{\expandafter\IfFileExists\expandafter{\jkubeamer@fontpath/PublicSans-Regular.ttf}{%
         \xdef\jkubeamer@fontpath{\jkubeamer@fontpath/}
     }{%
         \PackageError{beamerfontthemejku}{Font files not found in `\jkubeamer@fontpath', forgot to set the font path with package option `fontpath='?}{}%
