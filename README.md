@@ -6,7 +6,7 @@ This repository contains a rewrite of the LaTeX Beamer Theme for [Johannes Keple
 ## GET LATEST VERSION
 
 Find documentation and grab the latest version at
-<>
+<https://github.com/michaelroland/jku-templates-presentation-latex>
 
 
 ## COPYRIGHT
