@@ -3,10 +3,15 @@
 This repository contains a rewrite of the LaTeX Beamer Theme for [Johannes Kepler University Linz](https://www.jku.at/).
 
 
-## GET LATEST VERSION
+## RELEASES
 
-Find documentation and grab the latest version at
-<https://github.com/michaelroland/jku-templates-presentation-latex>
+Find documentation and grab the latest version of the template [here](https://github.com/michaelroland/jku-templates-presentation-latex/releases/latest).
+
+
+## LATEST VERSION AND BUG REPORTING
+
+The official source code repository of the theme is <https://github.com/michaelroland/jku-templates-presentation-latex>.
+You can request features and report bugs through the [issue tracker](https://github.com/michaelroland/jku-templates-presentation-latex/issues).
 
 
 ## COPYRIGHT
