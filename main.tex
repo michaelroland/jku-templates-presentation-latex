@@ -100,10 +100,14 @@
 %% 
 %% Frame numbering options:
 %%  * framenumber         ... Insert frame number into the frame footer.
-%%  * totalframenumber    ... Insert frame number and total frame number into the frame footer.
-%%  * appendixframenumber ... Similar to `totalframenumber', but total frame number only
-%%                            counts frames in the main part before the `\appendix' command
-%%                            and counts the overall total number of frames after that.
+%%  * totalframenumber    ... Insert frame number and total frame number into the frame footer
+%%                            (only frames in the main part are counted).
+%%  * appendixframenumber ... Similar to `totalframenumber', but count the overall total frame
+%%                            number of main part and appendix.
+%% 
+%% Note that combining `totalframenumber' and `appendixframenumber' options will show the total
+%% number of frames for the main part on frames in the main part and the overal total number of
+%% frames for frames in the appendix.
 %% 
 %% Sectioning options:
 %%  * nosectionpage       ... Supress section frames (see \section{<title>} command).
@@ -348,7 +352,7 @@ No slide numbers are shown in slide footers by default. Enable them with:
     \midrule
     \textverb{framenumber}         & Insert slide number into the footer. \tabularnewline
     \textverb{totalframenumber}    & Insert slide number and total slide number into the footer. \tabularnewline
-    \textverb{appendixframenumber} & Like ``\textverb{totalframenumber}'', but only count slides in the main part into the total. The overall total number of slides is only used after the \textverb{\string\appendix} command. \tabularnewline
+    \textverb{appendixframenumber} & Like ``\textverb{totalframenumber}'', but also count slides from the appendix into the total. Combine with ``\textverb{totalframenumber}'' to only show the overall total for appendix slides. \tabularnewline
     \bottomrule
     \end{tabularx}
 %\end{table}

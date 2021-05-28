@@ -71,32 +71,28 @@
     \boolfalse{jkubeamer@framefooterjku}%
 }
 
-% Option [no]framenumber: insert frame number into the frame footer (defaults to false)
+% Option [no]framenumber: insert current frame number into the frame footer (defaults to false)
 \newbool{jkubeamer@framenumber}
 \DeclareOptionBeamer{framenumber}[true]{\setbool{jkubeamer@framenumber}{#1}}
 \DeclareOptionBeamer{noframenumber}{\boolfalse{jkubeamer@framenumber}}
 
-% Option [no]totalframenumber: insert total frame number (in addition to frame number) into the frame footer (defaults to false)
+% Option [no]totalframenumber: insert total frame number (in addition to current frame number) into the frame footer; frames in appendix are not counted; (defaults to false)
 \newbool{jkubeamer@totalframenumber}
 \DeclareOptionBeamer{totalframenumber}[true]{%
     \setbool{jkubeamer@framenumber}{#1}%
     \setbool{jkubeamer@totalframenumber}{#1}%
 }
 \DeclareOptionBeamer{nototalframenumber}{%
-    \boolfalse{jkubeamer@framenumber}%
     \boolfalse{jkubeamer@totalframenumber}%
 }
 
-% Option [no]appendixframenumber: insert total frame number (in addition to frame number) into the frame footer; before \appendix: display current frame number and total number of frames in main part; in appendix: display current frame number and overall total number of frames; (defaults to false)
+% Option [no]appendixframenumber: insert overall total frame number (in addition to current frame number) into the frame footer; when combined with totalframenumber, the appendix is not counted for frames in the main part; (defaults to false)
 \newbool{jkubeamer@appendixframenumber}
 \DeclareOptionBeamer{appendixframenumber}[true]{%
     \setbool{jkubeamer@framenumber}{#1}%
-    \setbool{jkubeamer@totalframenumber}{#1}%
     \setbool{jkubeamer@appendixframenumber}{#1}%
 }
 \DeclareOptionBeamer{noappendixframenumber}{%
-    \boolfalse{jkubeamer@framenumber}%
-    \boolfalse{jkubeamer@totalframenumber}%
     \boolfalse{jkubeamer@appendixframenumber}%
 }
 
@@ -1630,12 +1626,19 @@
                     \insertframenumber%
                     \ifbool{jkubeamer@totalframenumber}{%
                         \jkubeamer@frameofframes%
-                        \ifbool{jkubeamer@appendixframenumber}{%
-                            \inserttotalframenumber%
+                        \ifbool{beamer@inappendix}{%
+                            \ifbool{jkubeamer@appendixframenumber}{%
+                                \inserttotalframenumber%
+                            }{%
+                                \insertmainframenumber%
+                            }%
                         }{%
                             \insertmainframenumber%
                         }%
-                    }{}%
+                    }{\ifbool{jkubeamer@appendixframenumber}{%
+                        \jkubeamer@frameofframes%
+                        \inserttotalframenumber%
+                    }{}}%
                 }{}%
                 \vphantom{Gg}%
                 \par%
