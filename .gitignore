@@ -16,9 +16,10 @@
 *.run.xml
 *.snm
 *.synctex.gz*
+*.synctex(busy)
 *.thm
 *.toc
 *.vrb
 .~*#
 *~
-*.pdf
+/main.pdf
