@@ -1,7 +1,7 @@
 % !TeX program = xelatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_US
-% !BIB program = bibtex
+% !BIB program = biber
 %% 
 %% The above lines help editors like TeXstudio to automatically choose the right tools
 %% to compile your LaTeX source file. If your tool does not support these magic comments,
@@ -155,14 +155,36 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
-\usepackage[numbers,square,sort&compress]{natbib}
 %\usepackage{pifont}
 %\newcommand{\cmark}{\ding{51}}
 %\newcommand{\xmark}{\ding{55}}
-%\newcommand{\lrarrow}{\ding{220}}
+%\newcommand{\rarr}{\ding{212}}
+%\newcommand{\larr}{\raisebox{\depth}{\rotatebox{180}{\rarr}}}
+\usepackage{csquotes}
+\usepackage[backend=biber,citestyle=authoryear,sortcites=true,style=ACM-Reference-Format]{biblatex}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Set reasonable defaults for biblatex.
+%% 
+
+\preto{\bibsetup}{\providecommand*{\insertbiblabel}{}}
+\DeclareFieldFormat*{title}{#1}
+\DeclareFieldFormat*{booktitle}{#1}
+\DeclareFieldFormat*{journaltitle}{#1}
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburllcpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+
+%% Add bibligraphy source files
+\addbibresource{references.bib}
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{document}
 
@@ -1160,9 +1182,10 @@ You see, btw., the slide title can run over several lines \ldots
 \end{frame}
 
 
-\begin{frame}{References}
-\bibliographystyle{abbrv}
-\bibliography{references}
+\begin{frame}[allowframebreaks]{References}
+%\setbeamerfont{bibliography item}{size={\footnotesize}}
+%\AtNextBibliography{\footnotesize}
+\printbibliography
 \end{frame}
 
 
