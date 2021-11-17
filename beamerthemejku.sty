@@ -71,6 +71,11 @@
     \boolfalse{jkubeamer@framefooterjku}%
 }
 
+% Option [no]legacyitemizestyle: use old bullet style in itemization (defaults to false)
+\newbool{jkubeamer@legacyitemizestyle}
+\DeclareOptionBeamer{legacyitemizestyle}[true]{\setbool{jkubeamer@legacyitemizestyle}{#1}}
+\DeclareOptionBeamer{nolegacyitemizestyle}{\boolfalse{jkubeamer@legacyitemizestyle}}
+
 % Option [no]framenumber: insert current frame number into the frame footer (defaults to false)
 \newbool{jkubeamer@framenumber}
 \DeclareOptionBeamer{framenumber}[true]{\setbool{jkubeamer@framenumber}{#1}}
@@ -1696,8 +1701,9 @@
 \mode
 <presentation>
 
-\setbeamertemplate{itemize item}{\rule[0.20ex]{0.95ex}{0.95ex}\hspace*{0.25em}}
-\setbeamertemplate{itemize subitem}{%
+\ifbool{jkubeamer@legacyitemizestyle}{%
+    \setbeamertemplate{itemize item}{\rule[0.20ex]{0.95ex}{0.95ex}\hspace*{0.25em}}
+    \setbeamertemplate{itemize subitem}{%
         \raisebox{0.675ex}{%
             \mbox{%
                 \setlength\unitlength{1ex}%
@@ -1708,8 +1714,35 @@
             \hspace*{-0.5ex}%
             \hspace*{0.25em}%
         }%
+    }
+    \setbeamertemplate{itemize subsubitem}{\rule[0.575ex]{0.95ex}{0.20ex}\hspace*{0.25em}}
+}{%
+    \setbeamertemplate{itemize item}{%
+        \raisebox{0.675ex}{%
+            \mbox{%
+                \setlength\unitlength{0.75ex}%
+                \begin{picture}(1,1)(0,0)%
+                \put (0,0){\circle*{1}}%
+                \end{picture}%
+            }%
+            \hspace*{-0.5ex}%
+            \hspace*{0.25em}%
+        }%
+    }
+    \setbeamertemplate{itemize subitem}{%
+        \raisebox{0.675ex}{%
+            \mbox{%
+                \setlength\unitlength{0.75ex}%
+                \begin{picture}(1,1)(0,0)%
+                \put (0,0){\circle{1}}%
+                \end{picture}%
+            }%
+            \hspace*{-0.5ex}%
+            \hspace*{0.25em}%
+        }%
+    }
+    \setbeamertemplate{itemize subsubitem}{\rule[0.31875ex]{0.7125ex}{0.7125ex}\hspace*{0.25em}}
 }
-\setbeamertemplate{itemize subsubitem}{\rule[0.575ex]{0.95ex}{0.20ex}\hspace*{0.25em}}
 \setlength{\leftmargini}{1.25em}
 \setlength{\leftmarginii}{1.25em}
 \setlength{\leftmarginiii}{1.25em}
