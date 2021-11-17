@@ -1673,6 +1673,17 @@
     }{}%
 }
 
+\renewcommand{\footnoterule}{\hrule height 0pt}
+\setbeamertemplate{footnote}{%
+    \parindent 1em%
+    \hangafter=1%
+    \hangindent 0.8em%
+    \noindent%
+    \raggedright%
+    \hskip -1em%
+    \hbox to 1.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
