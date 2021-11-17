@@ -254,13 +254,16 @@
 %% 
 %% Itemization and enumeration
 %% 
-\setbeamercolor*{itemize item}{parent=normal text}
-\setbeamercolor*{itemize subitem}{parent=itemize item}
-\setbeamercolor*{itemize subsubitem}{parent=itemize subitem}
-\setbeamercolor*{enumerate item}{parent=normal text}
-\setbeamercolor*{enumerate subitem}{parent=enumerate item}
-\setbeamercolor*{enumerate subsubitem}{parent=enumerate subitem}
-\setbeamercolor*{description item}{parent=normal text}
+\setbeamercolor*{item}{parent=normal text}
+\setbeamercolor*{subitem}{parent=item}
+\setbeamercolor*{subsubitem}{parent=subitem}
+\setbeamercolor*{itemize item}{parent=item}
+\setbeamercolor*{itemize subitem}{parent=subitem}
+\setbeamercolor*{itemize subsubitem}{parent=subsubitem}
+\setbeamercolor*{enumerate item}{parent=item}
+\setbeamercolor*{enumerate subitem}{parent=subitem}
+\setbeamercolor*{enumerate subsubitem}{parent=subsubitem}
+\setbeamercolor*{description item}{parent=item}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

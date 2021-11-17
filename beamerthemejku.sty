@@ -1698,16 +1698,16 @@
 
 \setbeamertemplate{itemize item}{\rule[0.20ex]{0.95ex}{0.95ex}\hspace*{0.25em}}
 \setbeamertemplate{itemize subitem}{%
-    \raisebox{0.675ex}{%
-        \mbox{%
-            \setlength\unitlength{1ex}%
-            \begin{picture}(1,1)(0,0)%
-            \put (0,0){\circle*{1}}%
-            \end{picture}%
+        \raisebox{0.675ex}{%
+            \mbox{%
+                \setlength\unitlength{1ex}%
+                \begin{picture}(1,1)(0,0)%
+                \put (0,0){\circle*{1}}%
+                \end{picture}%
+            }%
+            \hspace*{-0.5ex}%
+            \hspace*{0.25em}%
         }%
-        \hspace*{-0.5ex}%
-        \hspace*{0.25em}%
-    }%
 }
 \setbeamertemplate{itemize subsubitem}{\rule[0.575ex]{0.95ex}{0.20ex}\hspace*{0.25em}}
 \setlength{\leftmargini}{1.25em}
@@ -1736,6 +1736,23 @@
 }{%
     \nointerlineskip%
     \endgroup%
+}
+
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\setbeamertemplate{enumerate subitem}{\insertsubenumlabel.}
+\setbeamertemplate{enumerate subsubitem}{\insertsubsubenumlabel.}
+
+\setbeamertemplate{itemize/enumerate body begin}{%
+    \usebeamerfont{item}%
+    \usebeamercolor{item}%
+}
+\setbeamertemplate{itemize/enumerate subbody begin}{%
+    \usebeamerfont{subitem}%
+    \usebeamercolor{subitem}%
+}
+\setbeamertemplate{itemize/enumerate subsubbody begin}{%
+    \usebeamerfont{subsubitem}%
+    \usebeamercolor{subsubitem}%
 }
 
 \mode

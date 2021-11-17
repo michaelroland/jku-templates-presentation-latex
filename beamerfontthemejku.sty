@@ -323,13 +323,16 @@
 %% 
 %% Itemization and enumeration
 %% 
-\setbeamerfont*{itemize item}{parent=normal text}
-\setbeamerfont*{itemize subitem}{parent=itemize item}
-\setbeamerfont*{itemize subsubitem}{parent=itemize subitem}
-\setbeamerfont*{enumerate item}{parent=normal text}
-\setbeamerfont*{enumerate subitem}{parent=enumerate item}
-\setbeamerfont*{enumerate subsubitem}{parent=enumerate subitem}
-\setbeamerfont*{description item}{parent=normal text, series=\bfseries}
+\setbeamerfont*{item}{parent=normal text}
+\setbeamerfont*{subitem}{parent=item, size*={10pt}{12pt}}
+\setbeamerfont*{subsubitem}{parent=subitem, size*={9pt}{11pt}}
+\setbeamerfont*{itemize item}{parent=item}
+\setbeamerfont*{itemize subitem}{parent=subitem}
+\setbeamerfont*{itemize subsubitem}{parent=subsubitem}
+\setbeamerfont*{enumerate item}{parent=item}
+\setbeamerfont*{enumerate subitem}{parent=subitem}
+\setbeamerfont*{enumerate subsubitem}{parent=subsubitem}
+\setbeamerfont*{description item}{parent=item, series=\bfseries}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
