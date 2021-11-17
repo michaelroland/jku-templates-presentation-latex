@@ -719,6 +719,14 @@
     \renewcommand{\jkubeamer@insertagenda}{#2}%
 }
 
+\newcommand{\jkubeamer@insertsectionsubtitle}{}
+\newcommand{\jkubeamer@insertsectionsubsubtitle}{}
+% Command \sectionextra{subtitle}{subsubtitle}: sets the subtitle and subsubtitle for a section page (if subsections and subsubsections are not usable)
+\newcommand{\sectionextra}[2]{%
+    \renewcommand{\jkubeamer@insertsectionsubtitle}{#1}%
+    \renewcommand{\jkubeamer@insertsectionsubsubtitle}{#2}%
+}
+
 % Command \institutecode{code}: set the institute code (used to load institute-specific logo instead of JKU logo)
 \newcommand{\institutecode}[1]{%
     \renewcommand{\jkubeamer@institute@code}{#1}%
@@ -1227,7 +1235,12 @@
                 \protect\insertsubsection%
                 \vphantom{Gg}%
                 \par%
-            }{}%
+            }{\expandafter\notblank\expandafter{\jkubeamer@insertsectionsubtitle}{%
+                \vphantom{Gg}%
+                \protect\jkubeamer@insertsectionsubtitle%
+                \vphantom{Gg}%
+                \par%
+            }{}}%
             \expandafter\notblank\expandafter{\insertsubsubsection}{%
                 \begingroup%
                 \usebeamerfont{subsubsection title}%
@@ -1237,7 +1250,16 @@
                 \vphantom{Gg}%
                 \endgroup%
                 \par% with baselineskip of outer font (subtitle)
-            }{}%
+            }{\expandafter\notblank\expandafter{\jkubeamer@insertsectionsubsubtitle}{%
+                \begingroup%
+                \usebeamerfont{subsubsection title}%
+                \usebeamercolor[fg]{subsubsection title}%
+                \vphantom{Gg}%
+                \protect\jkubeamer@insertsectionsubsubtitle%
+                \vphantom{Gg}%
+                \endgroup%
+                \par% with baselineskip of outer font (subtitle)
+            }{}}%
             \endgroup%
         \end{minipage}%
     };
@@ -1304,6 +1326,7 @@
     }%
     \endgroup%
     \agenda[]{}%
+    \sectionextra{}{}%
 }
 
 \renewcommand{\subsectionpage}[1][]{\sectionpage[#1]}
