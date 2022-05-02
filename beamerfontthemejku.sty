@@ -269,10 +269,10 @@
 %% Normal style
 %% 
 \setbeamerfont*{normal text}{family=\sffamily, size*={11pt}{12.5pt}}
-\setbeamerfont*{structure}{parent=normal text}
-\setbeamerfont*{alerted text}{parent=normal text, series=\bfseries}
-\setbeamerfont*{example text}{parent=normal text}
-\setbeamerfont*{emphasized text}{parent=normal text, series=\itshape}
+\setbeamerfont*{structure}{}
+\setbeamerfont*{alerted text}{series=\bfseries}
+\setbeamerfont*{example text}{}
+\setbeamerfont*{emphasized text}{series=\itshape}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -390,10 +390,26 @@
 %% Highlighting commands
 %% 
 
-\renewcommand<>{\alert}[1]{{\only#2{\usebeamerfont{alerted text}\usebeamercolor[fg]{alerted text}}#1}}
-\renewcommand<>{\emph}[1]{{\only#2{\usebeamerfont{emphasized text}\usebeamercolor[fg]{emphasized text}}#1}}
-\newcommand<>{\highlight}[1]{{\only#2{\usebeamerfont{example text}\usebeamercolor[fg]{example text}}#1}}
-\renewcommand<>{\structure}[1]{{\only#2{\usebeamerfont{structure}\usebeamercolor[fg]{structure}}#1}}
+\renewcommand<>{\alert}[1]{{%
+    \only#2{%
+        \usebeamerfont{alerted text}%
+        \ifbeamercolorempty[fg]{alerted text}{}{\usebeamercolor[fg]{alerted text}}%
+    }#1}}
+\renewcommand<>{\emph}[1]{{%
+    \only#2{%
+        \usebeamerfont{emphasized text}%
+        \ifbeamercolorempty[fg]{emphasized text}{}{\usebeamercolor[fg]{emphasized text}}%
+    }#1}}
+\newcommand<>{\highlight}[1]{{%
+    \only#2{%
+        \usebeamerfont{example text}%
+        \ifbeamercolorempty[fg]{example text}{}{\usebeamercolor[fg]{example text}}%
+    }#1}}
+\renewcommand<>{\structure}[1]{{%
+    \only#2{%
+        \usebeamerfont{structure}%
+        \ifbeamercolorempty[fg]{structure}{}{\usebeamercolor[fg]{structure}}%
+    }#1}}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
