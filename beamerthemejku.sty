@@ -1580,6 +1580,11 @@
     \end{beamercolorbox}%
 }
 
+% No numbering on first-and-only frame for frames with allowframebreaks set
+\setbeamertemplate{frametitle continuation}[singleframecheck]
+% Note that we could use the following to get completely rid of the continuation count:
+%\setbeamertemplate{frametitle continuation}[from second][]
+
 % No navigation symbols
 \usenavigationsymbolstemplate{}
 
