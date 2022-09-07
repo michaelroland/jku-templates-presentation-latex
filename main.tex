@@ -284,20 +284,21 @@
 
 This theme requires that the following packages are installed:
 \begin{columns}[onlytextwidth]
-\column{0.5\textwidth}
+\column{0.4\textwidth}
 \begin{itemize}
 \item \texttt{amsmath}
 \item \texttt{babel}
 \item \texttt{beamer}
 \item \texttt{datetime2}
 \item \texttt{etoolbox}
+\item \texttt{fontawesome5}
 \item \texttt{fontspec} (only with XeTeX)
 \item \texttt{hyperref}
-\item \texttt{iftex}
 \end{itemize}
 
-\column{0.5\textwidth}
+\column{0.4\textwidth}
 \begin{itemize}
+\item \texttt{iftex}
 \item \texttt{inconsolata}
 \item \texttt{listings}
 \item \texttt{lm}
@@ -305,6 +306,10 @@ This theme requires that the following packages are installed:
 \item \texttt{psnfss}
 \item \texttt{translations}
 \item \texttt{xkeyval}
+\end{itemize}
+
+\column{0.2\textwidth}
+\begin{itemize}
 \item \texttt{xcolor}
 \end{itemize}
 \end{columns}
@@ -1034,6 +1039,59 @@ Just like switching the color mode and scheme for a specific special slide, you 
 
 Use \verb|\setcolormode[<mode options>]| to change the color mode.
 \end{frame}
+
+
+\begin{frame}[containsverbatim,allowframebreaks]
+\frametitle{Contact Information Slide}
+
+Use \verb|\contactframe[<mode options>]{<name>}{<affiliation>}{<contact info>}{<ack>}| to display a contact information frame. 
+\begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
+\contactframe{Johanna Kepler}{Institute of Networks and Security}{%
+    \contactphone{+43 732 2468-XXXX}
+    \contactmail{firstname.lastname@jku.at}
+    \contactweb[https://www.jku.at/ins]{jku.at/ins}
+}{%
+    This work is funded by XYZ.
+}
+\end{lstlisting}
+The optional argument ``\textverb{<mode options>}'' may be any of the color mode options that can be used for the \verb|\maketitle| command (see slide~\ref{advanced-title-slides}).
+
+\framebreak
+The contact info field may contain a combination of the following commands:
+\begin{itemize}
+\item \verb|\contactaddress{address}|: adds an address/place
+\item \verb|\contactphone{number}|: adds a phone number
+\item \verb|\contactfax{number}|: adds a fax number
+\item \verb|\contactmail{e-mail address}|: adds an e-mail address
+\item \verb|\contactweb[real url]{display url}|: adds a URL
+\item \verb|\contactother[icon]{contact info}|: adds an arbitrary contact info entry, use \verb|\fa...| (from \verb|fontawesome5| package) as icons
+\item \verb|\contactnewline|: adds an empty line
+\end{itemize}
+\end{frame}
+
+\contactframe[dark]{%
+    Johanna Kepler
+}{%
+    Institute of Networks and Security
+}{%
+    \contactphone{+43 732 2468-XXXX}
+    \contactmail{firstname.lastname@jku.at}
+    \contactweb[https://www.jku.at/ins]{jku.at/ins}
+}{%
+    This work is funded by XYZ.
+}
+
+\contactframe[light]{%
+    Johanna Kepler
+}{%
+    Institute of Networks and Security
+}{%
+    \contactphone{+43 732 2468-XXXX}
+    \contactmail{firstname.lastname@jku.at}
+    \contactweb[https://www.jku.at/ins]{jku.at/ins}
+}{%
+    This work is funded by XYZ.
+}
 
 
 
