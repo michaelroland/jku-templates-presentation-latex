@@ -1559,6 +1559,192 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
+%% Contact frames
+%% 
+
+\newcommand{\jkubeamer@contactframe@info}{}
+\newcommand{\jkubeamer@contactframe@ack}{}
+
+\setbeamertemplate{contact page}{%
+    \thispagestyle{empty}%
+    \begin{tikzpicture}[remember picture, overlay]
+    %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
+    \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
+        \color{fg}%
+        \jkubeamer@Klogo%
+    };
+    \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
+        \color{fg}%
+        \ifbool{jkubeamer@framefooterjku}{%
+            \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
+        }{}%
+    };
+    \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
+        \color{fg}%
+        \ifbool{jkubeamer@framefooterjku}{%
+            \ifbool{jkubeamer@imprint}{%
+                \jkubeamer@insertimprint%
+            }{}%
+        }{}%
+    };
+    \node[anchor=south west,line width=0mm, inner sep=0mm, yshift=\notbool{jkubeamer@imprint}{-2\jkubeamer@margin}{0mm}] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -3\jkubeamer@margin)$) {%
+        \color{fg}%
+        {%
+            \jkubeamer@logo@partner%
+        }%
+    };
+    %\fill[fill=red,opacity=0.5] ($(current page.west) + (\jkubeamer@margin, 0.15\jkubeamer@Klogo@height)$) rectangle ($(current page.north east) - (\jkubeamer@margin, \jkubeamer@margin)$);
+    \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0.15\jkubeamer@Klogo@height)$) {%
+        \begin{minipage}[b][\dimexpr.5\paperheight-\jkubeamer@margin\relax]{\dimexpr\paperwidth-2\jkubeamer@margin\relax}%
+            \raggedright%
+            \linespread{0.85}%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \usebeamerfont{contacttitle}%
+            \usebeamercolor[fg]{contacttitle}%
+            \expandafter\notblank\expandafter{\insertframetitle}{%
+                \begin{minipage}[t]{\textwidth}%
+                    \raggedright%
+                    \setlength{\parindent}{0pt}%
+                    \setlength{\parskip}{0pt}%
+                    \usebeamerfont{contacttitle}%
+                    \usebeamercolor[fg]{contacttitle}%
+                    \vphantom{Gg}%
+                    \ifbool{jkubeamer@frametitlecaps}{%
+                        \MakeUppercase{\insertframetitle}%
+                    }{%
+                        \protect\insertframetitle%
+                    }
+                    \vphantom{Gg}%
+                \end{minipage}%
+                \par%
+            }{}%
+            \expandafter\notblank\expandafter{\insertframesubtitle}{%
+                \begin{minipage}[t]{\textwidth}%
+                    \raggedright%
+                    \setlength{\parindent}{0pt}%
+                    \setlength{\parskip}{0pt}%
+                    \usebeamerfont{contactsubtitle}%
+                    \usebeamercolor[fg]{contactsubtitle}%
+                    \vphantom{Gg}%
+                    \protect\insertframesubtitle%
+                    \vphantom{Gg}%
+                \end{minipage}%
+                \par% with baselineskip of outer font (contacttitle)
+            }{}%
+            \linespread{1.0}\selectfont%
+            \vspace*{\dimexpr\f@size\p@ - \baselineskip\relax}%
+        \end{minipage}%
+    };
+    %\fill[fill=red,opacity=0.5] ($(current page.west) + (\jkubeamer@margin, -1.15\jkubeamer@Klogo@height)$) rectangle ($(current page.south east) + (-\jkubeamer@titlelogo@offset, \jkubeamer@margin)$);
+    \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, -1.15\jkubeamer@Klogo@height)$) {%
+        \begin{minipage}[t][\dimexpr.5\paperheight-\jkubeamer@margin\relax]{\dimexpr\paperwidth-\jkubeamer@margin-\jkubeamer@titlelogo@offset\relax}%
+            %\raggedright%
+            \linespread{0.95}%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \usebeamerfont{acknowledgement}%
+            \usebeamercolor[fg]{acknowledgement}%
+            \expandafter\notblank\expandafter{\jkubeamer@contactframe@ack}{%
+                \vphantom{Gg}%
+                \protect\jkubeamer@contactframe@ack%
+                \vphantom{Gg}%
+                \par% with baselineskip of outer font (acknowledgement)
+            }{}%
+        \end{minipage}%
+    };
+    %\fill[fill=red,opacity=0.5] ($(current page.center) - (\jkubeamer@Klogo@width, 0mm)$) rectangle ($(current page.east) - (\jkubeamer@titlelogo@offset, \jkubeamer@Klogo@height)$);
+    \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.center) - (\jkubeamer@Klogo@width, 0mm)$) {%
+        \begin{minipage}[t][\jkubeamer@Klogo@height]{\dimexpr.5\paperwidth+\jkubeamer@Klogo@width-\jkubeamer@titlelogo@offset\relax}%
+            \raggedright%
+            \linespread{1.0}%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \setlength{\fboxsep}{0pt}%
+            \usebeamerfont{contactinfo}%
+            \usebeamercolor[fg]{contactinfo}%
+            \begingroup%
+            \newbool{jkubeamer@contactlogo}%
+            \booltrue{jkubeamer@contactlogo}%
+            \newcommand{\jkubeamer@contact}[2]{%
+                \par%
+                \vphantom{Gg}%
+                \ifbool{jkubeamer@contactlogo}{%
+                    \hspace*{-1.2em}\begin{minipage}[c][\baselineskip][c]{1.2em}%
+                    \centering%
+                    \usebeamerfont{contactinfo icon}%
+                    \usebeamercolor[fg]{contactinfo icon}%
+                    {##1}
+                    \end{minipage}%
+                }{}%
+                \begin{minipage}[c][\baselineskip][c]{\dimexpr\linewidth-1.2em\relax}%
+                \raggedright%
+                \usebeamerfont{contactinfo}%
+                \usebeamercolor[fg]{contactinfo}%
+                {##2}
+                \end{minipage}%
+            }%
+            \newcommand{\nocontactlogos}{\boolfalse{jkubeamer@contactlogo}}%
+            \newcommand{\contactaddress}[1]{\jkubeamer@contact{\faMapMarker*}{##1}}%
+            \newcommand{\contactphone}[1]{\jkubeamer@contact{\reflectbox{\faPhone}}{##1}}%
+            \newcommand{\contactfax}[1]{\jkubeamer@contact{\faFax}{##1}}%
+            \newcommand{\contactmail}[1]{\jkubeamer@contact{\faAt}{\mailto{##1}}}%
+            \newcommand{\contactweb}[2][]{\jkubeamer@contact{\faGlobe}{\prettyurl[##1]{##2}}}%
+            \newcommand{\contactother}[2][~]{\jkubeamer@contact{##1}{##2}}%
+            \newcommand{\contactnewline}{\jkubeamer@contact{}{}}%
+            \jkubeamer@contactframe@info%
+            \endgroup%
+            \vphantom{Gg}%
+            \par
+        \end{minipage}%
+    };
+    \end{tikzpicture}%
+}
+
+% Command \contactframe[light | dark | gray | black, FACULTY]{name}{affiliation}{contact-info}{acknowledgements}: add contact slide using the given color mode (mode defaults to global default color mode)
+% Commands only valid within contact-info:
+%     Command \nocontactlogos: disables fancy logos in contact information
+%     Command \contactaddress{address}: adds an address/place to the contact entry
+%     Command \contactphone{number}: adds a phone number to the contact entry
+%     Command \contactfax{number}: adds a fax number to the contact entry
+%     Command \contactmail{address}: adds an e-mail address to an contact entry
+%     Command \contactweb[real url]{display url}: adds a URL to an contact entry
+%     Command \contactother[icon]{contact info}: adds an arbitrary contact info type to the contact entry
+%     Command \contactnewline: adds an empty line to the contact entry
+\newcommand{\contactframe}[5][]{
+    \ifbool{beamer@inframe}{%
+        \PackageError{beamerthemejku}{Command `\string\contactframe' is not allowed within a frame!}{}%
+    }{%
+        \begingroup%
+        \setbeamertemplate{frametitle}{}%
+        \framecolormode{#1}%
+        \usebeamercolor[fg]{background canvas}%
+        \begin{frame}[plain]%
+        \frametitle{#2}%
+        \framesubtitle{#3}%
+        \renewcommand{\jkubeamer@contactframe@info}{#4}
+        \renewcommand{\jkubeamer@contactframe@ack}{#5}
+        \usebeamertemplate{contact page}%
+        \end{frame}
+        %\addtocounter{framenumber}{-1}
+        \endgroup%
+    }%
+}
+
+\mode
+<article>
+
+\renewcommand{\contactframe}[5][]{}
+
+\mode
+<all>
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
 %% Frame title/footer
 %% 
 

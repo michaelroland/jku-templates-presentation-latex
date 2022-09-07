@@ -82,6 +82,7 @@
 \RequirePackage{inconsolata}
 \RequirePackage{helvet}
 \RequirePackage{euler}
+\RequirePackage{fontawesome5}
 %\usefonttheme{serif}
 \usefonttheme{professionalfonts}
 
@@ -321,6 +322,20 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
+%% Contact frames
+%% 
+\setbeamerfont*{contacttitle}{parent=title}
+\setbeamerfont*{contactsubtitle}{parent=framesubtitle}
+\setbeamerfont*{contactinfo}{parent=normal text, size*={10pt}{12pt}}
+\setbeamerfont*{contactinfo icon}{parent=contactinfo, size*={8pt}{9.6pt}}
+\setbeamerfont*{acknowledgement}{parent=normal text, size*={6pt}{7pt}}
+%% 
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
 %% Itemization and enumeration
 %% 
 \setbeamerfont*{item}{parent=normal text}
@@ -462,6 +477,9 @@
 
 % Nasty hack to emulate passing option `hyphens' to the url package:
 \def\do@url@hyp{\do\-}
+
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+\newcommand{\prettyurl}[2][]{\ifstrempty{#1}{\href{#2}{#2}}{\href{#1}{#2}}}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
