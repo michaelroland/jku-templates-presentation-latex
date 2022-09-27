@@ -1,4 +1,4 @@
-# LaTeX Beamer Theme for Johannes Kepler University Linz
+# LaTeX Beamer Theme for JKU Linz
 
 This repository contains a rewrite of the LaTeX Beamer Theme for [Johannes Kepler University Linz](https://www.jku.at/).
 
