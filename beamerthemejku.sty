@@ -144,6 +144,12 @@
 \DeclareOptionBeamer{imprint}[true]{\setbool{jkubeamer@imprint}{#1}}
 \DeclareOptionBeamer{noimprint}{\boolfalse{jkubeamer@imprint}}
 
+% Option [no]jkulogo: insert JKU and K logos on title pages and in frame footers (defaults to true)
+\newbool{jkubeamer@jkulogo}
+\booltrue{jkubeamer@jkulogo}
+\DeclareOptionBeamer{jkulogo}[true]{\setbool{jkubeamer@jkulogo}{#1}}
+\DeclareOptionBeamer{nojkulogo}{\boolfalse{jkubeamer@jkulogo}}
+
 % Option [no]optpackages: load convenience packages to mimic legacy behavior (defaults to true)
 \newbool{jkubeamer@optpackages}
 \booltrue{jkubeamer@optpackages}
@@ -795,12 +801,16 @@
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
         \color{fg}%
-        \jkubeamer@Klogo%
+        \ifbool{jkubeamer@jkulogo}{%
+            \jkubeamer@Klogo%
+        }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
         \color{fg}%
         \ifbool{jkubeamer@framefooterjku}{%
-            \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
+            \ifbool{jkubeamer@jkulogo}{%
+                \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
+            }{}%
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
@@ -998,12 +1008,16 @@
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
         \color{fg}%
-        \jkubeamer@Klogo%
+        \ifbool{jkubeamer@jkulogo}{%
+            \jkubeamer@Klogo%
+        }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
         \color{fg}%
         \ifbool{jkubeamer@framefooterjku}{%
-            \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
+            \ifbool{jkubeamer@jkulogo}{%
+                \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
+            }{}%
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
@@ -1202,7 +1216,9 @@
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
         \color{fg}%
-        \jkubeamer@Klogo%
+        \ifbool{jkubeamer@jkulogo}{%
+            \jkubeamer@Klogo%
+        }{}%
     };
     %\fill[fill=red,opacity=0.5] ($(current page.west) + (\jkubeamer@margin, 0.15\jkubeamer@Klogo@height)$) rectangle ($(current page.north east) - (\jkubeamer@margin, \jkubeamer@margin)$);
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0.15\jkubeamer@Klogo@height)$) {%
@@ -1395,7 +1411,9 @@
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=center,line width=0mm, inner sep=0mm] at (current page.center) {
         \color{fg}%
-        \jkubeamer@logo%
+        \ifbool{jkubeamer@jkulogo}{%
+            \jkubeamer@logo%
+        }{}%
     };
     \end{tikzpicture}%
 }
@@ -1487,7 +1505,9 @@
     \fill[fill=bg] (current page.south west) rectangle ($(current page.north west) + (0.3\paperwidth, 0)$);
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south west) + (.75\beamer@leftmargin, .75\jkubeamer@margin)$) {
         \color{fg}%
-        \resizebox{.4\jkubeamer@Klogo@width}{!}{\jkubeamer@Klogo}%
+        \ifbool{jkubeamer@jkulogo}{%
+            \resizebox{.4\jkubeamer@Klogo@width}{!}{\jkubeamer@Klogo}%
+        }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north west) + (.75\beamer@leftmargin, -.75\jkubeamer@margin)$) {%
         \begin{minipage}[t]{\dimexpr.3\paperwidth-1.5\jkubeamer@margin\relax}%
@@ -1571,12 +1591,16 @@
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
         \color{fg}%
-        \jkubeamer@Klogo%
+        \ifbool{jkubeamer@jkulogo}{%
+            \jkubeamer@Klogo%
+        }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
         \color{fg}%
         \ifbool{jkubeamer@framefooterjku}{%
-            \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
+            \ifbool{jkubeamer@jkulogo}{%
+                \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
+            }{}%
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
