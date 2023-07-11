@@ -1,26 +1,15 @@
-stages:
-  - test-build-latex
+include: 
+  - 'https://git.ins.jku.at/configurations/ci/-/raw/main/latex/build_pdf.yml'
 
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-  SOURCE_NAME: main
+.latex-build-matrix:
+  parallel:
+    matrix:
+      - LATEX_BUILDPDF_SOURCE_NAME: [main]
+        LATEX_BUILDPDF_TEX_COMMAND: [pdflatex, xelatex]
 
-build-pdflatex:
-  stage: test-build-latex
-  image: texlive/texlive:latest
-  script:
-  - latexmk -pdf -bibtex -gg -jobname=%A-pdflatex $SOURCE_NAME.tex
-  artifacts:
-    paths:
-    - ./$SOURCE_NAME-pdflatex.pdf
-    - ./$SOURCE_NAME-pdflatex.log
-
-build-xelatex:
-  stage: test-build-latex
-  image: texlive/texlive:latest
-  script:
-  - latexmk -pdfxe -bibtex -gg -jobname=%A-xelatex $SOURCE_NAME.tex
-  artifacts:
-    paths:
-    - ./$SOURCE_NAME-xelatex.pdf
-    - ./$SOURCE_NAME-xelatex.log
+latex_build_pdf:
+  extends:
+    - .latex-build-matrix
+  variables:
+    LATEX_BUILDPDF_TEXLIVE_IMAGE: texlive/texlive
+    LATEX_BUILDPDF_TEXLIVE_VERSION: latest
