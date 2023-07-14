@@ -40,7 +40,7 @@
 %% 
 
 % Option fontpath={}: set path to template font resources (defaults to "./fonts")
-\newcommand{\jkubeamer@fontpath}{./fonts}
+\newcommand{\jkubeamer@fontpath}{fonts}
 \DeclareOptionBeamer{fontpath}{\renewcommand{\jkubeamer@fontpath}{#1}}
 
 % Option [no]fancyfonts: use custom TTF fonts with XeTeX (defaults to true)
@@ -101,7 +101,7 @@
     \expandafter\IfFileExists\expandafter{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
     }{\expandafter\IfFileExists\expandafter{\jkubeamer@fontpath/PublicSans-Regular.ttf}{%
         \xdef\jkubeamer@fontpath{\jkubeamer@fontpath/}
-    }{%
+        }{%
         \PackageError{beamerfontthemejku}{Font files not found in `\jkubeamer@fontpath', forgot to set the font path with package option `fontpath='?}{}%
         \stop
     }}
