@@ -98,15 +98,30 @@
 \fi
 
 \ifbool{jkubeamer@xetexfonts}{%
+    \RequirePackage[no-math]{fontspec}
+    % discover font path
     \expandafter\IfFileExists\expandafter{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
+        \IfFontExistsTF{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
+        }{%
+            \xdef\jkubeamer@fontpath{}
+        }%
     }{\expandafter\IfFileExists\expandafter{\jkubeamer@fontpath/PublicSans-Regular.ttf}{%
         \xdef\jkubeamer@fontpath{\jkubeamer@fontpath/}
+        \IfFontExistsTF{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
         }{%
+            \xdef\jkubeamer@fontpath{}
+        }%
+    }{\IfFontExistsTF{PublicSans-Regular.ttf}{%
+        \xdef\jkubeamer@fontpath{}
+    }{%
         \PackageError{beamerfontthemejku}{Font files not found in `\jkubeamer@fontpath', forgot to set the font path with package option `fontpath='?}{}%
         \stop
-    }}
-    
-    \RequirePackage[no-math]{fontspec}
+    }}}%
+    \IfFontExistsTF{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
+    }{%
+        \PackageError{beamerfontthemejku}{Font files not found in local installation. Fonts must be installed to `$TEXMF[HOME|LOCAL]/fonts/truetype/' or an alternative font path set with package option `fontpath='}{}%
+        \stop
+    }%
     \defaultfontfeatures{
         Path={\jkubeamer@fontpath},
         Extension=.ttf,
