@@ -64,8 +64,14 @@
 % Option [no]mathastext: use standard document fonts (and default to sans-serif font) in math mode
 \newbool{jkubeamer@mathastext}
 %\booltrue{jkubeamer@mathastext}%
-\DeclareOptionBeamer{mathastext}[true]{\setbool{jkubeamer@mathastext}{#1}}
+\DeclareOptionBeamer{mathastext}[true]{\setbool{jkubeamer@mathastext}{#1}\ifbool{jkubeamer@mathastext}{\boolfalse{jkubeamer@eulermath}}{}}
 \DeclareOptionBeamer{nomathastext}{\boolfalse{jkubeamer@mathastext}}
+
+% Option [no]eulermath: use Euler math fonts (instead of Fira Sans) in math mode (legacy behavior)
+\newbool{jkubeamer@eulermath}
+%\booltrue{jkubeamer@eulermath}%
+\DeclareOptionBeamer{eulermath}[true]{\setbool{jkubeamer@eulermath}{#1}\ifbool{jkubeamer@mathastext}{\boolfalse{jkubeamer@mathastext}}{}}
+\DeclareOptionBeamer{noeulermath}{\boolfalse{jkubeamer@eulermath}}
 
 \ProcessOptionsBeamer
 
@@ -81,7 +87,9 @@
 \RequirePackage{lmodern}
 \RequirePackage{inconsolata}
 \RequirePackage{helvet}
-\RequirePackage{euler}
+\ifxetex\else%
+    \RequirePackage{euler}
+\fi
 \RequirePackage{fontawesome5}
 \ifxetex\else%
     % fix potentially mis-packaged FA5 in TeX Live 2017, see https://tex.stackexchange.com/q/497792/290236
@@ -98,7 +106,16 @@
 \fi
 
 \ifbool{jkubeamer@xetexfonts}{%
-    \RequirePackage[no-math]{fontspec}
+    \ifbool{jkubeamer@eulermath}{
+        \@ifpackageloaded{unicode-math}{%
+            \setmathfont{Euler-Math.otf}
+        }{%
+            \RequirePackage{euler-math}%
+        }%
+    }{%
+        \RequirePackage{firamath-otf}%
+        %\RequirePackage[no-math]{fontspec}
+    }
     % discover font path
     \expandafter\IfFileExists\expandafter{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
         \IfFontExistsTF{\jkubeamer@fontpath PublicSans-Regular.ttf}{%
