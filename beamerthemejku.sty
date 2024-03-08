@@ -250,6 +250,8 @@
 \DeclareOptionBeamer{nocompactmono}{\PassOptionsToPackage{nocompactmono}{beamerfontthemejku}}
 \DeclareOptionBeamer{mathastext}[true]{\PassOptionsToPackage{mathastext=#1}{beamerfontthemejku}}
 \DeclareOptionBeamer{nomathastext}{\PassOptionsToPackage{nomathastext}{beamerfontthemejku}}
+\DeclareOptionBeamer{eulermath}[true]{\PassOptionsToPackage{eulermath=#1}{beamerfontthemejku}}
+\DeclareOptionBeamer{noeulermath}{\PassOptionsToPackage{noeulermath}{beamerfontthemejku}}
 
 \ProcessOptionsBeamer
 
@@ -1970,21 +1972,26 @@
 
 % Environment tightlist: Tighter line spacing for itemize/enumerate lists (wrap any list within this environment)
 \newenvironment{tightlist}{%
-    \begingroup%
-    \def\@listi{\leftmargin\leftmargini
-                \topsep  0\p@ \@plus\p@
-                \parsep  0\p@ \@plus\p@
-                \itemsep \parsep}%
-    \let\@listI\@listi%
-    \def\@listii{\leftmargin\leftmarginii
-                 \topsep  0\p@ \@plus\p@
-                 \parsep  0\p@ \@plus\p@
-                 \itemsep 0\p@ \@plus\p@}%
-    \def\@listiii{\leftmargin\leftmarginii
-                  \topsep  0\p@ \@plus\p@
-                  \parsep  0\p@ \@plus\p@
-                  \itemsep 0\p@ \@plus\p@}%
-    \ifhmode\par\nointerlineskip\fi%
+    \ifdefstring{\@currenvir}{tightlist}{%
+        \begingroup%
+        \def\@listi{\leftmargin\leftmargini
+                    \topsep  0\p@ \@plus\p@
+                    \parsep  0\p@ \@plus\p@
+                    \itemsep \parsep}%
+        \let\@listI\@listi%
+        \def\@listii{\leftmargin\leftmarginii
+                     \topsep  0\p@ \@plus\p@
+                     \parsep  0\p@ \@plus\p@
+                     \itemsep 0\p@ \@plus\p@}%
+        \def\@listiii{\leftmargin\leftmarginii
+                      \topsep  0\p@ \@plus\p@
+                      \parsep  0\p@ \@plus\p@
+                      \itemsep 0\p@ \@plus\p@}%
+        \ifhmode\par\nointerlineskip\fi%
+    }{%
+        \setlength{\itemsep}{0pt}%
+        \setlength{\parskip}{0pt}%
+    }%
 }{%
     \nointerlineskip%
     \endgroup%
