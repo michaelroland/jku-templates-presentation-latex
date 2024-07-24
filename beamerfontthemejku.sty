@@ -64,13 +64,29 @@
 % Option [no]mathastext: use standard document fonts (and default to sans-serif font) in math mode
 \newbool{jkubeamer@mathastext}
 %\booltrue{jkubeamer@mathastext}%
-\DeclareOptionBeamer{mathastext}[true]{\setbool{jkubeamer@mathastext}{#1}\ifbool{jkubeamer@mathastext}{\boolfalse{jkubeamer@eulermath}}{}}
+\DeclareOptionBeamer{mathastext}[true]{%
+    \setbool{jkubeamer@mathastext}{#1}%
+    \ifbool{jkubeamer@mathastext}{%
+        \ifbool{jkubeamer@eulermath}{%
+            \PackageWarning{beamerfontthemejku}{Options `mathastext' and `eulermath' cannot be used simultaneously, ignoring `eulermath'!}%
+        }{}%
+        \boolfalse{jkubeamer@eulermath}%
+    }{}%
+}
 \DeclareOptionBeamer{nomathastext}{\boolfalse{jkubeamer@mathastext}}
 
 % Option [no]eulermath: use Euler math fonts (instead of Fira Sans) in math mode (legacy behavior)
 \newbool{jkubeamer@eulermath}
 %\booltrue{jkubeamer@eulermath}%
-\DeclareOptionBeamer{eulermath}[true]{\setbool{jkubeamer@eulermath}{#1}\ifbool{jkubeamer@mathastext}{\boolfalse{jkubeamer@mathastext}}{}}
+\DeclareOptionBeamer{eulermath}[true]{%
+    \setbool{jkubeamer@eulermath}{#1}%
+    \ifbool{jkubeamer@eulermath}{%
+        \ifbool{jkubeamer@mathastext}{%
+            \PackageWarning{beamerfontthemejku}{Options `eulermath' and `mathastext' cannot be used simultaneously, ignoring `mathastext'!}%
+        }{}%
+        \boolfalse{jkubeamer@mathastext}%
+    }{}%
+}
 \DeclareOptionBeamer{noeulermath}{\boolfalse{jkubeamer@eulermath}}
 
 \ProcessOptionsBeamer
