@@ -1,4 +1,4 @@
-% !TeX program = xelatex
+% !TeX program = lualatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_US
 % !BIB program = biber
@@ -7,9 +7,11 @@
 %% to compile your LaTeX source file. If your tool does not support these magic comments,
 %% you will need to make appropriate manual choices.
 %% 
-%% You can safely use "pdflatex" instead of "xelatex" if you prefer the pdfLaTeX toolchain.
+%% You can safely use "pdflatex" instead of "lualatex" if you prefer the pdfLaTeX toolchain.
 %% However, pdfLaTeX will not be able to deliver the professional font experience that you
-%% will get with XeLaTeX.
+%% will get with LuaLaTeX. You can also safely use "xelatex" instead of "lualatex" while
+%% preserving the professional font experience if you prefer the XeLaTeX toolchain (or if
+%% LuaLaTeX does not work for you for whatever reasons).
 %% 
 %% _Important_: These magic comments should be on the first lines of your source file.
 %% 
@@ -274,7 +276,7 @@
 \item Download the latest version of the theme package from \url{https://github.com/michaelroland/jku-templates-presentation-latex}.
 \item Extract its contents (unzip) and move the files to a location on your computer where {\LaTeX} will find them. The most portable choice is the folder of your main presentation file.
 \item Use \texttt{main.tex} (the source of this presentation) as a starting point for building your own presentation. It contains detailed guides about the various package options.
-\item Use \texttt{xelatex} as the {\LaTeX} typesetting engine (because it includes enhanced font support). \texttt{pdflatex} is also supported but does not deliver the full theme experience.
+\item Use \texttt{lualatex} (or \texttt{xelatex}) as the {\LaTeX} typesetting engine (because it includes enhanced font support). \texttt{pdflatex} is also supported but does not deliver the full theme experience.
 \end{itemize}
 \end{frame}
 
@@ -292,12 +294,12 @@ This theme requires that the following packages are installed:
 \item \texttt{datetime2}
 \item \texttt{etoolbox}
 \item \texttt{fontawesome5}
-\item \texttt{fontspec} (only with XeTeX)
-\item \texttt{hyperref}
+\item \texttt{fontspec} (only with LuaLaTeX/XeTeX)
 \end{itemize}
 
 \column{0.4\textwidth}
 \begin{itemize}
+\item \texttt{hyperref}
 \item \texttt{iftex}
 \item \texttt{inconsolata}
 \item \texttt{listings}
@@ -305,11 +307,11 @@ This theme requires that the following packages are installed:
 \item \texttt{pgf}
 \item \texttt{psnfss}
 \item \texttt{translations}
-\item \texttt{xkeyval}
 \end{itemize}
 
 \column{0.2\textwidth}
 \begin{itemize}
+\item \texttt{xkeyval}
 \item \texttt{xcolor}
 \end{itemize}
 \end{columns}

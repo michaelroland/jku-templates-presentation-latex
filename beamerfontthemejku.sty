@@ -26,7 +26,14 @@
 \RequirePackage{etoolbox}
 \RequirePackage{graphicx}
 \RequirePackage{xcolor}
-\RequirePackage{ifxetex}
+\RequirePackage{iftex}
+% legacy packages prior to merge into iftex; still relevant?
+\@ifundefined{ifluatex}{%
+    \RequirePackage{ifluatex}
+}{}
+\@ifundefined{ifxetex}{%
+    \RequirePackage{ifxetex}
+}{}
 \RequirePackage{listings}
 \RequirePackage{verbatim}
 
@@ -97,29 +104,29 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
-%% Fancy fonts with XeTeX
+%% Fancy fonts with LuaTeX/XeTeX
 %% 
 
 \RequirePackage{lmodern}
 \RequirePackage{inconsolata}
 \RequirePackage{helvet}
-\ifxetex\else%
+\ifluatex\else\ifxetex\else%
     \RequirePackage{euler}
-\fi
+\fi\fi
 \RequirePackage{fontawesome5}
-\ifxetex\else%
+\ifluatex\else\ifxetex\else%
     % fix potentially mis-packaged FA5 in TeX Live 2017, see https://tex.stackexchange.com/q/497792/290236
     \pdfmapfile{=fontawesome5.map}%
-\fi
+\fi\fi
 %\usefonttheme{serif}
 \usefonttheme{professionalfonts}
 
-\ifxetex\else%
+\ifluatex\else\ifxetex\else%
     \ifbool{jkubeamer@xetexfonts}{%
-        \PackageWarning{beamerfontthemejku}{True-type fonts are only supported on XeLaTeX. Please consider switching to XeLaTeX to get the full look and feel of this beamer template. Note that you can silence this warning with the `nofancyfonts' option.}%
+        \PackageWarning{beamerfontthemejku}{True-type fonts are only supported on LuaLaTeX/XeLaTeX. Please consider switching to LuaLaTeX (or XeLaTex) to get the full look and feel of this beamer template. Note that you can silence this warning with the `nofancyfonts' option.}%
     }{}%
     \boolfalse{jkubeamer@xetexfonts}%
-\fi
+\fi\fi
 
 \ifbool{jkubeamer@xetexfonts}{%
     \ifbool{jkubeamer@eulermath}{
