@@ -29,3 +29,15 @@ jobs:
         job_engine: pdfxe
         job_source: ${{ env.SOURCE_NAME }}
         job_artifact_suffix: -xelatex
+
+  build-lualatex:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: ./.github/actions/latexmk-and-output
+      with:
+        job_engine: pdflua
+        job_source: ${{ env.SOURCE_NAME }}
+        job_artifact_suffix: -lualatex
