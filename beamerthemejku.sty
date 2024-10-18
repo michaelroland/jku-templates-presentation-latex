@@ -2,7 +2,7 @@
 %% 
 %% LaTeX Beamer Theme for Johannes Kepler University Linz
 %% 
-%% Copyright (C) 2021-2023  Michael Roland
+%% Copyright (C) 2021-2024  Michael Roland
 %% 
 %% This is a rewrite of the JKU theme originally by
 %% Susanne Hametner, Doris Pargfrieder, and Pieter-Jan Hoedt.
@@ -29,10 +29,15 @@
 \RequirePackage{tikz}
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{calc}
+\RequirePackage{xstring}
 \RequirePackage{babel}
 \RequirePackage{translations}
 \RequirePackage{datetime2}
 \RequirePackage{amsmath}
+\RequirePackage{hyperxmp}
+\hypersetup{
+    keeppdfinfo,
+}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,6 +168,12 @@
     \booltrue{beamer@centered}%
     \PackageWarning{beamerthemejku}{Use option `c' with care; I hope you really know what you are doing!}%
 }
+
+% Option [no]autopdfinfo: automatically add pdfinfo with hyperref (defaults to true)
+\newbool{jkubeamer@hyperref@automatic}
+\booltrue{jkubeamer@hyperref@automatic}
+\DeclareOptionBeamer{autopdfinfo}[true]{\setbool{jkubeamer@hyperref@automatic}{#1}}
+\DeclareOptionBeamer{noautopdfinfo}{\boolfalse{jkubeamer@hyperref@automatic}}
 
 % Option JKU: use color palette for all JKU
 \newcommand{\jkubeamer@faculty}{jku}
@@ -327,16 +338,93 @@
 % JKU theme uses narrow margins
 \setbeamersize{text margin left=\jkubeamer@margin, text margin right=\jkubeamer@margin}
 
-% Disable Beamer's automatic updates of hyperref PDF info since this does not seem to work
+% Disable Beamer's automatic updates of hyperref PDF info since this does not work as expected
+% if \title and \author are not given in the preamble (see below for our alternative tweak)
+\boolfalse{beamer@autopdfinfo}%
 \AtBeginDocument{%
     \boolfalse{beamer@autopdfinfo}%
 }
 
+% Revert side-effects of beamer setting option implicit=false for hyperref to allow setting title/author after preamble
+\AtBeginDocument{%
+    \let\PDF@FinishDoc=\jkubeamer@PDF@FinishDoc%
+}
+\let\jkubeamer@PDF@FinishDoc=\PDF@FinishDoc%
+\gdef\PDF@FinishDoc{}%
+
+% Add a boolean flag to detect if title is set
+% and let first call to \title automatically set the pdftitle attribute
+\def\title{\@dblarg\jkubeamer@title}
+\newbool{jkubeamer@title@isset}
+\long\def\jkubeamer@title[#1]#2{%
+    \expandafter\notblank\expandafter{#2}{%
+        \ifbool{jkubeamer@hyperref@automatic}{%
+            \ifbool{jkubeamer@title@isset}{}{%
+                \hypersetup{pdftitle={#2}}
+            }%
+        }{}%
+        \booltrue{jkubeamer@title@isset}%
+    }{%
+        \boolfalse{jkubeamer@title@isset}%
+    }%
+    \beamer@title[#1]{#2}%
+}
+
+\newcommand{\jkubeamer@insertpdfauthor}{}
+\newcommand{\jkubeamer@preparepdfauthor@extra}[1]{%
+    \begingroup
+    \def\ignorespaces{}%
+    \def\unhbox{}%
+    \def\voidb@x{}%
+    \def\protect{}%
+    \def\penalty{}%
+    \def\@M{}%
+    \def\ { }%
+    \edef\@temp{\endgroup\def\noexpand\jkubeamer@insertpdfauthor{#1}}\@temp%
+}
+\newcommand{\jkubeamer@preparepdfauthor@subst@one}[2]{%
+    \StrSubstitute{\jkubeamer@insertpdfauthor}{#1}{#2}[\jkubeamer@insertpdfauthor]%
+}
+\newcommand{\jkubeamer@preparepdfauthor@subst@all}[2]{%
+    \jkubeamer@preparepdfauthor@subst@one{#1}{#2}%
+    \IfSubStr{\jkubeamer@insertpdfauthor}{#1}{%
+        \jkubeamer@preparepdfauthor@subst@all{#1}{#2}%
+    }{}%
+}
+\newcommand{\jkubeamer@preparepdfauthor}[1]{%
+    \begingroup
+    %\def\prefix##1{\%\%\%\%\%}%
+    %\def\suffix##1{\%\%\%\%\%}%
+    %\def\matno##1{\%\%\%\%\%}%
+    \def\and{\%\%\%\%\%,\%\%\%\%\%}%
+    %\def\affiliation##1{\%\%\%\%\%}%
+    \edef\@temp{\endgroup\def\noexpand\jkubeamer@insertpdfauthor{\%\%\%\%\%#1\%\%\%\%\%}}\@temp%
+    \saveexpandmode
+    \expandarg
+    \jkubeamer@preparepdfauthor@subst@one{ \%\%\%\%\% }{\%\%\%\%\%}%
+    \jkubeamer@preparepdfauthor@subst@all{ \%\%\%\%\%}{\%\%\%\%\%}%
+    \jkubeamer@preparepdfauthor@subst@all{\%\%\%\%\% }{\%\%\%\%\%}%
+    \jkubeamer@preparepdfauthor@subst@one{\%\%\%\%\%}{}%
+    \jkubeamer@preparepdfauthor@subst@one{,}{, }%
+    \jkubeamer@preparepdfauthor@extra{\jkubeamer@insertpdfauthor}
+    \jkubeamer@preparepdfauthor@subst@one{ }{\%\%\%\%\%}%
+    \jkubeamer@preparepdfauthor@subst@all{\%\%\%\%\%\%\%\%\%\%}{\%\%\%\%\%}%
+    \jkubeamer@preparepdfauthor@subst@one{\%\%\%\%\%}{ }%
+    \restoreexpandmode
+}
+
 % Add a boolean flag to detect if authors are set
+% and let first call to \author automatically set the pdfauthor attribute
 \def\author{\@dblarg\jkubeamer@author}
 \newbool{jkubeamer@author@isset}
 \long\def\jkubeamer@author[#1]#2{%
     \expandafter\notblank\expandafter{#2}{%
+        \ifbool{jkubeamer@hyperref@automatic}{%
+            \ifbool{jkubeamer@author@isset}{}{%
+                \jkubeamer@preparepdfauthor{#1}%
+                \hypersetup{pdfauthor={\jkubeamer@insertpdfauthor}}
+            }%
+        }{}%
         \booltrue{jkubeamer@author@isset}%
     }{%
         \boolfalse{jkubeamer@author@isset}%
