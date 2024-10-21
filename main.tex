@@ -1,4 +1,4 @@
-% !TeX program = lualatex
+% !TeX program = xelatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_US
 % !BIB program = biber
@@ -7,11 +7,10 @@
 %% to compile your LaTeX source file. If your tool does not support these magic comments,
 %% you will need to make appropriate manual choices.
 %% 
-%% You can safely use "pdflatex" instead of "lualatex" if you prefer the pdfLaTeX toolchain.
+%% You can safely use "pdflatex" instead of "xelatex" if you prefer the pdfLaTeX toolchain.
 %% However, pdfLaTeX will not be able to deliver the professional font experience that you
-%% will get with LuaLaTeX. You can also safely use "xelatex" instead of "lualatex" while
-%% preserving the professional font experience if you prefer the XeLaTeX toolchain (or if
-%% LuaLaTeX does not work for you for whatever reasons).
+%% will get with XeLaTeX. You can also safely use "lualatex" instead of "xelatex" while
+%% preserving the professional font experience if you prefer the LuaLaTeX toolchain.
 %% 
 %% _Important_: These magic comments should be on the first lines of your source file.
 %% 
@@ -67,7 +66,7 @@
 %% Other options:
 %%  * utf8 ... Treat input files as UTF-8 encoded. Make sure to always provide that option
 %%             when you use pdfLaTeX so that pdfLaTeX knows how to read and interpret
-%%             characters this source file.
+%%             characters in this source file.
 %%  * c    ... Vertically center text on slides by default. You should avoid using this
 %%             option. Only use this to restore the behavior of older versions of this theme.
 %% 
@@ -120,7 +119,7 @@
 %% Note that `nosectionpage' automatically sets `nosubsectionpage' and `nosubsubsectionpage'.
 %% You could still e.g. show only subsubsection pages by using `nosectionpage,subsubsectionpage'.
 %% 
-%% Space-efficient monospace font options (requires XeTeX):
+%% Space-efficient monospace font options (requires XeTeX/LuaTeX):
 %%  * compactmono   ... Use condensed fixed-width font everywhere.
 %%  * nocompactverb ... Do not use condensed fixed-width font for verbatim and listings.
 %% 
@@ -130,13 +129,14 @@
 %%  * noimprint      ... Do not insert imprint on title pages.
 %%  * nojkulogo      ... Do not insert JKU & K logos on title pages and in frame footers.
 %%  * frametitlecaps ... Set frame titles in capital letters (like in eariler theme versions).
-%%  * nofancyfonts   ... Do not use custom TTF fonts with XeTeX / supress pdfLaTeX warning.
+%%  * nofancyfonts   ... Do not use custom TTF fonts with XeTeX/LuaTeX / supress pdfLaTeX warning.
 %%  * mac            ... Use adapted color palette for screen display on Mac.
 %%  * legacyitemizestyle ... Use old bullet style in itemization.
 %% 
 %% Advanced options:
-%%  * mathastext        ... Use standard document fonts in math mode
-%%  * eulermath         ... Use Euler fonts (instead of Fira sans-serif font) in math mode with XeTeX
+%%  * mathastext        ... Use standard document fonts (enhanced with symbols from Fira Math
+%%                          font when using XeTeX/LuaTeX) in math mode.
+%%  * eulermath         ... Use Euler fonts in math mode with XeTeX/LuaTeX.
 %%  * nooptpackages     ... Do not load additional convenience packages (which are only there
 %%                          to provide interoperability to the behavior of previous versions of
 %%                          this theme but are not actually required for the current version).
@@ -276,7 +276,7 @@
 \item Download the latest version of the theme package from \url{https://github.com/michaelroland/jku-templates-presentation-latex}.
 \item Extract its contents (unzip) and move the files to a location on your computer where {\LaTeX} will find them. The most portable choice is the folder of your main presentation file.
 \item Use \texttt{main.tex} (the source of this presentation) as a starting point for building your own presentation. It contains detailed guides about the various package options.
-\item Use \texttt{lualatex} (or \texttt{xelatex}) as the {\LaTeX} typesetting engine (because it includes enhanced font support). \texttt{pdflatex} is also supported but does not deliver the full theme experience.
+\item Use \texttt{xelatex} or \texttt{lualatex} as the {\LaTeX} typesetting engine (because they include enhanced font support). \texttt{pdflatex} is also supported but does not deliver the full theme experience.
 \end{itemize}
 \end{frame}
 
@@ -294,7 +294,7 @@ This theme requires that the following packages are installed:
 \item \texttt{datetime2}
 \item \texttt{etoolbox}
 \item \texttt{fontawesome5}
-\item \texttt{fontspec} (only with LuaLaTeX/XeTeX)
+\item \texttt{fontspec} (only with XeTeX/LuaLaTeX)
 \end{itemize}
 
 \column{0.4\textwidth}
