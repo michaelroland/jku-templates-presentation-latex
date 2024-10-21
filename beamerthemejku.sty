@@ -54,8 +54,16 @@
 
 % Option [no]frametitlecaps: set frame titles in all-caps (defaults to false)
 \newbool{jkubeamer@frametitlecaps}
-\DeclareOptionBeamer{capsframetitle}[true]{\setbool{jkubeamer@frametitlecaps}{#1}}
-\DeclareOptionBeamer{nocapsframetitle}{\boolfalse{jkubeamer@frametitlecaps}}
+\DeclareOptionBeamer{frametitlecaps}[true]{\setbool{jkubeamer@frametitlecaps}{#1}}
+\DeclareOptionBeamer{frametitlecaps}{\boolfalse{jkubeamer@frametitlecaps}}
+\DeclareOptionBeamer{capsframetitle}[true]{%
+    \PackageWarning{beamerthemejku}{Option `capsframetitle' deprecated, use frametitlecaps instead!}%
+    \setbool{jkubeamer@frametitlecaps}{#1}%
+}
+\DeclareOptionBeamer{nocapsframetitle}{%
+    \PackageWarning{beamerthemejku}{Option `nocapsframetitle' deprecated, use nonocapsframetitle instead!}%
+    \boolfalse{jkubeamer@frametitlecaps}%
+}
 
 % Option [no]footer: display a frame footer (defaults to true)
 \newbool{jkubeamer@framefooter}
