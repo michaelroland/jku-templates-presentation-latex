@@ -163,6 +163,12 @@
 \DeclareOptionBeamer{jkulogo}[true]{\setbool{jkubeamer@jkulogo}{#1}}
 \DeclareOptionBeamer{nojkulogo}{\boolfalse{jkubeamer@jkulogo}}
 
+% Option [no]institutelogo: use institute logo instead of standard JKU logo (defaults to true)
+\newbool{jkubeamer@institutelogo}
+\booltrue{jkubeamer@institutelogo}
+\DeclareOptionBeamer{institutelogo}[true]{\setbool{jkubeamer@institutelogo}{#1}}
+\DeclareOptionBeamer{noinstitutelogo}{\boolfalse{jkubeamer@institutelogo}}
+
 % Option [no]optpackages: load convenience packages to mimic legacy behavior (defaults to true)
 \newbool{jkubeamer@optpackages}
 \booltrue{jkubeamer@optpackages}
@@ -566,107 +572,188 @@
 }
 
 \newsavebox{\jkubeamer@logoblack@en}
-\newsavebox{\jkubeamer@logocolor@en}
 \newsavebox{\jkubeamer@logowhite@en}
 \newsavebox{\jkubeamer@footerlogo@en}
 \newsavebox{\jkubeamer@logoblack@de}
-\newsavebox{\jkubeamer@logocolor@de}
 \newsavebox{\jkubeamer@logowhite@de}
 \newsavebox{\jkubeamer@footerlogo@de}
+\sbox{\jkubeamer@logoblack@en}{%
+    \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{black}}%
+}%
+\sbox{\jkubeamer@logowhite@en}{%
+    \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{white}}%
+}%
+\sbox{\jkubeamer@footerlogo@en}{%
+    \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{black_wide}}%
+}%
+\sbox{\jkubeamer@logoblack@de}{%
+    \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{black}}%
+}%
+\sbox{\jkubeamer@logowhite@de}{%
+    \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{white}}%
+}%
+\sbox{\jkubeamer@footerlogo@de}{%
+    \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{de}{black_wide}}%
+}%
+
+\newsavebox{\jkubeamer@logoblack@institute@en}
+\newsavebox{\jkubeamer@logocolor@institute@en}
+\newsavebox{\jkubeamer@logowhite@institute@en}
+\newsavebox{\jkubeamer@footerlogo@institute@en}
+\newsavebox{\jkubeamer@logoblack@institute@de}
+\newsavebox{\jkubeamer@logocolor@institute@de}
+\newsavebox{\jkubeamer@logowhite@institute@de}
+\newsavebox{\jkubeamer@footerlogo@institute@de}
 \newcommand{\jkubeamer@updatelogos}{%
-    \sbox{\jkubeamer@logoblack@en}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}{%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}{%
+        \sbox{\jkubeamer@logoblack@institute@en}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}{%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}{%
+        \sbox{\jkubeamer@logoblack@institute@en}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}%
-        }{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{black}}%
-        }}%
-    }
-    \sbox{\jkubeamer@logocolor@en}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}%
-        }{%
+        }%
+    }{%
+        \sbox{\jkubeamer@logoblack@institute@en}{%
             \usebox{\jkubeamer@logoblack@en}%
-        }}%
-    }
-    \sbox{\jkubeamer@logowhite@en}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}%
-        }{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{white}}%
-        }}%
-    }
-    \sbox{\jkubeamer@footerlogo@en}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}{%
-            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
-            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
-        }{%
-            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{black_wide}}%
-        }}%
-    }
-    \sbox{\jkubeamer@logoblack@de}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}%
-        }{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{black}}%
-        }}%
-    }
-    \sbox{\jkubeamer@logocolor@de}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}{%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}{%
+        \sbox{\jkubeamer@logocolor@institute@en}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}{%
+        \sbox{\jkubeamer@logocolor@institute@en}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}%
-        }{%
-            \usebox{\jkubeamer@logoblack@de}%
-        }}%
-    }
-    \sbox{\jkubeamer@logowhite@de}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}{%
+        }%
+    }{%
+        \sbox{\jkubeamer@logocolor@institute@en}{%
+            \usebox{\jkubeamer@logoblack@en}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}{%
+        \sbox{\jkubeamer@logowhite@institute@en}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}{%
+        \sbox{\jkubeamer@logowhite@institute@en}{%
             \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}%
-        }{%
-            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{white}}%
-        }}%
-    }
-    \sbox{\jkubeamer@footerlogo@de}{%
-        \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}{%
-            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}%
-        }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
+        }%
+    }{%
+        \sbox{\jkubeamer@logowhite@institute@en}{%
+            \usebox{\jkubeamer@logowhite@en}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@en}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
-        }{%
-            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{de}{black_wide}}%
-        }}%
-    }%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@en}{%
+            \usebox{\jkubeamer@footerlogo@en}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
+        \sbox{\jkubeamer@logoblack@institute@de}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}{%
+        \sbox{\jkubeamer@logoblack@institute@de}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@logoblack@institute@de}{%
+            \usebox{\jkubeamer@logoblack@de}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}{%
+        \sbox{\jkubeamer@logocolor@institute@de}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}{%
+        \sbox{\jkubeamer@logocolor@institute@de}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@logocolor@institute@de}{%
+            \usebox{\jkubeamer@logoblack@de}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}{%
+        \sbox{\jkubeamer@logowhite@institute@de}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}{%
+        \sbox{\jkubeamer@logowhite@institute@de}{%
+            \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@logowhite@institute@de}{%
+            \usebox{\jkubeamer@logowhite@de}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@de}{%
+            \usebox{\jkubeamer@footerlogo@de}%
+        }%
+    }}%
 }
 \jkubeamer@updatelogos% execute logo fetching now
 \newcommand{\jkubeamer@logoblack}{%
     \ifcurrentbaselanguage{german}{%
-        \usebox{\jkubeamer@logoblack@de}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@logoblack@institute@de}%
+        }{%
+            \usebox{\jkubeamer@logoblack@de}%
+        }%
     }{%
-        \usebox{\jkubeamer@logoblack@en}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@logoblack@institute@en}%
+        }{%
+            \usebox{\jkubeamer@logoblack@en}%
+        }%
     }
 }
 \newcommand{\jkubeamer@logocolor}{%
     \ifcurrentbaselanguage{german}{%
-        \usebox{\jkubeamer@logocolor@de}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@logocolor@institute@de}%
+        }{%
+            \usebox{\jkubeamer@logoblack@de}%
+        }%
     }{%
-        \usebox{\jkubeamer@logocolor@en}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@logocolor@institute@en}%
+        }{%
+            \usebox{\jkubeamer@logoblack@en}%
+        }%
     }
 }
 \newcommand{\jkubeamer@logowhite}{%
     \ifcurrentbaselanguage{german}{%
-        \usebox{\jkubeamer@logowhite@de}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@logowhite@institute@de}%
+        }{%
+            \usebox{\jkubeamer@logowhite@de}%
+        }%
     }{%
-        \usebox{\jkubeamer@logowhite@en}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@logowhite@institute@en}%
+        }{%
+            \usebox{\jkubeamer@logowhite@en}%
+        }%
     }
 }
 \newcommand{\jkubeamer@logo}{%
@@ -680,9 +767,17 @@
 }
 \newcommand{\jkubeamer@footerlogo}{%
     \ifcurrentbaselanguage{german}{%
-        \usebox{\jkubeamer@footerlogo@de}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@de}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@de}%
+        }%
     }{%
-        \usebox{\jkubeamer@footerlogo@en}%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@en}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@en}%
+        }%
     }
 }
 
@@ -1062,14 +1157,11 @@
     \end{tikzpicture}%
 }
 
-\mode
-<presentation>
+\let\jkubeamer@original@maketitle=\maketitle%
+\let\jkubeamer@original@titlepage=\titlepage%
+\let\jkubeamer@original@endtitlepage=\endtitlepage%
 
-% Command \maketitle[light | dark | gray | black, FACULTY]: insert a title page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
-\renewcommand{\maketitle}[1][]{\titlepage[#1]}
-
-% Command \titlepage[light | dark | gray | black, FACULTY]: insert a title page, automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
-\renewcommand{\titlepage}[1][]{
+\newcommand{\jkubeamer@titlepage@default}[1][]{%
     \ifbool{beamer@inframe}{%
         \usebeamertemplate{title page}%
     }{%
@@ -1079,21 +1171,79 @@
         \begin{frame}[plain]%
         \usebeamertemplate{title page}%
         \end{frame}
-        %\addtocounter{framenumber}{-1}
         \endgroup%
     }%
     \agenda[]{}%
 }
 
+\newcommand{\jkubeamer@titlepage@noinstitute}[1][]{%
+    \begingroup%
+    \boolfalse{jkubeamer@institutelogo}%
+    \jkubeamer@titlepage@default[#1]%
+    \endgroup%
+}
+
+% Command \maketitle[light | dark | gray | black, FACULTY]: insert a title page (with JKU/institute logo), automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+% Command \maketitle*[light | dark | gray | black, FACULTY]: insert a title page (with standard JKU logo), automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+\renewcommand{\maketitle}{%
+    \@ifstar%
+        \jkubeamer@titlepage@noinstitute%
+        \jkubeamer@titlepage@default%
+}
+
+% Note that beamer typically suggests usage as a command `\titlepage' while that's
+% actually an environment in LaTeX. This template tries to handle both cases,
+% dropping the content provided to the environment form and resorting to a
+% \maketitle-like usage.
+
+% Environment titlepage: See \titlepage[<color mode>] (the environment takes the same optional color mode arguments)
+\renewenvironment{titlepage}[1][]{%
+    \jkubeamer@titlepage@default[#1]%
+    \ifdefstring{\@currenvir}{titlepage}{%
+        \comment
+    }%
+}{%
+    \endcomment
+}
+% Environment titlepage*: See \titlepage*[<color mode>] (the environment takes the same optional color mode arguments)
+\newenvironment{titlepage*}[1][]{%
+    \jkubeamer@titlepage@noinstitute[#1]%
+    \ifdefstring{\@currenvir}{titlepage*}{%
+        \comment
+    }%
+}{%
+    \endcomment
+}
+
 \mode
 <article>
 
-\let\jkubeamer@original@maketitle=\maketitle%
-\renewcommand{\maketitle}[1][]{\jkubeamer@original@maketitle}
-\renewcommand{\titlepage}[1][]{}
+\renewcommand{\jkubeamer@titlepage@default}[1][]{\jkubeamer@original@maketitle}
+\renewcommand{\jkubeamer@titlepage@noinstitute}[1][]{\jkubeamer@original@maketitle}
+
+\renewenvironment{titlepage}[1][]{%
+    \jkubeamer@original@titlepage%
+}{%
+    \jkubeamer@original@endtitlepage
+}
+\renewenvironment{titlepage*}[1][]{%
+    \jkubeamer@original@titlepage%
+}{%
+    \jkubeamer@original@endtitlepage
+}
 
 \mode
 <all>
+
+% Command \titlepage[light | dark | gray | black, FACULTY]: insert a title page (with JKU/institute logo), automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+% Command \titlepage*[light | dark | gray | black, FACULTY]: insert a title page (with standard JKU logo), automatically wrap into a frame using the given color mode (mode defaults to global default color mode)
+\letcs{\jkubeamer@titlepageenv}{titlepage}%
+\letcs{\jkubeamer@titlepagestarenv}{titlepage*}%
+\renewcommand{\titlepage}{%
+    \@ifstar%
+        \jkubeamer@titlepagestarenv%
+        \jkubeamer@titlepageenv%
+}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1521,8 +1671,7 @@
     \end{tikzpicture}%
 }
 
-% Command \jkulogo[light | dark | gray | black, FACULTY]: add JKU logo slide using the given color mode (mode defaults to global default color mode)
-\newcommand{\jkulogo}[1][]{
+\newcommand{\jkubeamer@jkulogo@default}[1][]{%
     \ifbool{beamer@inframe}{%
         \usebeamertemplate{logo page}%
     }{%
@@ -1536,20 +1685,35 @@
     }%
 }
 
+\newcommand{\jkubeamer@jkulogo@noinstitute}[1][]{%
+    \begingroup%
+    \boolfalse{jkubeamer@institutelogo}%
+    \jkubeamer@jkulogo@default[#1]%
+    \endgroup%
+}
+
+% Command \jkulogo[light | dark | gray | black, FACULTY]: add JKU/institute logo slide using the given color mode (mode defaults to global default color mode)
+% Command \jkulogo*[light | dark | gray | black, FACULTY]: add JKU logo slide (with standard JKU logo) using the given color mode (mode defaults to global default color mode)
+\newcommand{\jkulogo}{%
+    \@ifstar%
+        \jkubeamer@jkulogo@noinstitute%
+        \jkubeamer@jkulogo@default%
+}
+
 % DEPRECATED command \jkulogoblack: see \jkulogo[black]
-\newcommand{\jkulogoblack}{
-    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use `\string\jkulogo[dark]' instead!}%
+\newcommand{\jkulogoblack}{%
+    \PackageWarning{beamerthemejku}{Command `\string\jkulogoblack' deprecated, use `\string\jkulogo[black]' instead!}%
     \jkulogo[black]%
 }
 
 % DEPRECATED command \jkulogogrey: see \jkulogo[dark]
-\newcommand{\jkulogogrey}{
+\newcommand{\jkulogogrey}{%
     \PackageWarning{beamerthemejku}{Command `\string\jkulogogrey' deprecated, use `\string\jkulogo[dark]' instead!}%
     \jkulogo[dark]%
 }
 
 % DEPRECATED command \jkulogowhite: see \jkulogo[light]
-\newcommand{\jkulogowhite}{
+\newcommand{\jkulogowhite}{%
     \PackageWarning{beamerthemejku}{Command `\string\jkulogowhite' deprecated, use `\string\jkulogo[light]' instead!}%
     \jkulogo[light]%
 }
@@ -1573,12 +1737,14 @@
 \mode
 <handout>
 
-\renewcommand{\jkulogo}[1][]{}
+\renewcommand{\jkubeamer@jkulogo@default}[1][]{}
+\renewcommand{\jkubeamer@jkulogo@noinstitute}[1][]{}
 
 \mode
 <article>
 
-\renewcommand{\jkulogo}[1][]{}
+\renewcommand{\jkubeamer@jkulogo@default}[1][]{}
+\renewcommand{\jkubeamer@jkulogo@noinstitute}[1][]{}
 
 \mode
 <all>
