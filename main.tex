@@ -463,7 +463,8 @@ These options can be used to reproduce older and alternative versions of styles.
     \textverb{nojkufooter}         & Supress JKU/partner logos in slide footer. \tabularnewline
     \textverb{noimprint}           & Supress imprint on title slides. \tabularnewline
     \textverb{nojkulogo}           & Supress JKU \& K logos on title pages and in frame footers. \tabularnewline
-    \textverb{noinstitutelogo}     & Use standard JKU logo even if \verb|\institutecode| is set. \tabularnewline
+    \textverb{noinstitutelogo}     & Use standard JKU logo even if \verb|\institutecode| is set.
+                                     Can be toggled using \verb|\noinstitutelogo| and \verb|\endnoinstitutelogo| within the presentation. \tabularnewline
     \bottomrule
     \end{tabularx}
 %\end{table}
@@ -519,6 +520,23 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
 \title{Space for new title}
 \subtitle{Space for new subtitle}
 \maketitle[TNF,dark]
+
+
+\begin{frame}[containsverbatim]
+\frametitle{Further Customizing Title Slides}
+
+%\begin{table}
+    \begin{tabularx}{\linewidth}{l>{\raggedright}X}
+    \toprule
+    \textbf{Command}                           & \textbf{Description} \tabularnewline
+    \midrule
+    \textverb{\string\series\{series title\}}  & A title printed in small above the presentation title (e.g.\ to mention the lecture name). \tabularnewline
+    \textverb{\string\agenda[caption]\{text\}} & Can be used to add information next to the K logo on the next title slide. \tabularnewline
+    \bottomrule
+    \end{tabularx}
+%\end{table}
+\end{frame}
+
 
 
 \begin{frame}[containsverbatim,label={logo-commands}]
