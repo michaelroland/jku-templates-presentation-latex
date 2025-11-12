@@ -941,6 +941,16 @@
     \jkubeamer@updatelogos%
 }
 
+% Environment noinstitutelogo: use standard JKU log instead of institute-specific logo even if `\institutecode' has been set
+% This implicitly defines two commands that can be used independently:
+% Command \noinstitutelogo: use standard JKU log instead of institute-specific logo even if `\institutecode' has been set
+% Command \endnoinstitutelogo: revert to (switch on) using the institute-specific logo (if available)
+\newenvironment{noinstitutelogo}{%
+    \boolfalse{jkubeamer@institutelogo}%
+}{%
+    \booltrue{jkubeamer@institutelogo}%
+}
+
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
