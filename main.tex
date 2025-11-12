@@ -89,7 +89,7 @@
 %% Color scheme selection options:
 %%  * JKU  ... Use JKU (gray) color scheme (this is the default if no scheme is selected).
 %%  * BUS  ... Use Business School color scheme.
-%%  * LIT  ... Use Linz Institute of Technology color scheme.
+%%  * LIT  ... Use Linz Institute of Technology color scheme (automatically sets \institutecode to `LIT').
 %%  * MED  ... Use MED faculty color scheme.
 %%  * RE   ... Use RE faculty color scheme.
 %%  * SOE  ... Use School of Education color scheme.
@@ -124,13 +124,15 @@
 %%  * nocompactverb ... Do not use condensed fixed-width font for verbatim and listings.
 %% 
 %% Style-breaking options:
-%%  * nojkufooter    ... Do not insert JKU/partner logos into the frame footer.
-%%  * nofooter       ... Do not display a frame footer.
-%%  * noimprint      ... Do not insert imprint on title pages.
-%%  * nojkulogo      ... Do not insert JKU & K logos on title pages and in frame footers.
-%%  * frametitlecaps ... Set frame titles in capital letters (like in earlier theme versions).
-%%  * nofancyfonts   ... Do not use custom TTF fonts with XeTeX/LuaTeX / supress pdfLaTeX warning.
-%%  * mac            ... Use adapted color palette for screen display on Mac.
+%%  * nojkufooter        ... Do not insert JKU/partner logos into the frame footer.
+%%  * nofooter           ... Do not display a frame footer.
+%%  * noimprint          ... Do not insert imprint on title pages.
+%%  * nojkulogo          ... Do not insert JKU & K logos on title pages and in frame footers.
+%%  * noinstitutelogo    ... Do not use institute logo instead of the standard JKU logo if
+%%                           \institutecode is set.
+%%  * frametitlecaps     ... Set frame titles in capital letters (like in earlier theme versions).
+%%  * nofancyfonts       ... Do not use custom TTF fonts with XeTeX/LuaTeX / supress pdfLaTeX warning.
+%%  * mac                ... Use adapted color palette for screen display on Mac.
 %%  * legacyitemizestyle ... Use old bullet style in itemization.
 %% 
 %% Advanced options:
@@ -419,6 +421,23 @@ By default, each sectioning command (\verb|\section|, \verb|\subsection|, \verb|
 
 
 \begin{frame}[containsverbatim]
+\frametitle{Theme Options: Support for Historic Styles}
+These options can be used to reproduce older and alternative versions of styles.
+\smallskip
+%\begin{table}
+    \begin{tabularx}{\linewidth}{l>{\raggedright}X}
+    \toprule
+    \textbf{Option}			     & \textbf{Description} \tabularnewline
+    \midrule
+    \textverb{frametitlecaps}      & Set frame titles in capital letters. \tabularnewline
+    \textverb{legacyitemizestyle}  & Use old bullet style in itemization. \tabularnewline
+    \bottomrule
+    \end{tabularx}
+%\end{table}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]
 \frametitle{More Theme Options}
 %\begin{table}
     \begin{tabularx}{\linewidth}{l>{\raggedright}X}
@@ -427,10 +446,25 @@ By default, each sectioning command (\verb|\section|, \verb|\subsection|, \verb|
     \midrule
     \textverb{compactmono}         & Use condensed fixed-width font everywhere. \tabularnewline
     \textverb{nocompactverb}       & Do not use condensed fixed-width font for verbatim and listings. \tabularnewline
+    \textverb{nooptpackages}       & Do not load additional convenience packages (which are only there to provide interoperability to the behavior of previous versions of this theme but are not actually required for the current version). \tabularnewline
+    \bottomrule
+    \end{tabularx}
+%\end{table}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{More Theme Options}
+%\begin{table}
+    \begin{tabularx}{\linewidth}{l>{\raggedright}X}
+    \toprule
+    \textbf{Option}			     & \textbf{Description} \tabularnewline
+    \midrule
     \textverb{nofooter}            & Supress slide footer. \tabularnewline
     \textverb{nojkufooter}         & Supress JKU/partner logos in slide footer. \tabularnewline
     \textverb{noimprint}           & Supress imprint on title slides. \tabularnewline
-    \textverb{nooptpackages}       & Do not load additional convenience packages (which are only there to provide interoperability to the behavior of previous versions of this theme but are not actually required for the current version). \tabularnewline
+    \textverb{nojkulogo}           & Supress JKU \& K logos on title pages and in frame footers. \tabularnewline
+    \textverb{noinstitutelogo}     & Use standard JKU logo even if \verb|\institutecode| is set.
+                                     Can be toggled using \verb|\noinstitutelogo| and \verb|\endnoinstitutelogo| within the presentation. \tabularnewline
     \bottomrule
     \end{tabularx}
 %\end{table}
@@ -479,6 +513,7 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
     \item \textverb{black}: Use black background.
     \end{itemize}
     In addition, options may contain a faculty name (see \hyperref[options:colorscheme]{Theme Options: Selecting a Color Scheme}) to use the faculty's color theme, e.g. ``\verb|\maketitle[TNF,dark]|''.
+\item The starred version \verb|\maketitle*[<options>]| always uses the standard JKU logo instead of the current institute logo. See \string\institutecode\{code\} on slide~\ref{logo-commands}.
 \end{itemize}
 \end{frame}
 
@@ -488,6 +523,23 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
 
 
 \begin{frame}[containsverbatim]
+\frametitle{Further Customizing Title Slides}
+
+%\begin{table}
+    \begin{tabularx}{\linewidth}{l>{\raggedright}X}
+    \toprule
+    \textbf{Command}                           & \textbf{Description} \tabularnewline
+    \midrule
+    \textverb{\string\series\{series title\}}  & A title printed in small above the presentation title (e.g.\ to mention the lecture name). \tabularnewline
+    \textverb{\string\agenda[caption]\{text\}} & Can be used to add information next to the K logo on the next title slide. \tabularnewline
+    \bottomrule
+    \end{tabularx}
+%\end{table}
+\end{frame}
+
+
+
+\begin{frame}[containsverbatim,label={logo-commands}]
 \frametitle{Logos}
 
 %\begin{table}
@@ -1013,17 +1065,27 @@ The optional argument ``\textverb{<mode options>}'' may be any of the color mode
 \begin{frame}[containsverbatim]
 \frametitle{Logo Slides}
 
-Use \verb|\jkulogo[<mode options>]| to display a logo slide. That is a slide with only the JKU logo centered on it. This slide is well suited as a final slide in your presentation.
+Use \verb|\jkulogo[<mode options>]| to display a logo slide. That is a slide with only the JKU logo (or institute logo, if you defined one) centered on it. This slide is well suited as a final slide in your presentation.
 
 Again, the optional argument ``\textverb{<mode options>}'' may be any of the color mode options that can be used for the \verb|\maketitle| command (see slide~\ref{advanced-title-slides}), e.g.
+\begin{columns}[onlytextwidth,T]
+\column{.5\textwidth}
 \begin{itemize}
 \item \textverb{\string\jkulogo}
 \item \textverb{\string\jkulogo[light]}
 \item \textverb{\string\jkulogo[dark]}
+\end{itemize}
+
+\column{.5\textwidth}
+\begin{itemize}
 \item \textverb{\string\jkulogo[SOWI,dark]}
 \item \textverb{\string\jkulogo[gray]}
 \item \textverb{\string\jkulogo[black]}
 \end{itemize}
+\end{columns}
+
+\medskip
+There is also a starred version \verb|\jkulogo*[<mode options>]|, which always uses the standard JKU logo instead of the current institute logo.
 \end{frame}
 
 \jkulogo
