@@ -1262,6 +1262,31 @@ Use the theme colors to generate colorful blocks.
 \end{frame}
 
 
+\begin{frame}[containsverbatim,shrink=30]
+\frametitle{Font Size and Slide Density}
+Sometimes you may try to squeeze a lot of text or bullet items or code blocks onto a single slide ...
+\begin{itemize}
+\item and I mean a lot ...
+\item really ... a lot ...
+\item so much text that the slide eventually overflows.
+\end{itemize}
+Luckily, \LaTeX-beamer has a solution to your problem: The \verb|shrink| frame option. This option takes an optional shrink factor (percentage) as an argument, e.g. \verb|shrink=30|:
+
+\begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
+\begin{frame}[shrink=30]
+\frametitle{Font Size and Slide Density}
+Sometimes you may try to squeeze a lot of text or bullet items or code blocks onto a single slide ...
+\begin{itemize}
+\item and I mean a lot ...
+\item really ... a lot ...
+\item so much text that the slide eventually overflows.
+\end{itemize}
+Luckily, \LaTeX-beamer has a solution to your problem: The \verb|shrink| frame option. This option takes an optional shrink factor (percentage) as an argument, e.g. \verb|shrink=30|:
+\end{frame}
+\end{lstlisting}
+\end{frame}
+
+
 \begin{otherlanguage}{ngerman}
 \begin{frame}[fragile]
 \frametitle{Language}
