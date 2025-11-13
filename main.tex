@@ -97,7 +97,8 @@
 %%  * TNF  ... Use TNF faculty color scheme.
 %% 
 %% Color mode selection options:
-%%  * darkmode ... Use dark color mode (where title and logo frames have a dark background).
+%%  * darkmode  ... Use dark color mode (where title and logo frames have a dark background).
+%%  * nightmode ... White-on-black color mode for presentation in dimmed rooms.
 %% 
 %% Frame numbering options:
 %%  * framenumber         ... Insert frame number into the frame footer.
@@ -369,6 +370,7 @@ If no color scheme option is given, the package defaults to using \texttt{JKU}.
 \begin{itemize}
 \item The theme uses light color mode by default. In this color mode, all frames (including title, logo, and section frames) have a white background.
 \item Use option ``\verb|darkmode|'' to display title, logo, and section frames with a dark background (primary color of the current color scheme).
+\item Use option ``\verb|nightmode|'' to get a white-on-black theme designed for presentation in dimmed rooms.
 \end{itemize}
 \end{frame}
 
@@ -507,10 +509,10 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
 \item You can change the presentation information and use the \verb+\maketitle+ command multiple times in your presentation.
 \item An optional argument \verb|\maketitle[<options>]| allows to change the color scheme of the title slide. Options may be one of:
     \begin{itemize}
-    \item \textverb{light}: Use light color theme.
+    \item \textverb{light}: Use light color theme (or white-on-black in \textverb{nightmode}).
     \item \textverb{dark}: Use dark color theme.
     \item \textverb{gray}: Use JKU gray color theme.
-    \item \textverb{black}: Use black background.
+    \item \textverb{black}: Use black background (or white background in \textverb{nightmode}).
     \end{itemize}
     In addition, options may contain a faculty name (see \hyperref[options:colorscheme]{Theme Options: Selecting a Color Scheme}) to use the faculty's color theme, e.g. ``\verb|\maketitle[TNF,dark]|''.
 \item The starred version \verb|\maketitle*[<options>]| always uses the standard JKU logo instead of the current institute logo. See \string\institutecode\{code\} on slide~\ref{logo-commands}.

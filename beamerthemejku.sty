@@ -261,6 +261,7 @@
 
 % Options to be passed to the color theme (see color theme for more information)
 \DeclareOptionBeamer{darkmode}[true]{\PassOptionsToPackage{darkmode=#1}{beamercolorthemejku}}
+\DeclareOptionBeamer{nightmode}[true]{\PassOptionsToPackage{nightmode=#1}{beamercolorthemejku}}
 \DeclareOptionBeamer{MAC}[true]{\PassOptionsToPackage{mac=#1}{beamercolorthemejku}}
 \DeclareOptionBeamer{mac}[true]{\PassOptionsToPackage{mac=#1}{beamercolorthemejku}}
 \DeclareOptionBeamer{greyText}{\PassOptionsToPackage{greyText}{beamercolorthemejku}}
@@ -1110,13 +1111,13 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@jkulogo}{%
                 \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
@@ -1124,7 +1125,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@imprint}{%
                 \jkubeamer@insertimprint%
@@ -1132,7 +1133,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm, yshift=\notbool{jkubeamer@imprint}{-2\jkubeamer@margin}{0mm}] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -3\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         {%
             \jkubeamer@logo@partner%
         }%
@@ -1372,13 +1373,13 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@jkulogo}{%
                 \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
@@ -1386,7 +1387,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@imprint}{%
                 \jkubeamer@insertimprint%
@@ -1394,7 +1395,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm, yshift=\notbool{jkubeamer@imprint}{-2\jkubeamer@margin}{0mm}] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -3\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         {%
             \jkubeamer@logo@partner%
         }%
@@ -1580,7 +1581,7 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
@@ -1776,7 +1777,7 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=center,line width=0mm, inner sep=0mm] at (current page.center) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@logo%
         }{}%
@@ -1876,17 +1877,17 @@
 \setbeamertemplate{image title page}{%
     \thispagestyle{empty}%
     \begin{tikzpicture}[remember picture, overlay]
-    \fill[fill=fg] (current page.south west) rectangle (current page.north east);
+    \fill[fill=normal text.bg] (current page.south west) rectangle (current page.north east);
     %\fill[fill=red,opacity=0.5] ($(current page.south west) + (0.3\paperwidth, 0)$) rectangle (current page.north east);
     \node[anchor=north east,line width=0mm, inner sep=0mm] at ($(current page.north east)$) {
-        \color{bg}%
+        \usebeamercolor[fg]{normal text}%
         \expandafter\notblank\expandafter{\jkubeamer@frameimage}{%
             \resizebox{!}{\paperheight}{\mbox{\jkubeamer@frameimage}}%
         }{}%
     };
-    \fill[fill=bg] (current page.south west) rectangle ($(current page.north west) + (0.3\paperwidth, 0)$);
+    \fill[fill=background canvas.bg] (current page.south west) rectangle ($(current page.north west) + (0.3\paperwidth, 0)$);
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south west) + (.75\beamer@leftmargin, .75\jkubeamer@margin)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \resizebox{.4\jkubeamer@Klogo@width}{!}{\jkubeamer@Klogo}%
         }{}%
@@ -1972,13 +1973,13 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@jkulogo}{%
                 \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
@@ -1986,7 +1987,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@imprint}{%
                 \jkubeamer@insertimprint%
@@ -1994,7 +1995,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm, yshift=\notbool{jkubeamer@imprint}{-2\jkubeamer@margin}{0mm}] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -3\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         {%
             \jkubeamer@logo@partner%
         }%
