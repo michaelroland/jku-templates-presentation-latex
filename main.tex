@@ -985,7 +985,28 @@ You can change the background color of a frame by changing the color ``\textverb
 \setbeamercolor{background canvas}{bg=jkuYellow}
 \setbeamercolor{normal text}{fg=white}
 \usebeamercolor[fg]{normal text}
-\begin{frame}[plain]
+\begin{frame}
+\frametitle{Space for your frame title.}
+
+Space for your frame body.
+\end{frame}
+\endgroup
+\end{lstlisting}
+\end{frame}
+\endgroup
+
+
+\begingroup
+\setbeamercolor{background canvas}{bg=jkuCyan}
+\begin{frame}[containsverbatim,transparentfooter]
+\frametitle{Transparent Footer}
+
+Normally, the footer will hide any content that flows behind it. You can avoid this by making the footer transparent using the ``\textverb{transparentfooter}'' frame option.
+
+\begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
+\begingroup
+\setbeamercolor{background canvas}{bg=jkuCyan}
+\begin{frame}[transparentfooter]
 \frametitle{Space for your frame title.}
 
 Space for your frame body.
@@ -1027,7 +1048,7 @@ Space for your frame body.
 \endgroup
 
 
-\begin{frame}[containsverbatim,plain]
+\begin{frame}[containsverbatim]
 \frametitle{Title Image Slide}
 
 Use \verb|\imageframe[<mode options>]{<title>}{<subtitle>}{<graphic>}| to display a title image frame. That is a full screen image with a title sidebar.

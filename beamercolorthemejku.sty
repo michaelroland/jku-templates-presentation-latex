@@ -240,7 +240,7 @@
 %% 
 \setbeamercolor*{frametitle}{parent=normal text}
 \setbeamercolor*{framesubtitle}{parent=frametitle}
-\setbeamercolor*{footline}{bg=white,fg=black}
+\setbeamercolor*{footline}{parent=palette primary}
 \setbeamercolor*{section in head/foot}{parent=footline}
 \setbeamercolor*{page number in head/foot}{parent=section in head/foot}
 \setbeamercolor*{date in head/foot}{parent=section in head/foot}
@@ -326,6 +326,30 @@
 \setbeamercolor*{block body example}{use=block title example,bg=block title example.bg!20,fg=black}
 \setbeamercolor*{block title alerted}{bg=jkuPurple,fg=white}
 \setbeamercolor*{block body alerted}{use=block title alerted,bg=block title alerted.bg!20,fg=black}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Frame color options
+%% 
+\newbool{jkubeamer@frame@transparentfooter}
+\boolfalse{jkubeamer@frame@transparentfooter}
+\define@key{beamerframe}{transparentfooter}[true]{%
+    \setbool{jkubeamer@frame@transparentfooter}{#1}%
+    \ifbool{jkubeamer@frame@transparentfooter}{%
+        \begingroup%
+        \setbeamercolor{footline}{use=normal text,bg=,fg=normal text.fg}%
+    }{}%
+}
+
+\apptocmd{\beamer@reseteecodes}{%
+    \ifbool{jkubeamer@frame@transparentfooter}{%
+        \endgroup
+        \boolfalse{jkubeamer@frame@transparentfooter}%
+    }{}%
+}{}{}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -434,6 +458,7 @@
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys{jkubeamer@kv@framecolormode}{default,\XKV@rm}}\@temp%
     \setbeamercolor*{background canvas}{parent=palette secondary}%
     \setbeamercolor*{normal text}{parent=palette primary}%
+    \setbeamercolor*{footline}{parent=palette primary}%
 }
 
 \setcolormode%
