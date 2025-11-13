@@ -36,6 +36,7 @@
 }{}
 \RequirePackage{listings}
 \RequirePackage{verbatim}
+\RequirePackage{relsize}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -385,8 +386,8 @@
 \setbeamerfont*{section in head/foot}{parent=structure, size*={6pt}{7pt}}
 \setbeamerfont*{page number in head/foot}{parent=section in head/foot}
 \setbeamerfont*{date in head/foot}{parent=section in head/foot}
-\setbeamerfont*{footnote}{parent=normal text, size*={8pt}{9.6pt}}
-\setbeamerfont*{footnote mark}{parent=normal text, size*={6pt}{7pt}}
+\setbeamerfont*{footnote}{parent=normal text, size=\relsize{-2}}
+\setbeamerfont*{footnote mark}{parent=normal text, size=\relsize{-4}}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -410,8 +411,8 @@
 %% Itemization and enumeration
 %% 
 \setbeamerfont*{item}{parent=normal text}
-\setbeamerfont*{subitem}{parent=item, size*={10pt}{12pt}}
-\setbeamerfont*{subsubitem}{parent=subitem, size*={9pt}{11pt}}
+\setbeamerfont*{subitem}{parent=item, size=\relsize{-0.5}}
+\setbeamerfont*{subsubitem}{parent=subitem, size=\relsize{-0.5}}
 \setbeamerfont*{itemize item}{parent=item}
 \setbeamerfont*{itemize subitem}{parent=subitem}
 \setbeamerfont*{itemize subsubitem}{parent=subsubitem}
@@ -451,7 +452,7 @@
 %% 
 %% Captions
 %% 
-\setbeamerfont*{caption}{parent=normal text, size*={10pt}{12pt}}
+\setbeamerfont*{caption}{parent=normal text, size=\relsize{-0.5}}
 \setbeamerfont*{caption name}{parent=caption}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -519,9 +520,9 @@
     keepspaces=true,      % needs to be set to maintain fixed-width property of spaces with fullflexible
     %fontadjust=true,
     numbers=left,
-    numberstyle=\fontsize{6pt}{6.6pt}\jkubeamer@verbfamily,
+    numberstyle=\relsize{-4}\jkubeamer@verbfamily,
     %stepnumber=1,
-    basicstyle=\fontsize{10pt}{11pt}\jkubeamer@verbfamily,
+    basicstyle=\relsize{-1}\jkubeamer@verbfamily,
     commentstyle=\crGreen\itshape,
     keywordstyle=\crBlue\bfseries,
     stringstyle=\crPurple,
