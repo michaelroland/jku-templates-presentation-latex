@@ -367,6 +367,8 @@
 
 % color palette switches
 \xdef\jkubeamer@currentfaculty{\jkubeamer@faculty}
+\newbool{jkubeamer@currentnightmode}
+\setbool{jkubeamer@currentnightmode}{\ifbool{jkubeamer@nightmode}{true}{false}}
 \define@key{jkubeamer@kv@colorpalette}{jku}[]{%
     \setbeamercolor*{palette secondary}{parent=palette jku}%
     \setbeamercolor*{palette quaternary}{parent=palette jku highlight}%
@@ -407,6 +409,18 @@
     \setbeamercolor*{palette quaternary}{parent=palette tnf highlight}%
     \renewcommand{\jkubeamer@currentfaculty}{tnf}%
 }
+\define@key{jkubeamer@kv@colorpalette}{night}[true]{%
+    \setbool{jkubeamer@currentnightmode}{#1}
+    \ifbool{jkubeamer@currentnightmode}{%
+        \setbeamercolor*{palette primary}{parent=palette primary night}%
+    }{%
+        \setbeamercolor*{palette primary}{parent=palette primary day}%
+    }%
+}
+\define@key{jkubeamer@kv@colorpalette}{nonight}[]{%
+    \boolfalse{jkubeamer@currentnightmode}
+    \setbeamercolor*{palette primary}{parent=palette primary day}%
+}
 
 % frame color mode switches
 \newcommand{\jkubeamer@currentcolormode}{default}
@@ -444,32 +458,26 @@
     \renewcommand{\jkubeamer@currentcolormode}{default}%
 }
 
-% Command \framecolormode{light | dark | gray | black, FACULTY}: changes the current frame color mode (if color mode is absent, use the current theme color mode)
+% Command \framecolormode{light | dark | gray | black, FACULTY, [no]night}: changes the current frame color mode (if color mode is absent, use the current theme color mode)
 \newcommand{\framecolormode}[1]{%
     % convert param to lowercase
     \begingroup\edef\@temp{\lowercase{\endgroup\def\noexpand\@temp@lcparam{#1}}}\@temp%
     % preset default color palette
-    \setkeys{jkubeamer@kv@colorpalette}{\jkubeamer@currentfaculty}%
+    \setkeys{jkubeamer@kv@colorpalette}{\ifbool{jkubeamer@currentnightmode}{night}{nonight},\jkubeamer@currentfaculty}%
     % update color palette according to params
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys*{jkubeamer@kv@colorpalette}{\@temp@lcparam}}\@temp%
     % update frame color mode according to params (presetting default frame color mode)
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys{jkubeamer@kv@framecolormode}{\jkubeamer@currentcolormode,\XKV@rm}}\@temp%
 }
 
-% Command \setcolormode[light | dark | gray | black, FACULTY]: changes the theme color mode (if color mode is absent, reset to the global default color mode)
+% Command \setcolormode[light | dark | gray | black, FACULTY, [no]night]: changes the theme color mode (if color mode is absent, reset to the global default color mode)
 \newcommand{\setcolormode}[1][]{%
     % convert param to lowercase
     \begingroup\edef\@temp{\lowercase{\endgroup\def\noexpand\@temp@lcparam{#1}}}\@temp%
-    % preset default main color palette
-    \ifbool{jkubeamer@nightmode}{%
-        \setbeamercolor*{palette primary}{parent=palette primary night}%
-    }{%
-        \setbeamercolor*{palette primary}{parent=palette primary day}%
-    }%
-    % preset default faculty color palette
-    \setkeys{jkubeamer@kv@colorpalette}{\jkubeamer@faculty}%
+    % preset default color palette
+    \setkeys{jkubeamer@kv@colorpalette}{\ifbool{jkubeamer@nightmode}{night}{nonight},\jkubeamer@faculty}%
     % update color palette according to params
-    \begingroup\edef\@temp{\endgroup\noexpand\setkeys*{jkubeamer@kv@colorpalette}{\@temp@lcparam,}}\@temp%
+    \begingroup\edef\@temp{\endgroup\noexpand\setkeys*{jkubeamer@kv@colorpalette}{\@temp@lcparam}}\@temp%
     % update frame color mode according to params (presetting default frame color mode)
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys{jkubeamer@kv@framecolormode}{default,\XKV@rm}}\@temp%
     \setbeamercolor*{background canvas}{parent=palette primary}%
