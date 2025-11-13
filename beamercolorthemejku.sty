@@ -41,6 +41,10 @@
 \newbool{jkubeamer@darkmode}
 \DeclareOptionBeamer{darkmode}[true]{\setbool{jkubeamer@darkmode}{#1}}
 
+% Option nightmode: white-on-black color mode
+\newbool{jkubeamer@nightmode}
+\DeclareOptionBeamer{nightmode}[true]{\setbool{jkubeamer@nightmode}{#1}}
+
 % Option mac: use adapted color palette for screen display on Mac
 \newbool{jkubeamer@maccolors}
 \DeclareOptionBeamer{mac}[true]{\setbool{jkubeamer@maccolors}{#1}}
@@ -169,7 +173,9 @@
 %% 
 %% Color palettes
 %% 
-\setbeamercolor*{palette primary}{bg=white,fg=black}
+\setbeamercolor*{palette primary day}{bg=white,fg=black}
+\setbeamercolor*{palette primary night}{bg=black,fg=white}
+\setbeamercolor*{palette primary}{parent=palette primary day}
 \setbeamercolor*{palette jku}{bg=white,fg=jkuGrey}
 \setbeamercolor*{palette med}{bg=white,fg=jkuYellow}
 \setbeamercolor*{palette re}{bg=white,fg=jkuRed}
@@ -179,7 +185,7 @@
 \setbeamercolor*{palette soe}{bg=white,fg=jkuPurple}
 \setbeamercolor*{palette bus}{bg=white,fg=jkuLightGreen}
 \setbeamercolor*{palette secondary}{parent=palette jku}
-\setbeamercolor*{palette tertiary}{bg=white,fg=jkuGrey}
+\setbeamercolor*{palette tertiary}{parent=palette jku}
 \setbeamercolor*{palette jku highlight}{bg=jkuDarkGrey,fg=jkuPurple}
 \setbeamercolor*{palette med highlight}{bg=jkuDarkGrey,fg=jkuGreen}
 \setbeamercolor*{palette re highlight}{bg=jkuDarkGrey,fg=jkuBlue}
@@ -240,7 +246,7 @@
 %% 
 \setbeamercolor*{frametitle}{parent=normal text}
 \setbeamercolor*{framesubtitle}{parent=frametitle}
-\setbeamercolor*{footline}{bg=white,fg=black}
+\setbeamercolor*{footline}{parent=palette primary}
 \setbeamercolor*{section in head/foot}{parent=footline}
 \setbeamercolor*{page number in head/foot}{parent=section in head/foot}
 \setbeamercolor*{date in head/foot}{parent=section in head/foot}
@@ -332,11 +338,37 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
+%% Frame color options
+%% 
+\newbool{jkubeamer@frame@transparentfooter}
+\boolfalse{jkubeamer@frame@transparentfooter}
+\define@key{beamerframe}{transparentfooter}[true]{%
+    \setbool{jkubeamer@frame@transparentfooter}{#1}%
+    \ifbool{jkubeamer@frame@transparentfooter}{%
+        \begingroup%
+        \setbeamercolor*{footline}{parent=normal text,bg=}%
+    }{}%
+}
+
+\apptocmd{\beamer@reseteecodes}{%
+    \ifbool{jkubeamer@frame@transparentfooter}{%
+        \endgroup
+        \boolfalse{jkubeamer@frame@transparentfooter}%
+    }{}%
+}{}{}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
 %% Color mode switching commands
 %% 
 
 % color palette switches
 \xdef\jkubeamer@currentfaculty{\jkubeamer@faculty}
+\newbool{jkubeamer@currentnightmode}
+\setbool{jkubeamer@currentnightmode}{\ifbool{jkubeamer@nightmode}{true}{false}}
 \define@key{jkubeamer@kv@colorpalette}{jku}[]{%
     \setbeamercolor*{palette secondary}{parent=palette jku}%
     \setbeamercolor*{palette quaternary}{parent=palette jku highlight}%
@@ -377,27 +409,43 @@
     \setbeamercolor*{palette quaternary}{parent=palette tnf highlight}%
     \renewcommand{\jkubeamer@currentfaculty}{tnf}%
 }
+\define@key{jkubeamer@kv@colorpalette}{night}[true]{%
+    \setbool{jkubeamer@currentnightmode}{#1}
+    \ifbool{jkubeamer@currentnightmode}{%
+        \setbeamercolor*{palette primary}{parent=palette primary night}%
+    }{%
+        \setbeamercolor*{palette primary}{parent=palette primary day}%
+    }%
+}
+\define@key{jkubeamer@kv@colorpalette}{nonight}[]{%
+    \boolfalse{jkubeamer@currentnightmode}
+    \setbeamercolor*{palette primary}{parent=palette primary day}%
+}
 
 % frame color mode switches
 \newcommand{\jkubeamer@currentcolormode}{default}
 \define@key{jkubeamer@kv@framecolormode}{light}[]{%
-    \setbeamercolor*{background canvas}{parent=palette secondary}%
+    \setbeamercolor*{background canvas}{parent=palette secondary,use=palette primary,bg=palette primary.bg}%
     \setbeamercolor*{normal text}{parent=palette primary}%
+    \setbeamercolor*{footline}{parent=palette primary}%
     \renewcommand{\jkubeamer@currentcolormode}{light}%
 }
 \define@key{jkubeamer@kv@framecolormode}{dark}[]{%
     \setbeamercolor*{background canvas}{use=palette secondary,bg=palette secondary.fg,fg=palette secondary.bg}%
-    \setbeamercolor*{normal text}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
+    \setbeamercolor*{normal text}{parent=palette primary,use=palette secondary,fg=palette secondary.bg}%
+    \setbeamercolor*{footline}{parent=palette primary}%
     \renewcommand{\jkubeamer@currentcolormode}{dark}%
 }
 \define@key{jkubeamer@kv@framecolormode}{black}[]{%
     \setbeamercolor*{background canvas}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
     \setbeamercolor*{normal text}{use=palette primary,bg=palette primary.fg,fg=palette primary.bg}%
+    \setbeamercolor*{footline}{parent=palette primary}%
     \renewcommand{\jkubeamer@currentcolormode}{black}%
 }
 \define@key{jkubeamer@kv@framecolormode}{grey}[]{%
     \setbeamercolor*{background canvas}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
     \setbeamercolor*{normal text}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
+    \setbeamercolor*{footline}{parent=palette primary}%
     \renewcommand{\jkubeamer@currentcolormode}{grey}%
 }
 \define@key{jkubeamer@kv@framecolormode}{gray}[]{\KV@jkubeamer@kv@framecolormode@grey{#1}}
@@ -410,33 +458,48 @@
     \renewcommand{\jkubeamer@currentcolormode}{default}%
 }
 
-% Command \framecolormode{light | dark | gray | black, FACULTY}: changes the current frame color mode (if color mode is absent, use the current theme color mode)
+% Command \framecolormode{light | dark | gray | black, FACULTY, [no]night}: changes the current frame color mode (if color mode is absent, use the current theme color mode)
 \newcommand{\framecolormode}[1]{%
     % convert param to lowercase
     \begingroup\edef\@temp{\lowercase{\endgroup\def\noexpand\@temp@lcparam{#1}}}\@temp%
     % preset default color palette
-    \setkeys{jkubeamer@kv@colorpalette}{\jkubeamer@currentfaculty}%
+    \setkeys{jkubeamer@kv@colorpalette}{\ifbool{jkubeamer@currentnightmode}{night}{nonight},\jkubeamer@currentfaculty}%
     % update color palette according to params
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys*{jkubeamer@kv@colorpalette}{\@temp@lcparam}}\@temp%
     % update frame color mode according to params (presetting default frame color mode)
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys{jkubeamer@kv@framecolormode}{\jkubeamer@currentcolormode,\XKV@rm}}\@temp%
 }
 
-% Command \setcolormode[light | dark | gray | black, FACULTY]: changes the theme color mode (if color mode is absent, reset to the global default color mode)
+% Command \setcolormode[light | dark | gray | black, FACULTY, [no]night]: changes the theme color mode (if color mode is absent, reset to the global default color mode)
 \newcommand{\setcolormode}[1][]{%
     % convert param to lowercase
     \begingroup\edef\@temp{\lowercase{\endgroup\def\noexpand\@temp@lcparam{#1}}}\@temp%
     % preset default color palette
-    \setkeys{jkubeamer@kv@colorpalette}{\jkubeamer@faculty}%
+    \setkeys{jkubeamer@kv@colorpalette}{\ifbool{jkubeamer@nightmode}{night}{nonight},\jkubeamer@faculty}%
     % update color palette according to params
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys*{jkubeamer@kv@colorpalette}{\@temp@lcparam}}\@temp%
     % update frame color mode according to params (presetting default frame color mode)
     \begingroup\edef\@temp{\endgroup\noexpand\setkeys{jkubeamer@kv@framecolormode}{default,\XKV@rm}}\@temp%
-    \setbeamercolor*{background canvas}{parent=palette secondary}%
+    \setbeamercolor*{background canvas}{parent=palette primary}%
     \setbeamercolor*{normal text}{parent=palette primary}%
+    \setbeamercolor*{footline}{parent=palette primary}%
 }
 
 \setcolormode%
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Tweaks
+%% 
+
+% Pick up changes to default foreground color for text on slides (cf. normal text)
+\apptocmd{\beamer@checkframetitle}{%
+    \usebeamercolor[fg]{normal text}%
+}{}{}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
