@@ -573,18 +573,23 @@
 
 \newsavebox{\jkubeamer@logoblack@en}
 \newsavebox{\jkubeamer@logowhite@en}
-\newsavebox{\jkubeamer@footerlogo@en}
+\newsavebox{\jkubeamer@footerlogo@black@en}
+\newsavebox{\jkubeamer@footerlogo@white@en}
 \newsavebox{\jkubeamer@logoblack@de}
 \newsavebox{\jkubeamer@logowhite@de}
-\newsavebox{\jkubeamer@footerlogo@de}
+\newsavebox{\jkubeamer@footerlogo@black@de}
+\newsavebox{\jkubeamer@footerlogo@white@de}
 \sbox{\jkubeamer@logoblack@en}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{black}}%
 }%
 \sbox{\jkubeamer@logowhite@en}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{white}}%
 }%
-\sbox{\jkubeamer@footerlogo@en}{%
+\sbox{\jkubeamer@footerlogo@black@en}{%
     \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{black_wide}}%
+}%
+\sbox{\jkubeamer@footerlogo@white@en}{%
+    \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{white_wide}}%
 }%
 \sbox{\jkubeamer@logoblack@de}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{black}}%
@@ -592,18 +597,25 @@
 \sbox{\jkubeamer@logowhite@de}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{white}}%
 }%
-\sbox{\jkubeamer@footerlogo@de}{%
+\sbox{\jkubeamer@footerlogo@black@de}{%
     \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{de}{black_wide}}%
+}%
+\sbox{\jkubeamer@footerlogo@white@de}{%
+    \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{de}{white_wide}}%
 }%
 
 \newsavebox{\jkubeamer@logoblack@institute@en}
 \newsavebox{\jkubeamer@logocolor@institute@en}
 \newsavebox{\jkubeamer@logowhite@institute@en}
-\newsavebox{\jkubeamer@footerlogo@institute@en}
+\newsavebox{\jkubeamer@footerlogo@institute@black@en}
+\newsavebox{\jkubeamer@footerlogo@institute@color@en}
+\newsavebox{\jkubeamer@footerlogo@institute@white@en}
 \newsavebox{\jkubeamer@logoblack@institute@de}
 \newsavebox{\jkubeamer@logocolor@institute@de}
 \newsavebox{\jkubeamer@logowhite@institute@de}
-\newsavebox{\jkubeamer@footerlogo@institute@de}
+\newsavebox{\jkubeamer@footerlogo@institute@black@de}
+\newsavebox{\jkubeamer@footerlogo@institute@color@de}
+\newsavebox{\jkubeamer@footerlogo@institute@white@de}
 \newcommand{\jkubeamer@updatelogos}{%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}{%
         \sbox{\jkubeamer@logoblack@institute@en}{%
@@ -645,16 +657,42 @@
         }%
     }}%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@en}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@en}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}%
         }%
     }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@en}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@en}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
         }%
     }{%
-        \sbox{\jkubeamer@footerlogo@institute@en}{%
-            \usebox{\jkubeamer@footerlogo@en}%
+        \sbox{\jkubeamer@footerlogo@institute@black@en}{%
+            \usebox{\jkubeamer@footerlogo@black@en}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@color@en}{%
+            \usebox{\jkubeamer@footerlogo@black@en}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@white@en}{%
+            \usebox{\jkubeamer@footerlogo@white@en}%
         }%
     }}%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
@@ -697,16 +735,42 @@
         }%
     }}%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@de}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@de}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}%
         }%
     }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@de}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@de}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
         }%
     }{%
-        \sbox{\jkubeamer@footerlogo@institute@de}{%
-            \usebox{\jkubeamer@footerlogo@de}%
+        \sbox{\jkubeamer@footerlogo@institute@black@de}{%
+            \usebox{\jkubeamer@footerlogo@black@de}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@color@de}{%
+            \usebox{\jkubeamer@footerlogo@black@de}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@white@de}{%
+            \usebox{\jkubeamer@footerlogo@white@de}%
         }%
     }}%
 }
@@ -765,20 +829,59 @@
         \jkubeamer@logocolor%
     }}%
 }
-\newcommand{\jkubeamer@footerlogo}{%
+\newcommand{\jkubeamer@footerlogo@black}{%
     \ifcurrentbaselanguage{german}{%
         \ifbool{jkubeamer@institutelogo}{%
-            \usebox{\jkubeamer@footerlogo@institute@de}%
+            \usebox{\jkubeamer@footerlogo@institute@black@de}%
         }{%
-            \usebox{\jkubeamer@footerlogo@de}%
+            \usebox{\jkubeamer@footerlogo@black@de}%
         }%
     }{%
         \ifbool{jkubeamer@institutelogo}{%
-            \usebox{\jkubeamer@footerlogo@institute@en}%
+            \usebox{\jkubeamer@footerlogo@institute@black@en}%
         }{%
-            \usebox{\jkubeamer@footerlogo@en}%
+            \usebox{\jkubeamer@footerlogo@black@en}%
         }%
     }
+}
+\newcommand{\jkubeamer@footerlogo@color}{%
+    \ifcurrentbaselanguage{german}{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@color@de}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@black@de}%
+        }%
+    }{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@color@en}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@black@en}%
+        }%
+    }
+}
+\newcommand{\jkubeamer@footerlogo@white}{%
+    \ifcurrentbaselanguage{german}{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@white@de}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@white@de}%
+        }%
+    }{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@white@en}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@white@en}%
+        }%
+    }
+}
+\newcommand{\jkubeamer@footerlogo}{%
+    \ifcsequal{\string\color@white}{\string\color@.}{%
+        \jkubeamer@footerlogo@white%
+    }{\ifcsequal{\string\color@black}{\string\color@.}{%
+        \jkubeamer@footerlogo@black%
+    }{%
+        \jkubeamer@footerlogo@color%
+    }}%
 }
 
 \newsavebox{\jkubeamer@logo@partner@color}
