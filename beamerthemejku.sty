@@ -261,6 +261,7 @@
 
 % Options to be passed to the color theme (see color theme for more information)
 \DeclareOptionBeamer{darkmode}[true]{\PassOptionsToPackage{darkmode=#1}{beamercolorthemejku}}
+\DeclareOptionBeamer{nightmode}[true]{\PassOptionsToPackage{nightmode=#1}{beamercolorthemejku}}
 \DeclareOptionBeamer{MAC}[true]{\PassOptionsToPackage{mac=#1}{beamercolorthemejku}}
 \DeclareOptionBeamer{mac}[true]{\PassOptionsToPackage{mac=#1}{beamercolorthemejku}}
 \DeclareOptionBeamer{greyText}{\PassOptionsToPackage{greyText}{beamercolorthemejku}}
@@ -573,18 +574,23 @@
 
 \newsavebox{\jkubeamer@logoblack@en}
 \newsavebox{\jkubeamer@logowhite@en}
-\newsavebox{\jkubeamer@footerlogo@en}
+\newsavebox{\jkubeamer@footerlogo@black@en}
+\newsavebox{\jkubeamer@footerlogo@white@en}
 \newsavebox{\jkubeamer@logoblack@de}
 \newsavebox{\jkubeamer@logowhite@de}
-\newsavebox{\jkubeamer@footerlogo@de}
+\newsavebox{\jkubeamer@footerlogo@black@de}
+\newsavebox{\jkubeamer@footerlogo@white@de}
 \sbox{\jkubeamer@logoblack@en}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{black}}%
 }%
 \sbox{\jkubeamer@logowhite@en}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{en}{white}}%
 }%
-\sbox{\jkubeamer@footerlogo@en}{%
+\sbox{\jkubeamer@footerlogo@black@en}{%
     \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{black_wide}}%
+}%
+\sbox{\jkubeamer@footerlogo@white@en}{%
+    \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{en}{white_wide}}%
 }%
 \sbox{\jkubeamer@logoblack@de}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{black}}%
@@ -592,18 +598,25 @@
 \sbox{\jkubeamer@logowhite@de}{%
     \includegraphics[height=\jkubeamer@logo@height]{\jkubeamer@logo@getname{}{de}{white}}%
 }%
-\sbox{\jkubeamer@footerlogo@de}{%
+\sbox{\jkubeamer@footerlogo@black@de}{%
     \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{de}{black_wide}}%
+}%
+\sbox{\jkubeamer@footerlogo@white@de}{%
+    \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{}{de}{white_wide}}%
 }%
 
 \newsavebox{\jkubeamer@logoblack@institute@en}
 \newsavebox{\jkubeamer@logocolor@institute@en}
 \newsavebox{\jkubeamer@logowhite@institute@en}
-\newsavebox{\jkubeamer@footerlogo@institute@en}
+\newsavebox{\jkubeamer@footerlogo@institute@black@en}
+\newsavebox{\jkubeamer@footerlogo@institute@color@en}
+\newsavebox{\jkubeamer@footerlogo@institute@white@en}
 \newsavebox{\jkubeamer@logoblack@institute@de}
 \newsavebox{\jkubeamer@logocolor@institute@de}
 \newsavebox{\jkubeamer@logowhite@institute@de}
-\newsavebox{\jkubeamer@footerlogo@institute@de}
+\newsavebox{\jkubeamer@footerlogo@institute@black@de}
+\newsavebox{\jkubeamer@footerlogo@institute@color@de}
+\newsavebox{\jkubeamer@footerlogo@institute@white@de}
 \newcommand{\jkubeamer@updatelogos}{%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black}}{%
         \sbox{\jkubeamer@logoblack@institute@en}{%
@@ -645,16 +658,42 @@
         }%
     }}%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@en}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@en}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{black_wide}}%
         }%
     }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@en}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@en}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
         }%
     }{%
-        \sbox{\jkubeamer@footerlogo@institute@en}{%
-            \usebox{\jkubeamer@footerlogo@en}%
+        \sbox{\jkubeamer@footerlogo@institute@black@en}{%
+            \usebox{\jkubeamer@footerlogo@black@en}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{color_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@color@en}{%
+            \usebox{\jkubeamer@footerlogo@black@en}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{en}{white_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@en}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@white@en}{%
+            \usebox{\jkubeamer@footerlogo@white@en}%
         }%
     }}%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black}}{%
@@ -697,16 +736,42 @@
         }%
     }}%
     \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@de}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@de}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{black_wide}}%
         }%
     }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}{%
-        \sbox{\jkubeamer@footerlogo@institute@de}{%
+        \sbox{\jkubeamer@footerlogo@institute@black@de}{%
             \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{black_wide}}%
         }%
     }{%
-        \sbox{\jkubeamer@footerlogo@institute@de}{%
-            \usebox{\jkubeamer@footerlogo@de}%
+        \sbox{\jkubeamer@footerlogo@institute@black@de}{%
+            \usebox{\jkubeamer@footerlogo@black@de}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{color_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@color@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{color_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@color@de}{%
+            \usebox{\jkubeamer@footerlogo@black@de}%
+        }%
+    }}%
+    \jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{de}{white_wide}}%
+        }%
+    }{\jkubeamer@IfLogoFileExists{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}{%
+        \sbox{\jkubeamer@footerlogo@institute@white@de}{%
+            \includegraphics[height=\jkubeamer@footerlogo@height]{\jkubeamer@logo@getname{\jkubeamer@institute@code}{}{white_wide}}%
+        }%
+    }{%
+        \sbox{\jkubeamer@footerlogo@institute@white@de}{%
+            \usebox{\jkubeamer@footerlogo@white@de}%
         }%
     }}%
 }
@@ -765,20 +830,59 @@
         \jkubeamer@logocolor%
     }}%
 }
-\newcommand{\jkubeamer@footerlogo}{%
+\newcommand{\jkubeamer@footerlogo@black}{%
     \ifcurrentbaselanguage{german}{%
         \ifbool{jkubeamer@institutelogo}{%
-            \usebox{\jkubeamer@footerlogo@institute@de}%
+            \usebox{\jkubeamer@footerlogo@institute@black@de}%
         }{%
-            \usebox{\jkubeamer@footerlogo@de}%
+            \usebox{\jkubeamer@footerlogo@black@de}%
         }%
     }{%
         \ifbool{jkubeamer@institutelogo}{%
-            \usebox{\jkubeamer@footerlogo@institute@en}%
+            \usebox{\jkubeamer@footerlogo@institute@black@en}%
         }{%
-            \usebox{\jkubeamer@footerlogo@en}%
+            \usebox{\jkubeamer@footerlogo@black@en}%
         }%
     }
+}
+\newcommand{\jkubeamer@footerlogo@color}{%
+    \ifcurrentbaselanguage{german}{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@color@de}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@black@de}%
+        }%
+    }{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@color@en}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@black@en}%
+        }%
+    }
+}
+\newcommand{\jkubeamer@footerlogo@white}{%
+    \ifcurrentbaselanguage{german}{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@white@de}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@white@de}%
+        }%
+    }{%
+        \ifbool{jkubeamer@institutelogo}{%
+            \usebox{\jkubeamer@footerlogo@institute@white@en}%
+        }{%
+            \usebox{\jkubeamer@footerlogo@white@en}%
+        }%
+    }
+}
+\newcommand{\jkubeamer@footerlogo}{%
+    \ifcsequal{\string\color@white}{\string\color@.}{%
+        \jkubeamer@footerlogo@white%
+    }{\ifcsequal{\string\color@black}{\string\color@.}{%
+        \jkubeamer@footerlogo@black%
+    }{%
+        \jkubeamer@footerlogo@color%
+    }}%
 }
 
 \newsavebox{\jkubeamer@logo@partner@color}
@@ -1007,13 +1111,13 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@jkulogo}{%
                 \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
@@ -1021,7 +1125,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@imprint}{%
                 \jkubeamer@insertimprint%
@@ -1029,7 +1133,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm, yshift=\notbool{jkubeamer@imprint}{-2\jkubeamer@margin}{0mm}] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -3\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         {%
             \jkubeamer@logo@partner%
         }%
@@ -1269,13 +1373,13 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@jkulogo}{%
                 \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
@@ -1283,7 +1387,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@imprint}{%
                 \jkubeamer@insertimprint%
@@ -1291,7 +1395,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm, yshift=\notbool{jkubeamer@imprint}{-2\jkubeamer@margin}{0mm}] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -3\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         {%
             \jkubeamer@logo@partner%
         }%
@@ -1477,7 +1581,7 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
@@ -1673,7 +1777,7 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=center,line width=0mm, inner sep=0mm] at (current page.center) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@logo%
         }{}%
@@ -1773,17 +1877,17 @@
 \setbeamertemplate{image title page}{%
     \thispagestyle{empty}%
     \begin{tikzpicture}[remember picture, overlay]
-    \fill[fill=fg] (current page.south west) rectangle (current page.north east);
+    \fill[fill=normal text.bg] (current page.south west) rectangle (current page.north east);
     %\fill[fill=red,opacity=0.5] ($(current page.south west) + (0.3\paperwidth, 0)$) rectangle (current page.north east);
     \node[anchor=north east,line width=0mm, inner sep=0mm] at ($(current page.north east)$) {
-        \color{bg}%
+        \usebeamercolor[fg]{normal text}%
         \expandafter\notblank\expandafter{\jkubeamer@frameimage}{%
             \resizebox{!}{\paperheight}{\mbox{\jkubeamer@frameimage}}%
         }{}%
     };
-    \fill[fill=bg] (current page.south west) rectangle ($(current page.north west) + (0.3\paperwidth, 0)$);
+    \fill[fill=background canvas.bg] (current page.south west) rectangle ($(current page.north west) + (0.3\paperwidth, 0)$);
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south west) + (.75\beamer@leftmargin, .75\jkubeamer@margin)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \resizebox{.4\jkubeamer@Klogo@width}{!}{\jkubeamer@Klogo}%
         }{}%
@@ -1869,13 +1973,13 @@
     \begin{tikzpicture}[remember picture, overlay]
     %\fill[fill=bg] (current page.south west) rectangle (current page.north east);
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.west) + (\beamer@leftmargin, 0mm)$) {
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@jkulogo}{%
             \jkubeamer@Klogo%
         }{}%
     };
     \node[anchor=north west,line width=0mm, inner sep=0mm] at ($(current page.north east) - (\jkubeamer@titlelogo@offset, \jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@jkulogo}{%
                 \resizebox{!}{\jkubeamer@titlelogo@height}{\jkubeamer@logo}%
@@ -1883,7 +1987,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         \ifbool{jkubeamer@framefooterjku}{%
             \ifbool{jkubeamer@imprint}{%
                 \jkubeamer@insertimprint%
@@ -1891,7 +1995,7 @@
         }{}%
     };
     \node[anchor=south west,line width=0mm, inner sep=0mm, yshift=\notbool{jkubeamer@imprint}{-2\jkubeamer@margin}{0mm}] at ($(current page.south east) - (\jkubeamer@titleimprint@offset, -3\jkubeamer@margin)$) {%
-        \color{fg}%
+        \usebeamercolor[fg]{normal text}%
         {%
             \jkubeamer@logo@partner%
         }%
