@@ -159,6 +159,8 @@
 %% a package `booktabs', you would use the command `\usepackage{booktabs}'.
 %% 
 
+\usepackage{listings}
+%\usepackage{minted}
 \usepackage{booktabs}
 \usepackage{tabularx}
 %\usepackage{pifont}
@@ -281,43 +283,6 @@
 \item Use \texttt{main.tex} (the source of this presentation) as a starting point for building your own presentation. It contains detailed guides about the various package options.
 \item Use \texttt{xelatex} or \texttt{lualatex} as the {\LaTeX} typesetting engine (because they include enhanced font support). \texttt{pdflatex} is also supported but does not deliver the full theme experience.
 \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Theme Package Requirements}
-
-This theme requires that the following packages are installed:
-\begin{columns}[onlytextwidth]
-\column{0.4\textwidth}
-\begin{itemize}
-\item \texttt{amsmath}
-\item \texttt{babel}
-\item \texttt{beamer}
-\item \texttt{datetime2}
-\item \texttt{etoolbox}
-\item \texttt{fontawesome5}
-\item \texttt{fontspec} (only with XeTeX/LuaLaTeX)
-\end{itemize}
-
-\column{0.4\textwidth}
-\begin{itemize}
-\item \texttt{hyperref}
-\item \texttt{iftex}
-\item \texttt{inconsolata}
-\item \texttt{listings}
-\item \texttt{lm}
-\item \texttt{pgf}
-\item \texttt{psnfss}
-\item \texttt{translations}
-\end{itemize}
-
-\column{0.2\textwidth}
-\begin{itemize}
-\item \texttt{xkeyval}
-\item \texttt{xcolor}
-\end{itemize}
-\end{columns}
 \end{frame}
 
 
