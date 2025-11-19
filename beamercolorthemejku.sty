@@ -425,7 +425,7 @@
 % frame color mode switches
 \newcommand{\jkubeamer@currentcolormode}{default}
 \define@key{jkubeamer@kv@framecolormode}{light}[]{%
-    \setbeamercolor*{background canvas}{parent=palette secondary,use=palette primary,bg=palette primary.bg}%
+    \setbeamercolor*{background canvas}{parent=palette primary}%
     \setbeamercolor*{normal text}{parent=palette primary}%
     \setbeamercolor*{footline}{parent=palette primary}%
     \renewcommand{\jkubeamer@currentcolormode}{light}%
@@ -444,7 +444,7 @@
 }
 \define@key{jkubeamer@kv@framecolormode}{grey}[]{%
     \setbeamercolor*{background canvas}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
-    \setbeamercolor*{normal text}{use=palette tertiary,bg=palette tertiary.fg,fg=palette tertiary.bg}%
+    \setbeamercolor*{normal text}{parent=palette primary,use=palette tertiary,fg=palette tertiary.bg}%
     \setbeamercolor*{footline}{parent=palette primary}%
     \renewcommand{\jkubeamer@currentcolormode}{grey}%
 }
