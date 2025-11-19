@@ -169,6 +169,11 @@
 \DeclareOptionBeamer{institutelogo}[true]{\setbool{jkubeamer@institutelogo}{#1}}
 \DeclareOptionBeamer{noinstitutelogo}{\boolfalse{jkubeamer@institutelogo}}
 
+% Option [no]navigation: show navigation symbols at bottom of slide (defaults to false)
+\newbool{jkubeamer@navigationsymbols}
+\DeclareOptionBeamer{navigation}[true]{\setbool{jkubeamer@navigationsymbols}{#1}}
+\DeclareOptionBeamer{nonavigation}{\boolfalse{jkubeamer@navigationsymbols}}
+
 % Option [no]optpackages: load convenience packages to mimic legacy behavior (defaults to true)
 \newbool{jkubeamer@optpackages}
 \booltrue{jkubeamer@optpackages}
@@ -2178,16 +2183,44 @@
 % Note that we could use the following to get completely rid of the continuation count:
 %\setbeamertemplate{frametitle continuation}[from second][]
 
-% No navigation symbols
-\usenavigationsymbolstemplate{}
+\newcommand{\jkubeamer@insertnavigationsymbols}{
+    \ifbool{jkubeamer@navigationsymbols}{%
+        \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=south east,line width=0mm, inner sep=0mm, text width=\dimexpr\paperwidth-4pt\relax, align=right, xshift=-2pt, yshift=1pt] at (current page.south east) {%
+            \usebeamerfont{navigation symbols}%
+            \usebeamercolor[fg]{navigation symbols}%
+            \usebeamertemplate{navigation symbols}%
+        };
+        \end{tikzpicture}%
+    }{}%
+}
+\apptocmd{\ps@empty}{%
+    \def\@oddfoot{%
+        \setbox\beamer@tempbox=\hbox{%
+            \linespread{0.95}%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \usebeamerfont{footline}%
+            \usebeamercolor[fg]{background canvas}%
+            \jkubeamer@insertnavigationsymbols%
+        }%
+        \ht\beamer@tempbox=0pt%
+        \dp\beamer@tempbox=0pt%
+        \box\beamer@tempbox%
+    }%
+    \let\@evenfoot\@oddfoot%
+}{}{}
+
+\setbeamertemplate{headline}{}
 
 \setbeamertemplate{footline}{%
     \linespread{0.95}%
     \setlength{\parindent}{0pt}%
     \setlength{\parskip}{0pt}%
     \usebeamerfont{footline}%
-    \usebeamercolor[fg]{footline}%
+    \usebeamercolor[fg]{background canvas}%
     \ifbool{jkubeamer@framefooter}{%
+        \usebeamercolor[fg]{footline}%
         \begin{beamercolorbox}[wd=\paperwidth,ht=\jkubeamer@footerheight,dp=0mm,ignorebg=\ifbool{jkubeamer@framefooterjku}{false}{true}]{footline}%
         \end{beamercolorbox}%
         \begin{tikzpicture}[remember picture, overlay]
@@ -2274,6 +2307,7 @@
         };
         \end{tikzpicture}%
     }{}%
+    \jkubeamer@insertnavigationsymbols%
 }
 
 \renewcommand{\footnoterule}{\hrule height 0pt}
