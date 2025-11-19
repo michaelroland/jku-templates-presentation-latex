@@ -351,7 +351,11 @@
 %% 
 
 % JKU theme uses narrow margins
-\setbeamersize{text margin left=\jkubeamer@margin, text margin right=\jkubeamer@margin}
+\setbeamersize{
+    text margin left=\jkubeamer@margin,
+    text margin right=\jkubeamer@margin,
+    sidebar width right=0mm,
+}
 
 % Disable Beamer's automatic updates of hyperref PDF info since this does not work as expected
 % if \title and \author are not given in the preamble (see below for our alternative tweak)
@@ -2285,6 +2289,57 @@
     \raggedright%
     \hskip -1em%
     \hbox to 1.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Copyright notice and water mark
+%% 
+
+\newbool{jkubeamer@copyright@isset}
+\newcommand{\jkubeamer@insertcopyright}{}
+% Command \copyrightnotice{text}: sets the copyright notice field
+\newcommand{\copyrightnotice}[1]{%
+    \renewcommand{\jkubeamer@insertcopyright}{#1}%
+    \expandafter\notblank\expandafter{#1}{%
+        \ifbool{jkubeamer@hyperref@automatic}{%
+            \ifbool{jkubeamer@copyright@isset}{}{%
+                \let\jkubeamer@orig@insertauthor\insertauthor%
+                \renewcommand{\insertauthor}{\jkubeamer@insertpdfauthor}
+                \hypersetup{pdfcopyright={#1}}
+                \let\insertauthor\jkubeamer@orig@insertauthor%
+            }%
+        }{}%
+        \booltrue{jkubeamer@copyright@isset}%
+    }{}%
+}
+
+\setbeamertemplate{logo}{}
+%\setbeamertemplate{sidebar left}{}
+\setbeamertemplate{sidebar right}{%
+    %\ifbool{jkubeamer@copyrightnotice}{%
+    \expandafter\notblank\expandafter{\jkubeamer@insertcopyright}{%
+        \begin{tikzpicture}[remember picture, overlay]
+        %\fill[fill=red,opacity=0.5] ($(current page.south west) + (0, \jkubeamer@footerheight)$) rectangle ($(current page.south west) + (\beamer@leftmargin, \textheight)$);
+        \node[anchor=south west, line width=0mm, inner sep=0mm, rotate=90] at ($(current page.south west) + (\beamer@leftmargin, \jkubeamer@footerheight)$) {%
+            \begin{minipage}[b][\beamer@leftmargin][c]{\dimexpr\textheight-\jkubeamer@footerheight\relax}%
+                \centering%
+                \linespread{1.0}%
+                \setlength{\parindent}{0pt}%
+                \setlength{\parskip}{0pt}%
+                \usebeamerfont{copyright notice}%
+                \usebeamercolor[fg]{copyright notice}%
+                \vphantom{Gg}%
+                \jkubeamer@insertcopyright%
+                \vphantom{Gg}%
+            \end{minipage}%
+        };
+        \end{tikzpicture}%
+    }{}%
 }
 
 %% 
