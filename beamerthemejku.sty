@@ -356,7 +356,11 @@
 %% 
 
 % JKU theme uses narrow margins
-\setbeamersize{text margin left=\jkubeamer@margin, text margin right=\jkubeamer@margin}
+\setbeamersize{
+    text margin left=\jkubeamer@margin,
+    text margin right=\jkubeamer@margin,
+    sidebar width right=0mm,
+}
 
 % Disable Beamer's automatic updates of hyperref PDF info since this does not work as expected
 % if \title and \author are not given in the preamble (see below for our alternative tweak)
@@ -2319,6 +2323,100 @@
     \raggedright%
     \hskip -1em%
     \hbox to 1.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Copyright notice and watermark
+%% 
+
+\newbool{jkubeamer@copyright@isset}
+\newcommand{\jkubeamer@insertcopyright}{}
+% Command \copyrightnotice{text}: sets the copyright notice field
+\newcommand{\copyrightnotice}[1]{%
+    \renewcommand{\jkubeamer@insertcopyright}{#1}%
+    \expandafter\notblank\expandafter{#1}{%
+        \ifbool{jkubeamer@hyperref@automatic}{%
+            \ifbool{jkubeamer@copyright@isset}{}{%
+                \let\jkubeamer@orig@insertauthor\insertauthor%
+                \renewcommand{\insertauthor}{\jkubeamer@insertpdfauthor}
+                \hypersetup{pdfcopyright={#1}}
+                \let\insertauthor\jkubeamer@orig@insertauthor%
+            }%
+        }{}%
+        \booltrue{jkubeamer@copyright@isset}%
+    }{}%
+}
+
+\newcommand{\jkubeamer@watermark@rotation}{0}
+\newcommand{\jkubeamer@insertwatermarktitle}{}
+\newcommand{\jkubeamer@insertwatermark}{}
+% Command \setwatermark[rotation in degrees]{large text}{small text}: sets the watermark shown on slides
+\newcommand{\setwatermark}[3][0]{%
+    \renewcommand{\jkubeamer@watermark@rotation}{#1}%
+    \renewcommand{\jkubeamer@insertwatermarktitle}{#2}%
+    \renewcommand{\jkubeamer@insertwatermark}{#3}%
+}
+
+\setbeamertemplate{logo}{}
+%\setbeamertemplate{sidebar left}{}
+\setbeamertemplate{sidebar right}{%
+    \expandafter\notblank\expandafter{\jkubeamer@insertwatermark\jkubeamer@insertwatermarktitle}{%
+        \begin{tikzpicture}[remember picture, overlay]
+        %\fill[fill=red,opacity=0.5] (current page.south west) rectangle (current page.north east);
+        \node[anchor=center, line width=0mm, inner sep=0mm, rotate=\jkubeamer@watermark@rotation] at (current page.center) {%
+            \begin{minipage}[t][\paperheight][c]{\paperwidth}%
+            \centering%
+            \linespread{1.0}%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \pgfsetfillopacity{0.3}%
+            \expandafter\notblank\expandafter{\jkubeamer@insertwatermarktitle}{%
+                \begingroup%
+                \usebeamerfont{watermark title}%
+                \usebeamercolor[fg]{watermark title}%
+                \vphantom{Gg}%
+                \jkubeamer@insertwatermarktitle%
+                \vphantom{Gg}%
+                \expandafter\notblank\expandafter{\jkubeamer@insertwatermark}{%
+                    \par%
+                    \vspace*{.4em}%
+                }{}%
+                \endgroup%
+            }{}%
+            \expandafter\notblank\expandafter{\jkubeamer@insertwatermark}{%
+                \usebeamerfont{watermark}%
+                \usebeamercolor[fg]{watermark}%
+                \vphantom{Gg}%
+                \jkubeamer@insertwatermark%
+                \vphantom{Gg}%
+            }{}%
+            \end{minipage}%
+        };
+        \end{tikzpicture}%
+    }{}%
+    \expandafter\notblank\expandafter{\jkubeamer@insertcopyright}{%
+        \begin{tikzpicture}[remember picture, overlay]
+        %\fill[fill=red,opacity=0.5] ($(current page.south west) + (0, \jkubeamer@footerheight)$) rectangle ($(current page.south west) + (\beamer@leftmargin, \textheight)$);
+        \node[anchor=south west, line width=0mm, inner sep=0mm, rotate=90] at ($(current page.south west) + (\beamer@leftmargin, \jkubeamer@footerheight)$) {%
+            \begin{minipage}[b][\beamer@leftmargin][c]{\dimexpr\textheight-\jkubeamer@footerheight\relax}%
+                \centering%
+                \linespread{1.0}%
+                \setlength{\parindent}{0pt}%
+                \setlength{\parskip}{0pt}%
+                \usebeamerfont{copyright notice}%
+                \usebeamercolor[fg]{copyright notice}%
+                \vphantom{Gg}%
+                \jkubeamer@insertcopyright%
+                \vphantom{Gg}%
+            \end{minipage}%
+        };
+        \end{tikzpicture}%
+    }{}%
 }
 
 %% 

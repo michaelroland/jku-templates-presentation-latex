@@ -112,9 +112,9 @@
 %% frames for frames in the appendix.
 %% 
 %% Sectioning options:
-%%  * nosectionpage       ... Supress section frames (see \section{<title>} command).
-%%  * nosubsectionpage    ... Supress subsection frames (see \subsection{<title>} command).
-%%  * nosubsubsectionpage ... Supress subsubsection frames (see \subsubsection{<title>} command).
+%%  * nosectionpage       ... Suppress section frames (see \section{<title>} command).
+%%  * nosubsectionpage    ... Suppress subsection frames (see \subsection{<title>} command).
+%%  * nosubsubsectionpage ... Suppress subsubsection frames (see \subsubsection{<title>} command).
 %%  * partpage            ... Insert part frames (see \part{<title>} command).
 %% 
 %% Note that `nosectionpage' automatically sets `nosubsectionpage' and `nosubsubsectionpage'.
@@ -133,7 +133,7 @@
 %%                           \institutecode is set.
 %%  * navigation         ... Show navigation symbols at the bottom of slides.
 %%  * frametitlecaps     ... Set frame titles in capital letters (like in earlier theme versions).
-%%  * nofancyfonts       ... Do not use custom TTF fonts with XeTeX/LuaTeX / supress pdfLaTeX warning.
+%%  * nofancyfonts       ... Do not use custom TTF fonts with XeTeX/LuaTeX / suppress pdfLaTeX warning.
 %%  * mac                ... Use adapted color palette for screen display on Mac.
 %%  * legacyitemizestyle ... Use old bullet style in itemization.
 %% 
@@ -238,6 +238,12 @@
 %% Command \footerpartnerlogo{filename}: use a different partner logo in the footer (e.g. a logo with a different form factor or no filename to disable the partner logo in the footer)
 %\footerpartnerlogo{our_partner_logo}
 
+%% Command \copyrightnotice{text}: sets the copyright notice field
+%\copyrightnotice{Copyright (c) \the\year\ \insertauthor. All rights reserved.}
+
+%% Command \setwatermark[rotation in degrees]{large text}{small text}: sets the watermark shown on slides
+%\setwatermark[30]{Space for your main watermark text.}{Space for your additional watermark text.}
+
 %% Command \agenda[caption]{text}: sets the agenda (and optional caption) to display on the next title or section page
 %\agenda[caption]{text}
 
@@ -289,7 +295,7 @@
 
 \section{Getting Started}
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Getting Started}
 
 \begin{itemize}
@@ -307,7 +313,7 @@
 
 \subsection{Theme Options}
 
-\begin{frame}[containsverbatim,label={options:colorscheme}]
+\begin{frame}[label={options:colorscheme}]
 \frametitle{Theme Options: Selecting a Color Scheme}
 %\begin{table}
     \begin{tabularx}{\linewidth}{ll>{\raggedright}X}
@@ -331,17 +337,17 @@ If no color scheme option is given, the package defaults to using \texttt{JKU}.
 \end{frame}
 
 
-\begin{frame}[containsverbatim,label={options:colormode}]
+\begin{frame}[label={options:colormode}]
 \frametitle{Theme Options: Selecting a Color Mode}
 \begin{itemize}
 \item The theme uses light color mode by default. In this color mode, all frames (including title, logo, and section frames) have a white background.
-\item Use option ``\verb|darkmode|'' to display title, logo, and section frames with a dark background (primary color of the current color scheme).
-\item Use option ``\verb|nightmode|'' to get a white-on-black theme designed for presentation in dimmed rooms.
+\item Use option ``\textverb{darkmode}'' to display title, logo, and section frames with a dark background (primary color of the current color scheme).
+\item Use option ``\textverb{nightmode}'' to get a white-on-black theme designed for presentation in dimmed rooms.
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}[containsverbatim,label={options:slide-numbers}]
+\begin{frame}[label={options:slide-numbers}]
 \frametitle{Theme Options: Slide Numbers}
 No slide numbers are shown in slide footers by default. Enable them with:
 
@@ -359,13 +365,13 @@ No slide numbers are shown in slide footers by default. Enable them with:
 %\end{table}
 
 \smallskip
-Btw., if you want to reference a slide number, use the option \verb+[label={s}]+ in the target frame. Then \verb+\ref{s}+ will give a reference to the slide number. For instance, slide~\ref{options:section-slides} is the next slide.
+Btw., if you want to reference a slide number, use the option \textverb{[label=\{s\}]} in the target frame. Then \textverb{\string\ref\{s\}} will give a reference to the slide number. For instance, slide~\ref{options:section-slides} is the next slide.
 \end{frame}
 
 
-\begin{frame}[containsverbatim,label={options:section-slides}]
+\begin{frame}[label={options:section-slides}]
 \frametitle{Theme Options: Section Slides}
-By default, each sectioning command (\verb|\section|, \verb|\subsection|, \verb|\subsubsection|) inserts a section slide. You can globally disable section slides with:
+By default, each sectioning command (\textverb{\string\section}, \textverb{\string\subsection}, \textverb{\string\subsubsection}) inserts a section slide. You can globally disable section slides with:
 
 \smallskip
 %\begin{table}
@@ -373,22 +379,22 @@ By default, each sectioning command (\verb|\section|, \verb|\subsection|, \verb|
     \toprule
     \textbf{Option}            & \textbf{Description} \tabularnewline
     \midrule
-    \textverb{nosectionpage}       & Supress all section slides. \tabularnewline
-    \textverb{nosubsectionpage}    & Supress subsection and subsubsection slides. \tabularnewline
-    \textverb{nosubsubsectionpage} & Supress subsubsection slides. \tabularnewline
+    \textverb{nosectionpage}       & Suppress all section slides. \tabularnewline
+    \textverb{nosubsectionpage}    & Suppress subsection and subsubsection slides. \tabularnewline
+    \textverb{nosubsubsectionpage} & Suppress subsubsection slides. \tabularnewline
     \bottomrule
     \end{tabularx}
 %\end{table}
 
 \smallskip
 \begin{itemize}
-\item The class option \verb|handout| also supresses these slides but includes them in slide numbering.
-\item The starred versions of sectioning commands (e.g.\ \verb|\section*{...}|) also supress section slides. 
+\item The class option \textverb{handout} also suppresses these slides but includes them in slide numbering.
+\item The starred versions of sectioning commands (e.g.\ \textverb{\string\section*\{...\}}) also suppress section slides. 
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{Theme Options: Support for Historic Styles}
 These options can be used to reproduce older and alternative versions of styles.
 \smallskip
@@ -405,7 +411,7 @@ These options can be used to reproduce older and alternative versions of styles.
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{More Theme Options}
 %\begin{table}
     \begin{tabularx}{\linewidth}{l>{\raggedright}X}
@@ -420,19 +426,19 @@ These options can be used to reproduce older and alternative versions of styles.
 %\end{table}
 \end{frame}
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{More Theme Options}
 %\begin{table}
     \begin{tabularx}{\linewidth}{l>{\raggedright}X}
     \toprule
     \textbf{Option}			     & \textbf{Description} \tabularnewline
     \midrule
-    \textverb{nofooter}            & Supress slide footer. \tabularnewline
-    \textverb{nojkufooter}         & Supress JKU/partner logos in slide footer. \tabularnewline
-    \textverb{noimprint}           & Supress imprint on title slides. \tabularnewline
-    \textverb{nojkulogo}           & Supress JKU \& K logos on title pages and in frame footers. \tabularnewline
-    \textverb{noinstitutelogo}     & Use standard JKU logo even if \verb|\institutecode| is set.
-                                     Can be toggled using \verb|\noinstitutelogo| and \verb|\endnoinstitutelogo| within the presentation. \tabularnewline
+    \textverb{nofooter}            & Suppress slide footer. \tabularnewline
+    \textverb{nojkufooter}         & Suppress JKU/partner logos in slide footer. \tabularnewline
+    \textverb{noimprint}           & Suppress imprint on title slides. \tabularnewline
+    \textverb{nojkulogo}           & Suppress JKU \& K logos on title pages and in frame footers. \tabularnewline
+    \textverb{noinstitutelogo}     & Use standard JKU logo even if \textverb{\string\institutecode} is set.
+                                     Can be toggled using \textverb{\string\noinstitutelogo} and \textverb{\string\endnoinstitutelogo} within the presentation. \tabularnewline
     \bottomrule
     \end{tabularx}
 %\end{table}
@@ -441,10 +447,10 @@ These options can be used to reproduce older and alternative versions of styles.
 
 \subsection{Title Slide \& Slide Footers}
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{Title Slide}
 
-Use \verb+\maketitle+ to display a title slide. This command uses the following information:
+Use \textverb{\string\maketitle} to display a title slide. This command uses the following information:
 
 \smallskip
 %\begin{table}
@@ -457,31 +463,31 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
     \textverb{\string\author\{...\}}    & The speakers / authors of the presentation.
                                           % Use \textverb{\string\and} to separate multiple author names. 
                                           \tabularnewline
-    \textverb{\string\institute\{...\}} & The intitute / affiliations of the author(s). \tabularnewline
-    \textverb{\string\date\{...\}}      & The date of the presentation. Defaults to today's date if omitted. Use \textverb{\string\date\{\}} to supress the date. \tabularnewline
+    \textverb{\string\institute\{...\}} & The institute / affiliations of the author(s). \tabularnewline
+    \textverb{\string\date\{...\}}      & The date of the presentation. Defaults to today's date if omitted. Use \textverb{\string\date\{\}} to suppress the date. \tabularnewline
     \bottomrule
     \end{tabularx}
 %\end{table}
 
 \smallskip
-\small An optional argument (\verb|\cmd[opt]{...}|) allows to set short versions for use in e.g.\ footers.
+\small An optional argument (\textverb{\string\cmd[opt]{...}}) allows to set short versions for use in e.g.\ footers.
 \end{frame}
 
 
-\begin{frame}[containsverbatim,label={advanced-title-slides}]
+\begin{frame}[label={advanced-title-slides}]
 \frametitle{Advanced Title Slides}
 
 \begin{itemize}
-\item You can change the presentation information and use the \verb+\maketitle+ command multiple times in your presentation.
-\item An optional argument \verb|\maketitle[<options>]| allows to change the color scheme of the title slide. Options may be one of:
+\item You can change the presentation information and use the \textverb{\string\maketitle} command multiple times in your presentation.
+\item An optional argument \textverb{\string\maketitle[<options>]} allows to change the color scheme of the title slide. Options may be one of:
     \begin{itemize}
     \item \textverb{light}: Use light color theme (or white-on-black in \textverb{nightmode}).
     \item \textverb{dark}: Use dark color theme.
     \item \textverb{gray}: Use JKU gray color theme.
     \item \textverb{black}: Use black background (or white background in \textverb{nightmode}).
     \end{itemize}
-    In addition, options may contain a faculty name (see \hyperref[options:colorscheme]{Theme Options: Selecting a Color Scheme}) to use the faculty's color theme, e.g. ``\verb|\maketitle[TNF,dark]|''.
-\item The starred version \verb|\maketitle*[<options>]| always uses the standard JKU logo instead of the current institute logo. See \string\institutecode\{code\} on slide~\ref{logo-commands}.
+    In addition, options may contain a faculty name (see \hyperref[options:colorscheme]{Theme Options: Selecting a Color Scheme}) to use the faculty's color theme, e.g. ``\textverb{\string\maketitle[TNF,dark]}''.
+\item The starred version \textverb{\string\maketitle*[<options>]} always uses the standard JKU logo instead of the current institute logo. See \textverb{\string\institutecode\{code\}} on slide~\ref{logo-commands}.
 \end{itemize}
 \end{frame}
 
@@ -490,7 +496,7 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
 \maketitle[TNF,dark]
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{Further Customizing Title Slides}
 
 %\begin{table}
@@ -507,7 +513,7 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
 
 
 
-\begin{frame}[containsverbatim,label={logo-commands}]
+\begin{frame}[label={logo-commands}]
 \frametitle{Logos}
 
 %\begin{table}
@@ -524,7 +530,7 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{Customizing the Slide Footer}
 
 %\begin{table}
@@ -540,13 +546,54 @@ Use \verb+\maketitle+ to display a title slide. This command uses the following 
 \end{frame}
 
 
+\copyrightnotice{Space for your copyright notice.}
+\begin{frame}
+\frametitle{Copyright Notice}
+
+%\begin{table}
+    \begin{tabularx}{\linewidth}{l>{\raggedright}X}
+    \toprule
+    \textbf{Command}                                 & \textbf{Description} \tabularnewline
+    \midrule
+    \textverb{\string\copyrightnotice\{...\}}        & Display a copyright notice on the left border of each slide. \tabularnewline
+    \bottomrule
+    \end{tabularx}
+%\end{table}
+
+\medskip
+The copyright notice can be changed anywhere within a presentation by using \textverb{\string\copyrightnotice\{...\}} again.
+Using \textverb{\string\copyrightnotice\{\}} removes the copyright notice from all following slides.
+\end{frame}
+\copyrightnotice{}
+
+
+\setwatermark[30]{Space for your main watermark text.}{Space for your additional watermark text.}
+\begin{frame}[fragile]
+\frametitle{Watermark}
+
+Use \verb|\setwatermark[<rotation>]{<large text>}{<small text>}| to display a watermark on each slide:
+
+\begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
+\setwatermark[30]%
+    {Space for your main watermark text.}%
+    {Space for your additional watermark text.}
+\end{lstlisting}
+
+The optional argument ``\textverb{<rotation>}'' specifies the rotation angle in degrees.
+
+The watermark can be changed anywhere within a presentation by using \verb|\setwatermark[...]{...}{...}| again.
+Using \verb|\setwatermark{}{}| removes the watermark from all following slides.
+\end{frame}
+\setwatermark{}{}
+
+
 \subsection{Basic Elements}
 
 
 \begin{frame}[containsverbatim]
 \frametitle{Frames}
 
-A slides is called \verb|frame| in \LaTeX\ beamer. It consists of a frame title and a body:
+A slides is called \textverb{frame} in \LaTeX\ beamer. It consists of a frame title and a body:
 \begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
 \begin{frame}
 \frametitle{Space for your frame title.}
@@ -557,7 +604,7 @@ Space for your frame body.
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Bullet Items}
 
 \begin{columns}[onlytextwidth,T]
@@ -601,7 +648,7 @@ Space for your frame body.
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Enumerations}
 
 \begin{columns}[onlytextwidth,T]
@@ -642,12 +689,12 @@ Space for your frame body.
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Columns}
 
 \begin{columns}[onlytextwidth,T]
 
-\column{.45\textwidth}
+\begin{column}{.45\textwidth}
 Use the columns environment to split the frame body into multiple columns:
 \begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
 \begin{columns}[onlytextwidth,T]
@@ -655,18 +702,23 @@ Use the columns environment to split the frame body into multiple columns:
 \end{columns}
 \end{lstlisting}
 The options ``\textverb{onlytextwidth,T}'' are sensible defaults to make columns span only the normal text width of the slide and to vertically align column contents to the top.
+\end{column}
 
-\column{.50\textwidth}
-Begin a new column with \verb|\column{<width>}|. You can use e.g.\ \verb|\column{.45\textwidth}| to let a column span 45\,\% of the normal text width.
+\begin{column}{.50\textwidth}
+Each column is wrapped into its own environment: \verb|\begin{column}{<width>}|.
+
+You can set \textverb{<width>} e.g.\ to \verb|.45\textwidth| to let a column span 45\,\% of the normal text width.
 \begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
 \begin{columns}[onlytextwidth,T]
-\column{.45\textwidth}
+\begin{column}{.45\textwidth}
 Space for column 1.
-
-\column{.50\textwidth}
+\end{column}
+\begin{column}{.50\textwidth}
 Space for column 2.
+\end{column}
 \end{columns}
 \end{lstlisting}
+\end{column}
 
 \end{columns}
 \end{frame}
@@ -692,10 +744,10 @@ Space for column 2.
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{Table of Contents}
 
-Use the \verb|\tableofcontents| command to list all sections and subsections in the presentation (if you really want to do this~\cite{schultz}):
+Use the \textverb{\string\tableofcontents} command to list all sections and subsections in the presentation (if you really want to do this~\cite{schultz}):
 
 \medskip
 \tableofcontents
@@ -720,7 +772,7 @@ Use the \verb|hideallsubsections| option to keep the table of contents more comp
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Blocks}
 
 \begin{block}{Standard Block}
@@ -735,7 +787,7 @@ Space for content.
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Colorful Blocks}
 
 \begin{alertblock}{Alert Block}
@@ -760,7 +812,7 @@ Space for content.
 \end{frame}
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Lists with Reduced Spacing}
 
 In some rare situations, it may be useful to create lists with reduced vertical spacing. Use the \verb|tightlist| environment for this:
@@ -915,7 +967,7 @@ In some rare situations, it may be useful to create lists with reduced vertical 
 \begin{frame}[containsverbatim,plain]
 \frametitle{Plain Frames}
 
-The frame environment also takes optional arguments \verb|\begin{frame}[<options>]|. You already read about the ``\verb|label=|'' option on slide~\ref{options:slide-numbers}. Another option is \verb|plain| to supress the footer for a frame.
+The frame environment also takes optional arguments \verb|\begin{frame}[<options>]|. You already read about the ``\verb|label=|'' option on slide~\ref{options:slide-numbers}. Another option is \verb|plain| to suppress the footer for a frame.
 
 \begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
 \begin{frame}[plain]
@@ -1012,7 +1064,7 @@ Space for your frame body.
 \endgroup
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}[fragile]
 \frametitle{Title Image Slide}
 
 Use \verb|\imageframe[<mode options>]{<title>}{<subtitle>}{<graphic>}| to display a title image frame. That is a full screen image with a title sidebar.
@@ -1047,12 +1099,12 @@ The optional argument ``\textverb{<mode options>}'' may be any of the color mode
 }
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{Logo Slides}
 
-Use \verb|\jkulogo[<mode options>]| to display a logo slide. That is a slide with only the JKU logo (or institute logo, if you defined one) centered on it. This slide is well suited as a final slide in your presentation.
+Use \textverb{\string\jkulogo[<mode options>]} to display a logo slide. That is a slide with only the JKU logo (or institute logo, if you defined one) centered on it. This slide is well suited as a final slide in your presentation.
 
-Again, the optional argument ``\textverb{<mode options>}'' may be any of the color mode options that can be used for the \verb|\maketitle| command (see slide~\ref{advanced-title-slides}), e.g.
+Again, the optional argument ``\textverb{<mode options>}'' may be any of the color mode options that can be used for the \textverb{\string\maketitle} command (see slide~\ref{advanced-title-slides}), e.g.
 \begin{columns}[onlytextwidth,T]
 \column{.5\textwidth}
 \begin{itemize}
@@ -1070,7 +1122,7 @@ Again, the optional argument ``\textverb{<mode options>}'' may be any of the col
 \end{columns}
 
 \medskip
-There is also a starred version \verb|\jkulogo*[<mode options>]|, which always uses the standard JKU logo instead of the current institute logo.
+There is also a starred version \textverb{\string\jkulogo*[<mode options>]}, which always uses the standard JKU logo instead of the current institute logo.
 \end{frame}
 
 \jkulogo
@@ -1081,16 +1133,16 @@ There is also a starred version \verb|\jkulogo*[<mode options>]|, which always u
 \jkulogo[black]
 
 
-\begin{frame}[containsverbatim]
+\begin{frame}
 \frametitle{Switching Color Mode and Scheme}
 
 Just like switching the color mode and scheme for a specific special slide, you can also switch the color mode for the remaining part of the presentation. This may be useful if you want to create a presentation with parts focusing on more than one faculty. You can also use ``\textverb{night}'' and ``\textverb{nonight}'' to switch night mode on or off within the presentation.
 
-Use \verb|\setcolormode[<mode options>]| to change the color mode (reset to default if no options are given).
+Use \textverb{\string\setcolormode[<mode options>]} to change the color mode (reset to default if no options are given).
 \end{frame}
 
 
-\begin{frame}[containsverbatim,allowframebreaks]
+\begin{frame}[fragile,allowframebreaks]
 \frametitle{Contact Information Slide}
 
 Use \verb|\contactframe[<mode options>]{<name>}{<affiliation>}{<contact info>}{<ack>}| to display a contact information frame. 
