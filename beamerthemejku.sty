@@ -2297,7 +2297,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 
-%% Copyright notice and water mark
+%% Copyright notice and watermark
 %% 
 
 \newbool{jkubeamer@copyright@isset}
@@ -2318,10 +2318,53 @@
     }{}%
 }
 
+\newcommand{\jkubeamer@watermark@rotation}{0}
+\newcommand{\jkubeamer@insertwatermarktitle}{}
+\newcommand{\jkubeamer@insertwatermark}{}
+% Command \setwatermark[rotation in degrees]{large text}{small text}: sets the watermark shown on slides
+\newcommand{\setwatermark}[3][0]{%
+    \renewcommand{\jkubeamer@watermark@rotation}{#1}%
+    \renewcommand{\jkubeamer@insertwatermarktitle}{#2}%
+    \renewcommand{\jkubeamer@insertwatermark}{#3}%
+}
+
 \setbeamertemplate{logo}{}
 %\setbeamertemplate{sidebar left}{}
 \setbeamertemplate{sidebar right}{%
-    %\ifbool{jkubeamer@copyrightnotice}{%
+    \expandafter\notblank\expandafter{\jkubeamer@insertwatermark\jkubeamer@insertwatermarktitle}{%
+        \begin{tikzpicture}[remember picture, overlay]
+        %\fill[fill=red,opacity=0.5] (current page.south west) rectangle (current page.north east);
+        \node[anchor=center, line width=0mm, inner sep=0mm, rotate=\jkubeamer@watermark@rotation] at (current page.center) {%
+            \begin{minipage}[t][\paperheight][c]{\paperwidth}%
+            \centering%
+            \linespread{1.0}%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \pgfsetfillopacity{0.3}%
+            \expandafter\notblank\expandafter{\jkubeamer@insertwatermarktitle}{%
+                \begingroup%
+                \usebeamerfont{watermark title}%
+                \usebeamercolor[fg]{watermark title}%
+                \vphantom{Gg}%
+                \jkubeamer@insertwatermarktitle%
+                \vphantom{Gg}%
+                \expandafter\notblank\expandafter{\jkubeamer@insertwatermark}{%
+                    \par%
+                    \vspace*{.4em}%
+                }{}%
+                \endgroup%
+            }{}%
+            \expandafter\notblank\expandafter{\jkubeamer@insertwatermark}{%
+                \usebeamerfont{watermark}%
+                \usebeamercolor[fg]{watermark}%
+                \vphantom{Gg}%
+                \jkubeamer@insertwatermark%
+                \vphantom{Gg}%
+            }{}%
+            \end{minipage}%
+        };
+        \end{tikzpicture}%
+    }{}%
     \expandafter\notblank\expandafter{\jkubeamer@insertcopyright}{%
         \begin{tikzpicture}[remember picture, overlay]
         %\fill[fill=red,opacity=0.5] ($(current page.south west) + (0, \jkubeamer@footerheight)$) rectangle ($(current page.south west) + (\beamer@leftmargin, \textheight)$);
