@@ -237,8 +237,11 @@
 %% Command \footerpartnerlogo{filename}: use a different partner logo in the footer (e.g. a logo with a different form factor or no filename to disable the partner logo in the footer)
 %\footerpartnerlogo{our_partner_logo}
 
-% Command \copyrightnotice{text}: sets the copyright notice field
+%% Command \copyrightnotice{text}: sets the copyright notice field
 %\copyrightnotice{Copyright (c) \the\year\ \insertauthor. All rights reserved.}
+
+%% Command \setwatermark[rotation in degrees]{large text}{small text}: sets the watermark shown on slides
+%\setwatermark[30]{Space for your main watermark text.}{Space for your additional watermark text.}
 
 %% Command \agenda[caption]{text}: sets the agenda (and optional caption) to display on the next title or section page
 %\agenda[caption]{text}
@@ -555,8 +558,32 @@ Use \textverb{\string\maketitle} to display a title slide. This command uses the
     \bottomrule
     \end{tabularx}
 %\end{table}
+
+\medskip
+The copyright notice can be changed anywhere within a presentation by using \textverb{\string\copyrightnotice\{...\}} again.
+Using \textverb{\string\copyrightnotice\{\}} removes the copyright notice from all following slides.
 \end{frame}
 \copyrightnotice{}
+
+
+\setwatermark[30]{Space for your main watermark text.}{Space for your additional watermark text.}
+\begin{frame}[fragile]
+\frametitle{Watermark}
+
+Use \verb|\setwatermark[<rotation>]{<large text>}{<small text>}| to display a watermark on each slide:
+
+\begin{lstlisting}[language={[LaTeX]TeX},numbers=none]
+\setwatermark[30]%
+    {Space for your main watermark text.}%
+    {Space for your additional watermark text.}
+\end{lstlisting}
+
+The optional argument ``\textverb{<rotation>}'' specifies the rotation angle in degrees.
+
+The watermark can be changed anywhere within a presentation by using \verb|\setwatermark[...]{...}{...}| again.
+Using \verb|\setwatermark{}{}| removes the watermark from all following slides.
+\end{frame}
+\setwatermark{}{}
 
 
 \subsection{Basic Elements}
