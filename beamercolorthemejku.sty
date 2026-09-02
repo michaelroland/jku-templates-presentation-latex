@@ -510,7 +510,7 @@
 %% 
 
 % Pick up changes to default foreground color for text on slides (cf. normal text)
-\apptocmd{\beamer@checkframetitle}{%
+\pretocmd{\beamer@checkframetitle}{%
     \usebeamercolor[fg]{normal text}%
 }{}{}
 

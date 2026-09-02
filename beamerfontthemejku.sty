@@ -653,7 +653,7 @@
 %% 
 
 % Pick up changes to default font for text on slides (cf. normal text)
-\apptocmd{\beamer@checkframetitle}{%
+\pretocmd{\beamer@checkframetitle}{%
     \usebeamerfont{normal text}%
 }{}{}
 
